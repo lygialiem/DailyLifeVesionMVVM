@@ -111,7 +111,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
         
         guard let latitude = location?.latitude, let longitude = location?.longitude else {return}
         
-        LocationService.instance.getWeatherApi(latitude: latitude, longitude: longitude) { (dataResponse) in
+        WeatherApiService.instance.getWeatherApi(latitude: latitude, longitude: longitude) { (dataResponse) in
           wSelf.dataResponseWeather?(dataResponse)
           guard let temper = dataResponse.currently?.temperature else {
             return
@@ -149,12 +149,12 @@ class MainVC: ButtonBarPagerTabStripViewController {
   }
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-    for i in 0..<ApiServices.instance.TOPIC_NEWSAPI.count{
+    for i in 0..<NewsApiService.instance.TOPIC_NEWSAPI.count{
       let pageVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
       
-      pageVC.menuBarTitle = ApiServices.instance.TOPIC_NEWSAPI[i]
+      pageVC.menuBarTitle = NewsApiService.instance.TOPIC_NEWSAPI[i]
       DispatchQueue.main.async {
-        ApiServices.instance.getMoreNewsApi(topic: ApiServices.instance.TOPIC_NEWSAPI[i], page: 3,numberOfArticles: 10) { (dataApi) in
+        NewsApiService.instance.getMoreNewsApi(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 3,numberOfArticles: 10) { (dataApi) in
           
           if dataApi.status == "error"{
             self.snipper.stopAnimating()
@@ -168,7 +168,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
       }
       
       
-      ApiServices.instance.getMoreNewsApi(topic: ApiServices.instance.TOPIC_NEWSAPI[i], page: 1, numberOfArticles: 20) {(dataApi) in
+      NewsApiService.instance.getMoreNewsApi(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 1, numberOfArticles: 20) {(dataApi) in
         
         pageVC.articles = dataApi.articles
         if i == 0 {
@@ -253,7 +253,7 @@ extension MainVC: CLLocationManagerDelegate{
     self.newestLocaton?(location.coordinate)
   }
   
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+  private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     debugPrint("Fail to get Location")
   }
   

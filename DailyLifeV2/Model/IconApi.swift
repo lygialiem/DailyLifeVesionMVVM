@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Info: Decodable{
+struct IconApi: Decodable{
   var code: Int
   var day: String
   var night: String

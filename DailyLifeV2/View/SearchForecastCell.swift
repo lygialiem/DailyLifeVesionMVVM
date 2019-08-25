@@ -12,7 +12,7 @@ protocol moveToWebVC {
   func moveToWebVCFromWeatherVC(url: String)
 }
 
-class WeatherHeader1_2: UITableViewCell {
+class SearchForecast: UITableViewCell {
   
   @IBOutlet var dailyTitleHeader: UILabel!
   @IBOutlet var hourlyTitleHeader: UILabel!

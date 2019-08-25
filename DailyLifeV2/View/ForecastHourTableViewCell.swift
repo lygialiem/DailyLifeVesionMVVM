@@ -41,7 +41,7 @@ extension ForecastHourTableViewCell: UICollectionViewDelegateFlowLayout, UIColle
     let time = Int((hourlyData?.hourly?.data?[indexPath.row]?.time ?? 0).formatEpochTime(dateFormatType: "HH"))
     
     if indexPath.row == 0{
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellNow", for: indexPath) as! WeatherRow1CollectionViewCell
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellNow", for: indexPath) as! HourlyForecastCell
       cell.hourNow.text = "Now"
       cell.tempNow.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row]?.temperature ?? 0)))º"
       
@@ -59,7 +59,7 @@ extension ForecastHourTableViewCell: UICollectionViewDelegateFlowLayout, UIColle
       return cell
     }else {
       
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! WeatherRow1CollectionViewCell
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HourlyForecastCell
       
       cell.hour.text = hourlyData?.hourly?.data?[indexPath.row]?.time?.formatEpochTime(dateFormatType: "haa")
       cell.temp.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row]?.temperature ?? 0)))º"

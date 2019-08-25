@@ -44,7 +44,7 @@ class PageVC: UIViewController, IndicatorInfoProvider {
     self.newsFeedCV.reloadData()
   }
   func setupRefreshControl(){
-    refreshControl.tintColor = #colorLiteral(red: 0.2041230202, green: 0.8423736691, blue: 0.608956933, alpha: 1)
+    refreshControl.tintColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
     refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: UIControl.Event.valueChanged)
     newsFeedCV.refreshControl = refreshControl
   }
@@ -56,7 +56,7 @@ class PageVC: UIViewController, IndicatorInfoProvider {
   // Use indexOfNewArticle to insert new Article to newFeeds:
   var indexOfNewArticle = 0
   @objc func handleRefreshControl(){
-    ApiServices.instance.getMoreNewsApi(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
+    NewsApiService.instance.getMoreNewsApi(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
       for index in 0..<dataApi.articles.count{
         if dataApi.articles[index].title != self.articles[index].title{
           self.articles.insert(dataApi.articles[index], at: self.indexOfNewArticle)
@@ -142,7 +142,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     if indexPath.row == articles.count - 1{
       let numberOfPage = 5
       if currentPage <= numberOfPage{
-        ApiServices.instance.getMoreNewsApi(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
+        NewsApiService.instance.getMoreNewsApi(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
           for article in dataApi.articles{
             self.articles.append(article)
           }

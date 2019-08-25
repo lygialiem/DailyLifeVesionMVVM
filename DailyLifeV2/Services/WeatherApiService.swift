@@ -9,9 +9,9 @@
 import Foundation
 import CoreLocation
 
-class LocationService{
+class WeatherApiService{
   
-  static let instance = LocationService()
+  static let instance = WeatherApiService()
   
   let weatherTitles = ["time", "summary", "latitude", "longitude", "temperature", "humidity", "pressure","nearest Storm Distance", "precip Intensity", "precip Type", "precip Probability", "dew point", "wind Bearing", "ozone",  "cloud Cover", "visibility", "UV Index"]
   
@@ -64,13 +64,13 @@ class LocationService{
       }.resume()
   }
   
-  func getIconJson(completion: @escaping ([Info]) -> Void){
+  func getIconJson(completion: @escaping ([IconApi]) -> Void){
     let urlRequest = URL(string: "http://www.apixu.com/doc/Apixu_weather_conditions.json")
     guard let url = urlRequest else {return}
     URLSession.shared.dataTask(with: url) { (data, response, error) in
       guard let data = data else {return}
       do {
-        let dataDecoded = try JSONDecoder().decode([Info].self, from: data)
+        let dataDecoded = try JSONDecoder().decode([IconApi].self, from: data)
         completion(dataDecoded)
         
       }catch{

@@ -63,12 +63,12 @@ override  func prepareForReuse() {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! FirstCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! ContentCell
       cell.configureContent(article: self.article!)
       cell.delegate = self
       return cell
     } else if indexPath.section == 1{
-      let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! ConcernCell
      
          cell.configureContent(article: (self.articlesOfConcern[indexPath.row]))
       

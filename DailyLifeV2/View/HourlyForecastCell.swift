@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherRow1CollectionViewCell: UICollectionViewCell {
+class HourlyForecastCell: UICollectionViewCell {
   
   @IBOutlet var hour: UILabel!
   @IBOutlet var image: UIImageView!

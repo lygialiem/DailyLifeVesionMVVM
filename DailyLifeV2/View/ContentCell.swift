@@ -4,7 +4,7 @@ protocol ReadingCellDelegate: class {
   func didPressSeeMore(url: String)
 }
 
-class FirstCell: UITableViewCell {
+class ContentCell: UITableViewCell {
   
   @IBOutlet var contentArticle: UITextView!
   @IBOutlet var imageArticle: UIImageView!
@@ -48,7 +48,7 @@ class FirstCell: UITableViewCell {
     self.contentArticle.attributedText = attributedString
   }
 }
-extension FirstCell:  UITextViewDelegate{
+extension ContentCell:  UITextViewDelegate{
   func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
     delegate?.didPressSeeMore(url: URL.absoluteString)
     return false

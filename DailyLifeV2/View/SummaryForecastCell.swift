@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherRow3: UITableViewCell {
+class SummaryForecastCell: UITableViewCell {
 
   @IBOutlet var summary: UILabel!
   

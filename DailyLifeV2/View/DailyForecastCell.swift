@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class WeatheTableViewRow2: UITableViewCell {
+class DailyForecastCell: UITableViewCell {
 
   @IBOutlet var day: UILabel!
   @IBOutlet var icon: UIImageView!
@@ -26,16 +26,18 @@ class WeatheTableViewRow2: UITableViewCell {
   
   func configureCell(forecastDay: Forecastday?){
     
-    let date = NSDate(timeIntervalSince1970: forecastDay?.date_epoch ?? 0)
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"
-    let day = dateFormatter.string(from: date as Date)
+//    let date = NSDate(timeIntervalSince1970: forecastDay?.date_epoch ?? 0)
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateFormat = "EEEE"
+    let day = (forecastDay?.date_epoch ?? 0).formatEpochTime(dateFormatType: "EEEE")
+
+    
     self.day.text = day
     
     let codeIcon = forecastDay?.day?.condition?.code ?? 0
     
     
-    LocationService.instance.getIconJson { (dataJson) in
+    WeatherApiService.instance.getIconJson { (dataJson) in
       for i in 0..<dataJson.count{
         if codeIcon == dataJson[i].code{
           

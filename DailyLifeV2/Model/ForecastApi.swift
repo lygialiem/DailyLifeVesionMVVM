@@ -57,12 +57,12 @@ struct Condition: Decodable{
 }
 
 struct Forecast: Decodable{
-  var forecastday: [Forecastday?]?
+  var forecastday: [Forecastday]?
 }
 
 struct Forecastday: Decodable{
   var date: String?
-  var date_epoch: TimeInterval?
+  var date_epoch: Int?
   var day: Day?
   var astro: Astro?
 }
@@ -83,6 +83,8 @@ struct Day: Decodable{
   var avgvis_km: Double?
   var condition: ConditionDay?
   var uv: Double?
+  var avghumidity: Double?
+
 }
 
 struct ConditionDay: Decodable{

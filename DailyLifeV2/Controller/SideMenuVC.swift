@@ -80,7 +80,7 @@ class SideMenuVC: UIViewController {
 extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return ApiServices.instance.TOPIC_NEWSAPI.count
+    return NewsApiService.instance.TOPIC_NEWSAPI.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,8 +90,8 @@ extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
 //      cell.topicName = "Add"
 //      return cell
 //    } else {
-      cell.imageName = ApiServices.instance.TOPIC_NEWSAPI[indexPath.row]
-      cell.topicName = ApiServices.instance.TOPIC_NEWSAPI[indexPath.row]
+      cell.imageName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
+      cell.topicName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
       return cell
 //    }
   }
@@ -145,8 +145,8 @@ extension SideMenuVC{
   @IBAction func addButton(_ sender: Any) {
     animateAddViewOut()
     guard let textFieldString = myTextField.text else {return}
-    ApiServices.instance.TOPIC_NEWSAPI.append(textFieldString.capitalized)
-    let indexPath = IndexPath(row: ApiServices.instance.TOPIC_NEWSAPI.count - 1
+    NewsApiService.instance.TOPIC_NEWSAPI.append(textFieldString.capitalized)
+    let indexPath = IndexPath(row: NewsApiService.instance.TOPIC_NEWSAPI.count - 1
       , section: 0)
     menuCollectionView.insertItems(at: [indexPath])
     NotificationCenter.default.post(name: NSNotification.Name("reloadMainVC"), object: nil)

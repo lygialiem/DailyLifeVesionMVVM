@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SecondCell: UITableViewCell {
+class ConcernCell: UITableViewCell {
   @IBOutlet var imageArticle: UIImageView!
   @IBOutlet var titleArticle: UILabel!
   @IBOutlet var timePublishedArticle: UILabel!
