@@ -27,6 +27,11 @@
 		E72E49A0230FF2E100E4FA8F /* DetailWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72E499F230FF2E100E4FA8F /* DetailWeatherCell.swift */; };
 		E72E49A22310092200E4FA8F /* SummaryForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72E49A12310092200E4FA8F /* SummaryForecastCell.swift */; };
 		E72E49A423100D4900E4FA8F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E49A323100D4900E4FA8F /* WebKit.framework */; };
+		E7406F062313DD90005D1C84 /* WorldClockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7406F052313DD90005D1C84 /* WorldClockVC.swift */; };
+		E7406F082313DF5C005D1C84 /* ListCityTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7406F072313DF5C005D1C84 /* ListCityTableVC.swift */; };
+		E7406F0A2313E090005D1C84 /* WorldClockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7406F092313E090005D1C84 /* WorldClockCell.swift */; };
+		E7406F0C2313E0A9005D1C84 /* listCityNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7406F0B2313E0A9005D1C84 /* listCityNameCell.swift */; };
+		E7406F0E2313E5F0005D1C84 /* GTMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7406F0D2313E5F0005D1C84 /* GTMCell.swift */; };
 		E74B26452303D2E50057684B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74B26442303D2E50057684B /* Extensions.swift */; };
 		E76A604B230BD93500B3E4A3 /* CurrentlyDarkSkyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A604A230BD93500B3E4A3 /* CurrentlyDarkSkyApi.swift */; };
 		E76A604D230BDBB000B3E4A3 /* WeatherApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A604C230BDBB000B3E4A3 /* WeatherApiService.swift */; };
@@ -81,6 +86,11 @@
 		E72E499F230FF2E100E4FA8F /* DetailWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherCell.swift; sourceTree = "<group>"; };
 		E72E49A12310092200E4FA8F /* SummaryForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryForecastCell.swift; sourceTree = "<group>"; };
 		E72E49A323100D4900E4FA8F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E7406F052313DD90005D1C84 /* WorldClockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockVC.swift; sourceTree = "<group>"; };
+		E7406F072313DF5C005D1C84 /* ListCityTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCityTableVC.swift; sourceTree = "<group>"; };
+		E7406F092313E090005D1C84 /* WorldClockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockCell.swift; sourceTree = "<group>"; };
+		E7406F0B2313E0A9005D1C84 /* listCityNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listCityNameCell.swift; sourceTree = "<group>"; };
+		E7406F0D2313E5F0005D1C84 /* GTMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTMCell.swift; sourceTree = "<group>"; };
 		E74B26442303D2E50057684B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E76A604A230BD93500B3E4A3 /* CurrentlyDarkSkyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentlyDarkSkyApi.swift; sourceTree = "<group>"; };
 		E76A604C230BDBB000B3E4A3 /* WeatherApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiService.swift; sourceTree = "<group>"; };
@@ -189,6 +199,8 @@
 				E79A149323085F390004D62E /* FavoriteVC.swift */,
 				E7D221B6230C4CDA000230F0 /* WeatherContainer.swift */,
 				E76A604E230BE62200B3E4A3 /* ForecastVC.swift */,
+				E7406F052313DD90005D1C84 /* WorldClockVC.swift */,
+				E7406F072313DF5C005D1C84 /* ListCityTableVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +230,9 @@
 				E7E3CA712311128000DD87B6 /* TestCell.xib */,
 				E774873B2312C9830096C1D8 /* CityForecastCell.swift */,
 				E774873F2312D9290096C1D8 /* DetailForecastCell.swift */,
+				E7406F092313E090005D1C84 /* WorldClockCell.swift */,
+				E7406F0B2313E0A9005D1C84 /* listCityNameCell.swift */,
+				E7406F0D2313E5F0005D1C84 /* GTMCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E79A148C23080A9C0004D62E /* CoreData.xcdatamodeld in Sources */,
+				E7406F0C2313E0A9005D1C84 /* listCityNameCell.swift in Sources */,
 				E7C8E37222C3BC5E00235DA5 /* NewsApiService.swift in Sources */,
 				E71F710F22C267D60050B506 /* HomeVC.swift in Sources */,
 				E79A148E23080E3E0004D62E /* CoreDataService.swift in Sources */,
@@ -398,14 +414,18 @@
 				E71F712522C27E890050B506 /* SideMenuVC.swift in Sources */,
 				E70F3A6C230E89990051F46C /* LocationForecastCell in Sources */,
 				E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */,
+				E7406F0E2313E5F0005D1C84 /* GTMCell.swift in Sources */,
 				E72E49A22310092200E4FA8F /* SummaryForecastCell.swift in Sources */,
 				E76A604D230BDBB000B3E4A3 /* WeatherApiService.swift in Sources */,
+				E7406F082313DF5C005D1C84 /* ListCityTableVC.swift in Sources */,
 				E71B1BAD230D9B9E00DE0406 /* ForecastHourTableViewCell.swift in Sources */,
 				E7D221B9230C5899000230F0 /* WeatherContainerCell.swift in Sources */,
 				E70F3A70230E8F150051F46C /* DailyForecastCell.swift in Sources */,
+				E7406F0A2313E090005D1C84 /* WorldClockCell.swift in Sources */,
 				E79A149623086D940004D62E /* ReadingFavoriteArticle.swift in Sources */,
 				E71F712322C27C2C0050B506 /* MainVC.swift in Sources */,
 				E778DF752307A9B800B1C532 /* ConcernCell.swift in Sources */,
+				E7406F062313DD90005D1C84 /* WorldClockVC.swift in Sources */,
 				E70D8108230F16AF0059D289 /* IconApi.swift in Sources */,
 				E71F710D22C267D60050B506 /* AppDelegate.swift in Sources */,
 				E79D708B22DC50F3001125F6 /* PageCell.swift in Sources */,

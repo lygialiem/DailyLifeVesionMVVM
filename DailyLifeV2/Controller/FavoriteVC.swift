@@ -108,15 +108,14 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     
     let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {(rowAction, indexPath) in
       self.removeItemAtIndexPathCoreData(atIndexPath: indexPath)
-      CoreDataServices.instance.fetchCoreData(completion: { (favoriteArticlesCD) in
-        self.articlesCoreData = favoriteArticlesCD.reversed()
-        
-        if favoriteArticlesCD == []{
-          self.myTableView.isHidden = true
-        } else {
-          self.myTableView.isHidden = false
-        }
-      })
+      self.articlesCoreData.remove(at: indexPath.row)
+      
+      if self.articlesCoreData == []{
+        self.myTableView.isHidden = true
+      } else {
+        self.myTableView.isHidden = false
+      }
+      
       tableView.deleteRows(at: [indexPath], with: .bottom)
       NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
     }
@@ -142,6 +141,29 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     readingFavoriteVC.myCollectionView.reloadData()
     
     navigationController?.pushViewController(readingFavoriteVC, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let temp1 = articlesCoreData[sourceIndexPath.row]
+    let temp2 = articlesCoreData[destinationIndexPath.row]
+    
+    articlesCoreData[sourceIndexPath.row] = temp2
+    articlesCoreData[destinationIndexPath.row] = temp1
+    
+    tableView.reloadData()
+    
+    
+    CoreDataServices.instance.fetchCoreData { (coreData) in
+      
+    }
+    
+    
+    
+    
   }
 }
 
