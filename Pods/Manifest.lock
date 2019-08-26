@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - MMDB-Swift (0.3.0)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -17,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - MMDB-Swift
   - RxCocoa
   - RxSwift
   - SDWebImage (~> 5.0)
@@ -27,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - MMDB-Swift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -38,6 +41,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  MMDB-Swift: bc8ec03ce32286ac30f7bf3a50eca7eef59c8006
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
@@ -47,6 +51,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 06c3cf90b21277a9f47d8f73505c5a63b0633031
+PODFILE CHECKSUM: c0c4ba00e25d14fac5d565290eafa59f2f9a5d93
 
 COCOAPODS: 1.5.2

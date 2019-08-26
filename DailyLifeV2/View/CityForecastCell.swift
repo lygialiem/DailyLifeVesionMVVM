@@ -29,9 +29,10 @@ class CityForecastCell: UITableViewCell {
   
   
   func configureCell(forecast: ForecastApi?){
-    guard let cityZone = forecast?.location?.name, let description = forecast?.current?.condition?.text, let temperature = forecast?.current?.temp_c, let currentDay = forecast?.current?.last_updated_epoch,
+    guard let cityZone = forecast?.location?.name, let description = forecast?.current?.condition?.text, let temperature = forecast?.current?.temp_c,
       let region = forecast?.location?.region,
-      let country = forecast?.location?.country
+      let country = forecast?.location?.country,
+    let lastUpdated = forecast?.current?.last_updated
       else {return}
     if region == ""{
       self.regionCountry.text = "\(country)"
@@ -47,7 +48,7 @@ class CityForecastCell: UITableViewCell {
     self.temperature.text = "\(Int(round(temperature)))ºC"
     
     
-    self.currentDay.text = currentDay.formatEpochTime(dateFormatType: "h:mma, MMMM dd, yyyy")
+    self.currentDay.text = lastUpdated.changeFormatTime(from: "YYYY-MM-dd HH:mm", to: "MMMM dd, YYYY hh:mma")
     
     let date = Date()
     let dateFormatter = DateFormatter()

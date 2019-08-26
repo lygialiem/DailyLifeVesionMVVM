@@ -90,3 +90,16 @@ extension UIImageView{
     }
   }
 }
+
+extension String{
+  func changeFormatTime(from: String, to: String) -> String{
+    let inputFormat = DateFormatter()
+    let outputFormat = DateFormatter()
+    
+    inputFormat.dateFormat = from
+    outputFormat.dateFormat = to
+    
+    let dateInput = inputFormat.date(from: self)
+    return outputFormat.string(from: dateInput ?? Date())
+  }
+}

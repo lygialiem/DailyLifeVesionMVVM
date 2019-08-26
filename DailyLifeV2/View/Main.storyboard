@@ -555,7 +555,7 @@
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmQ-ou-G18">
                                                                     <rect key="frame" x="0.0" y="2.5" width="29.5" height="25"/>
-                                                                    <state key="normal" image="greenLikeButton"/>
+                                                                    <state key="normal" image="redLikeButton"/>
                                                                     <connections>
                                                                         <action selector="likeButtonByPress:" destination="9ET-gd-IuL" eventType="touchUpInside" id="xPP-6N-t44"/>
                                                                     </connections>
@@ -878,7 +878,7 @@
                                                         <constraint firstAttribute="width" constant="350" id="LWi-rN-Al8"/>
                                                         <constraint firstAttribute="height" constant="17" id="ik7-cE-cpd"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1977,7 +1977,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August, 25-2019" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3g-Gl-ejW">
-                                                <rect key="frame" x="20" y="0.0" width="330" height="25"/>
+                                                <rect key="frame" x="20" y="3" width="330" height="22"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1986,7 +1986,7 @@
                                         <color key="backgroundColor" red="0.1569153368" green="0.15693783759999999" blue="0.156902343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="v3g-Gl-ejW" secondAttribute="trailing" id="2pl-ce-HLU"/>
-                                            <constraint firstItem="v3g-Gl-ejW" firstAttribute="top" secondItem="U0K-Zh-r2G" secondAttribute="top" id="4Ni-c1-h6K"/>
+                                            <constraint firstItem="v3g-Gl-ejW" firstAttribute="top" secondItem="U0K-Zh-r2G" secondAttribute="top" constant="3" id="4Ni-c1-h6K"/>
                                             <constraint firstItem="v3g-Gl-ejW" firstAttribute="leading" secondItem="U0K-Zh-r2G" secondAttribute="leading" constant="20" id="VC1-vz-cwX"/>
                                             <constraint firstAttribute="bottom" secondItem="v3g-Gl-ejW" secondAttribute="bottom" id="YN2-b3-fdc"/>
                                         </constraints>
@@ -2004,8 +2004,8 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KC8-9x-bG9">
                                                 <rect key="frame" x="15" y="11" width="320" height="28"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <color key="textColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oxk-yV-fJ0">
@@ -3023,7 +3023,6 @@
         <image name="Travel" width="1600" height="1181"/>
         <image name="apixuLogo" width="200" height="200"/>
         <image name="darkSkyLogo" width="256" height="256"/>
-        <image name="greenLikeButton" width="25" height="25"/>
         <image name="heartSketch" width="25" height="25"/>
         <image name="homeSketch" width="25" height="25"/>
         <image name="move" width="25" height="25"/>
@@ -3032,6 +3031,7 @@
         <image name="noImage" width="110" height="84"/>
         <image name="plus" width="75" height="75"/>
         <image name="rain" width="512" height="512"/>
+        <image name="redLikeButton" width="25" height="25"/>
         <image name="refresh" width="25" height="25"/>
         <image name="search" width="170.66667175292969" height="170.66667175292969"/>
         <image name="shareButton" width="25" height="25"/>

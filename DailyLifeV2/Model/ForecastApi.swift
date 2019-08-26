@@ -32,6 +32,7 @@ struct Location: Decodable{
 
 struct Current: Decodable{
   var last_updated_epoch: Int?
+  var last_updated: String?
   var temp_c: Double?
   var condition: Condition?
   var wind_kph: Double?

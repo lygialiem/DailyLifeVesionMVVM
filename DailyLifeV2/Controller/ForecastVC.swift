@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import MMDB_Swift
 
 class ForecastVC: UIViewController {
   
@@ -30,6 +31,8 @@ class ForecastVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.navigationBar.isHidden = true
+    
+    
     
     snipper.startAnimating()
     self.addCityBtn.isHidden = true
@@ -80,6 +83,7 @@ class ForecastVC: UIViewController {
     setupTapToDimiss()
     
     self.searchTextfield.delegate = self
+  
     
   }
   
@@ -292,11 +296,10 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
     } else if tableView.tag == 1  {
       switch indexPath.row{
         
-        
       case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell") as! DetailForecastCell
         guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
-        cell.dateForecast.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].date_epoch ?? 0).formatEpochTime(dateFormatType: "MMMM dd, YYYY "))"
+        cell.dateForecast.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].date ?? "").changeFormatTime(from: "YYYY-MM-dd", to: "MMMM dd, YYYY"))"
         return cell
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! DetailForecastCell
@@ -516,23 +519,21 @@ extension ForecastVC: UITextFieldDelegate{
           
           DispatchQueue.main.async {
             self.saveCountryNameToCoreDate(nameToSave: textField.text)
-            self.hourlyData = data
-            
-            self.weatherTableView.isHidden = false
+            self.weatherTableView.isHidden = false 
             self.weatherTableView.dataSource = self
             self.weatherTableView.reloadData()
-            
+            self.hourlyData = data
             self.snipper.stopAnimating()
             self.snipper.isHidden = true
-            
           }
         })
       }
     }
     
-    animationOut(searchView)
+    self.animationOut(self.searchView)
     textField.resignFirstResponder()
     self.weatherTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: self.weatherTableView.frame.width, height: self.weatherTableView.frame.height), animated: true)
+    
     return true
   }
 }
