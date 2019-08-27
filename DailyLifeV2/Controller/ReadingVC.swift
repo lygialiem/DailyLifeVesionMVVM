@@ -14,7 +14,7 @@ class ReadingVC: UIViewController {
   
   @IBOutlet var readingCollectionView: UICollectionView!
   
-  var articles = [Article?]()
+  var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?
   var articlesOfConcern = [Article]()
   
@@ -47,6 +47,10 @@ class ReadingVC: UIViewController {
     readingCollectionView.dataSource = self
     readingCollectionView.isPagingEnabled = true
     
+  }
+  @IBAction func shareButton(_ sender: Any) {
+    let shareAction = UIActivityViewController(activityItems: [articles[indexPathOfDidSelectedArticle?.row ?? 0].url ?? ""], applicationActivities: nil)
+    self.present(shareAction, animated: true, completion: nil)
   }
 }
 

@@ -29,6 +29,7 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   var arrayName = [Section]()
   
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -94,13 +95,13 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! listCityNameCell
     
     if isFiltering(){
-      cell.textLabel?.text = filterContents[indexPath.section].names[indexPath.row].replacingOccurrences(of: "_", with: " ")
+      cell.nameTItle.text = filterContents[indexPath.section].names[indexPath.row].replacingOccurrences(of: "_", with: " ")
       cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       return cell
     }
     
-    cell.textLabel?.text = sections[indexPath.section].names[indexPath.row].replacingOccurrences(of: "_", with: " ")
-    cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    cell.nameTItle.text = sections[indexPath.section].names[indexPath.row].replacingOccurrences(of: "_", with: " ")
+    cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     return cell
   }
   
@@ -109,7 +110,7 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 40
+    return 35
   }
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

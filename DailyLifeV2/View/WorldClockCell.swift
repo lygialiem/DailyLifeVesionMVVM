@@ -15,6 +15,7 @@ class WorldClockCell: UITableViewCell {
   @IBOutlet var continentName: UILabel!
   
   var idTimezone: String?
+  let feedback = UINotificationFeedbackGenerator()
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -41,6 +42,5 @@ class WorldClockCell: UITableViewCell {
     
     continentName.text = String((idTimezone?.split(separator: "/")[0]) ?? "")
     cityName.text = String((idTimezone?.split(separator: "/")[1]) ?? "").replacingOccurrences(of: "_", with: " ")
-    
   }
 }

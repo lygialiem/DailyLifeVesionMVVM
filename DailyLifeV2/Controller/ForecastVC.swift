@@ -28,8 +28,12 @@ class ForecastVC: UIViewController {
   var forecastData: ForecastApi?
   var hourlyData: HourlyDarkSkyApi?
   var effect: UIVisualEffect!
+  let feedback = UINotificationFeedbackGenerator()
+  var scrollable = true
   
   override func viewWillAppear(_ animated: Bool) {
+    scrollable = false
+   
     self.navigationController?.navigationBar.isHidden = true
     
     
@@ -67,12 +71,16 @@ class ForecastVC: UIViewController {
               
               self.addCityLabel.isHidden = true
               self.addCityBtn.isHidden = true
+              
+              self.feedback.notificationOccurred(.success)
             }
           })
         })
       }
     }
   }
+  
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,9 +89,9 @@ class ForecastVC: UIViewController {
     self.navigationController?.navigationBar.isHidden = true
     setupSearchCityView()
     setupTapToDimiss()
-    
+    self.tabBarController?.delegate = self
     self.searchTextfield.delegate = self
-  
+
     
   }
   
@@ -528,6 +536,7 @@ extension ForecastVC: UITextFieldDelegate{
           }
         })
       }
+      self.feedback.notificationOccurred(.success)
     }
     
     self.animationOut(self.searchView)
@@ -535,5 +544,18 @@ extension ForecastVC: UITextFieldDelegate{
     self.weatherTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: self.weatherTableView.frame.width, height: self.weatherTableView.frame.height), animated: true)
     
     return true
+  }
+}
+
+extension ForecastVC: UITabBarControllerDelegate{
+  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    
+    if tabBarController.selectedIndex == 2{
+      if scrollable == false{
+        scrollable = true
+      } else {
+        self.weatherTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+      }
+    }
   }
 }

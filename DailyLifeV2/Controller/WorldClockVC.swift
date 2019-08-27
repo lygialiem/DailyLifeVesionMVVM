@@ -13,11 +13,14 @@ class WorldClockVC: UIViewController {
   var stringArray = [String]()
   @IBOutlet var editButton: UIBarButtonItem!
   @IBOutlet var myTableView: UITableView!
+  @IBOutlet var addButton: UIBarButtonItem!
+  
+  let feedback = UINotificationFeedbackGenerator()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-  stringArray = getUserDefault()
+    stringArray = getUserDefault()
     
   }
   
@@ -35,6 +38,13 @@ class WorldClockVC: UIViewController {
     super.setEditing(!isEditing, animated: true)
     
     myTableView.setEditing(!myTableView.isEditing, animated: true)
+    
+    if editing{
+      let deleteAllButton = UIBarButtonItem(title: "Delete All", style: .plain, target: self, action: #selector(handleDeleteAllButton))
+      navigationItem.rightBarButtonItems = [deleteAllButton]
+    } else {
+      navigationItem.rightBarButtonItems = [addButton]
+    }
   }
   
   
@@ -43,15 +53,12 @@ class WorldClockVC: UIViewController {
     
   }
   
-  @IBAction func editButton(_ sender: Any) {
-    if myTableView.isEditing{
-      myTableView.setEditing(false, animated: true)
-      navigationItem.leftBarButtonItem?.title = "Done"
-      
-    } else {
-      myTableView.setEditing(true, animated: true)
-      navigationItem.leftBarButtonItem?.title = "Edit"
-    }
+  
+  @objc func handleDeleteAllButton(){
+    self.feedback.notificationOccurred(.success)
+    self.stringArray = []
+    self.setUserDefault()
+    self.myTableView.reloadData()
   }
   
   func setUserDefault(){
@@ -131,31 +138,31 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
-    return 50
+    if indexPath.section == 1{
+    return 70
+    }else {
+      return 70
+    }
   }
-  
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-  tableView.beginUpdates()
+    
     let temp1 = stringArray[sourceIndexPath.row]
     let temp2 = stringArray[destinationIndexPath.row]
     
     stringArray[sourceIndexPath.row] = temp2
     stringArray[destinationIndexPath.row] = temp1
-  
-    tableView.reloadRows(at: [sourceIndexPath,destinationIndexPath], with: .none)
-    tableView.endUpdates()
+    
+    tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     setUserDefault()
   }
-  
-  
 }
 
 extension WorldClockVC: WordClockDidSelect{
   func addWorldClock(timezone: String) {
     self.stringArray.append(timezone)
     self.setUserDefault()
-    self.myTableView.reloadData()
+    myTableView.insertRows(at: [
+      NSIndexPath(row: stringArray.count - 1, section: 1) as IndexPath], with: .automatic)
   }
 }
 

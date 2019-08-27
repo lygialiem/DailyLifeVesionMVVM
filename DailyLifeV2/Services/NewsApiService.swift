@@ -12,8 +12,8 @@ class NewsApiService{
   static let instance = NewsApiService()
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
-  let API_KEY_NEWSAPI = "8eb1b89eec2b47e598d5f68e1282200f"
-  var TOPIC_NEWSAPI = ["World", "Politics", "Business", "Opinion", "Technology", "Science", "Arts", "Food", "Health", "Entertainment", "Style", "Travel", "Sport"]
+  let API_KEY_NEWSAPI = "a1483434307040f69a72d3e354977a79"
+  var TOPIC_NEWSAPI = ["Style", "Entertainment", "Arts", "Travel", "Food", "Health", "Sport", "World", "Politics", "Business", "Opinion", "Technology", "Science"]
   
   func getMoreNewsApi(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     

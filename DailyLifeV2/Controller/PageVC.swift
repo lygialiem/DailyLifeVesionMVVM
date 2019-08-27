@@ -9,30 +9,38 @@
 import UIKit
 import XLPagerTabStrip
 
-class PageVC: UIViewController, IndicatorInfoProvider {
+class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegate {
   
+  
+  @IBOutlet var outOfDateApi: UILabel!
   @IBOutlet var newsFeedCV: UICollectionView!
+  
   var articles = [Article]()
   var menuBarTitle: String = ""
   var currentPage = 2
   var articlesOfConcern = [Article]()
-  @IBOutlet var outOfDateApi: UILabel!
+  
+  
   
   let refreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+   
     configureCollectionView()
     self.navigationItem.backBarButtonItem?.title = ""
-    
+    self.tabBarController?.delegate = self
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
-  
+    
   }
   
   deinit {
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  func scrollToTop() {
+    self.newsFeedCV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
   }
   
   @objc func handleShareAction(notification: Notification){
@@ -134,7 +142,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     readingVC.readingCollectionView.reloadData()
     
     self.navigationController?.pushViewController(readingVC, animated: true)
-
+    
   }
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

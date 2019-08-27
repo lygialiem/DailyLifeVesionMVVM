@@ -17,6 +17,7 @@ class PageCell: UICollectionViewCell {
   @IBOutlet var likeButton: UIButton!
   
   var articles: Article?
+  let effectTap = UINotificationFeedbackGenerator()
   
   // false: Non-Saved...
   var isLikedStateButton = false
@@ -53,6 +54,7 @@ class PageCell: UICollectionViewCell {
   }
   
   @IBAction func likeButtonByPress(_ sender: Any) {
+    effectTap.notificationOccurred(.success)
     if isLikedStateButton{
       likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
       //delete article in CoreData:

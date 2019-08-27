@@ -33,7 +33,7 @@ class FavoriteCell: UITableViewCell {
     self.timePublishedArticle.text = "\(formatString!)".replacingOccurrences(of: "+0000", with: "")
     
     guard let titleArticle = article.titleCD else {return}
-    self.titleArticle.text = titleArticle.uppercased()
+    self.titleArticle.text = titleArticle.capitalized
   
   }
   

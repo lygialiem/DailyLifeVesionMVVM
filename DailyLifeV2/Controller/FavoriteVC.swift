@@ -14,6 +14,8 @@ class FavoriteVC: UIViewController {
   var articlesCoreData = [FavoriteArtilce]()
   @IBOutlet var swiftLabel: UILabel!
   
+  let feedback = UINotificationFeedbackGenerator()
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.swiftLabel.stopBlink()
@@ -61,6 +63,7 @@ class FavoriteVC: UIViewController {
       for i in 0..<favoriteArticlesCD.count{
         managedContext.delete(favoriteArticlesCD[i])
       }
+      self.feedback.notificationOccurred(.success)
       do{
         try managedContext.save()
         self.articlesCoreData = []
@@ -113,6 +116,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       }
       
       tableView.deleteRows(at: [indexPath], with: .bottom)
+      self.feedback.notificationOccurred(.success)
       NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
     }
     
@@ -148,15 +152,9 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     articlesCoreData[destinationIndexPath.row] = temp1
     
     tableView.reloadData()
-    
-    
     CoreDataServices.instance.fetchCoreData { (coreData) in
       
     }
-    
-    
-    
-    
   }
 }
 

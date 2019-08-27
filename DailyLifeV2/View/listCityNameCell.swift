@@ -10,7 +10,8 @@ import UIKit
 
 class listCityNameCell: UITableViewCell {
 
-    override func awakeFromNib() {
+  @IBOutlet var nameTItle: UILabel!
+  override func awakeFromNib() {
         super.awakeFromNib()
      
       

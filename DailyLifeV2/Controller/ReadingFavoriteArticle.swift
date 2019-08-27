@@ -35,6 +35,10 @@ class ReadingFavoriteArticle: UIViewController {
     myCollectionView.scrollToItem(at: indexPathOfDidSelectedArticle!
       , at: .centeredHorizontally, animated: false)
   }
+  @IBAction func shareButton(_ sender: Any) {
+    let shareAction = UIActivityViewController(activityItems: [self.articles[indexPathOfDidSelectedArticle?.row ?? 0].urlCD ?? ""], applicationActivities: nil)
+    self.present(shareAction, animated: true, completion: nil)
+  }
 }
 
 extension ReadingFavoriteArticle: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource{
