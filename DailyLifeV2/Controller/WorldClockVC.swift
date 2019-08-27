@@ -10,9 +10,16 @@ import UIKit
 
 class WorldClockVC: UIViewController {
   
-  var stringArray = ["America/Grenada","Arctic/Longyearbyen", "Asia/Krasnoyarsk"]
+  var stringArray = [String]()
   @IBOutlet var editButton: UIBarButtonItem!
   @IBOutlet var myTableView: UITableView!
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+  stringArray = getUserDefault()
+    
+  }
   
   
   override func viewDidLoad() {
@@ -34,7 +41,6 @@ class WorldClockVC: UIViewController {
   
   @IBAction func AddMoreCityButton(_ sender: Any) {
     
-    
   }
   
   @IBAction func editButton(_ sender: Any) {
@@ -45,6 +51,24 @@ class WorldClockVC: UIViewController {
     } else {
       myTableView.setEditing(true, animated: true)
       navigationItem.leftBarButtonItem?.title = "Edit"
+    }
+  }
+  
+  func setUserDefault(){
+    UserDefaults.standard.set(stringArray, forKey: "WorldClock")
+    UserDefaults.standard.synchronize()
+  }
+  
+  func getUserDefault() -> [String]{
+    guard let userDefault = UserDefaults.standard.value(forKey: "WorldClock") as? [String] else {return [String]()}
+    return userDefault
+  }
+  
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "listCities"{
+      guard let vc = segue.destination as? ListCityTableVC else {return}
+      vc.delegate = self
     }
   }
 }
@@ -73,7 +97,7 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
       
     case 1:
       let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath) as! WorldClockCell
-      cell.cityName.text = stringArray[indexPath.row]
+      cell.idTimezone = stringArray[indexPath.row]
       return cell
     default:
       return UITableViewCell()
@@ -93,6 +117,7 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
     if editingStyle == .delete{
       stringArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
+      setUserDefault()
     }
   }
   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -105,14 +130,34 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
     }
   }
   
-  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    return 50
+  }
   
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+  tableView.beginUpdates()
     let temp1 = stringArray[sourceIndexPath.row]
     let temp2 = stringArray[destinationIndexPath.row]
     
     stringArray[sourceIndexPath.row] = temp2
     stringArray[destinationIndexPath.row] = temp1
-    
-    tableView.reloadData()
+  
+    tableView.reloadRows(at: [sourceIndexPath,destinationIndexPath], with: .none)
+    tableView.endUpdates()
+    setUserDefault()
+  }
+  
+  
+}
+
+extension WorldClockVC: WordClockDidSelect{
+  func addWorldClock(timezone: String) {
+    self.stringArray.append(timezone)
+    self.setUserDefault()
+    self.myTableView.reloadData()
   }
 }
+
+
+

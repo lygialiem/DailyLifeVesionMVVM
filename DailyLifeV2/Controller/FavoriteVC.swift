@@ -37,7 +37,7 @@ class FavoriteVC: UIViewController {
     myTableView.dataSource = self
     self.swiftLabel.startBlink()
     myTableView.isHidden = false
-    
+    navigationController?.title = "Liked Contents"
   }
   
   func removeItemAtIndexPathCoreData(atIndexPath indexPath: IndexPath){
@@ -75,10 +75,6 @@ class FavoriteVC: UIViewController {
 
 extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-    
-  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     return articlesCoreData.count
@@ -124,13 +120,10 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       let share = UIActivityViewController(activityItems: [self.articlesCoreData[indexPath.row].urlCD!], applicationActivities: nil)
       self.present(share, animated: true, completion: nil)
     }
-    shareAction.backgroundColor = #colorLiteral(red: 0.1203624085, green: 0.8030965108, blue: 0.7143992782, alpha: 1)
+    shareAction.backgroundColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
     return [deleteAction, shareAction]
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Articles"
-  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let readingFavoriteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle

@@ -25,13 +25,15 @@ class GTMCell: UITableViewCell {
   @objc func setupTime(){
     
     timeZone.text = getTime()
+    self.gtm.text = "Your Current"
+    
     
   }
   
   func getTime() -> String{
     var stringTime = ""
     let dateFormater = DateFormatter()
-    dateFormater.timeStyle = .short
+    dateFormater.timeStyle = .long
     dateFormater.timeZone = TimeZone(identifier: "GTM")
     
     let timeNow = Date()

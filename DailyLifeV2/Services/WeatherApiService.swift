@@ -45,7 +45,7 @@ class WeatherApiService{
           let dataDecoded = try JSONDecoder().decode(ForecastApi.self, from: data)
           completion(dataDecoded)
         }catch let jsonError{
-          debugPrint("JSON ERROR: ",jsonError,"Error: ", error!)
+          debugPrint("JSON ERROR: ",jsonError,"Error: ", error)
         }
       }
       }.resume()
