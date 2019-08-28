@@ -13,6 +13,7 @@ class WorldClockCell: UITableViewCell {
   @IBOutlet var cityName: UILabel!
   @IBOutlet var timezone: UILabel!
   @IBOutlet var continentName: UILabel!
+  @IBOutlet var gmt: UILabel!
   
   var idTimezone: String?
   let feedback = UINotificationFeedbackGenerator()
@@ -28,7 +29,7 @@ class WorldClockCell: UITableViewCell {
   
   @objc func setTime(){
     
-  setupCell()
+    setupCell()
     
   }
   
@@ -38,9 +39,22 @@ class WorldClockCell: UITableViewCell {
     dateFormatter.timeStyle = .long
     dateFormatter.timeZone = TimeZone(identifier: idTimezone ?? "")
     let timeNow = Date()
-    timezone.text = dateFormatter.string(from: timeNow)
+    let stringDate = dateFormatter.string(from: timeNow)
+    let splitSubStringDate = stringDate.split(separator: " ")
+    
+    timezone.text = "\(String(splitSubStringDate[0])) \(String(splitSubStringDate[1]))"
+    gmt.text = String(splitSubStringDate[2])
     
     continentName.text = String((idTimezone?.split(separator: "/")[0]) ?? "")
-    cityName.text = String((idTimezone?.split(separator: "/")[1]) ?? "").replacingOccurrences(of: "_", with: " ")
+    
+    let splitString = idTimezone?.split(separator: "/")
+    guard let splitStringNoneOptional = splitString else {return}
+    
+    if splitStringNoneOptional.count == 1{
+      cityName.text = "Your Current"
+      self.continentName.text = ""
+    } else {
+      cityName.text = (splitStringNoneOptional[1]).replacingOccurrences(of: "_", with: " ")
+    }
   }
 }

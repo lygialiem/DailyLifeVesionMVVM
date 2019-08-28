@@ -61,8 +61,6 @@ class FavoriteVC: UIViewController {
   
   @IBAction func deleteAllButtonByPressed(_ sender: Any) {
     
-    
-    
     self.myTableView.isHidden = true
     
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}

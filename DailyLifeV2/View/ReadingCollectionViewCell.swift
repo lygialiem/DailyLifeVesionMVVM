@@ -34,7 +34,7 @@ class ReadingCollectionViewCell: UICollectionViewCell {
     myTableView.delegate = self
     myTableView.dataSource = self
     myTableView.estimatedRowHeight = 1000
-//    myTableView.register(UINib.init(nibName: "TestCell", bundle: nil), forCellReuseIdentifier: "TestCell")
+
     myTableView.rowHeight = UITableView.automaticDimension
   }
 }
@@ -107,6 +107,7 @@ override  func prepareForReuse() {
 
 extension ReadingCollectionViewCell: ReadingCellDelegate{
   func didPressSeeMore(url: String) {
+    
     let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     NotificationCenter.default.post(name: NSNotification.Name("NavigateToWebViewVCFromFirstCell"), object: nil, userInfo: ["data": webViewViewController])

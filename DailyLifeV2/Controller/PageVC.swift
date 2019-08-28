@@ -129,8 +129,8 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let storyboard = self.storyboard else { return }
     
+    guard let storyboard = self.storyboard else { return }
     let readingVC = storyboard.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
     readingVC.articlesOfConcern = self.articlesOfConcern
     readingVC.articles = self.articles

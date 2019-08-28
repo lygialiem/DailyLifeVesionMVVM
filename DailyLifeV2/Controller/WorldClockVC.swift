@@ -102,13 +102,13 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell") as! WorldClockCell
     switch indexPath.section{
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "GTMCell") as! GTMCell
+      cell.idTimezone = "GMT"
       return cell
       
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath) as! WorldClockCell
       cell.idTimezone = stringArray[indexPath.row]
       return cell
     default:
