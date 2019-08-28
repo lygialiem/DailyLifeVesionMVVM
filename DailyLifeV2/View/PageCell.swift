@@ -88,7 +88,6 @@ class PageCell: UICollectionViewCell {
     let coreData = FavoriteArtilce(context: managedContext)
     
     coreData.authorCD = articles?.author
-    
     coreData.contentCD = articles?.content
     coreData.descriptionCD = articles?.description
     coreData.publishedAtCD = articles?.publishedAt

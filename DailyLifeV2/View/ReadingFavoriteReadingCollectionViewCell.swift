@@ -32,25 +32,25 @@ class ReadingFavoriteReadingCollectionViewCell: UICollectionViewCell {
     
   }
   
-  func configureContent(article: FavoriteArtilce?){
+  func configureContent(article: Article?){
     
-    guard let urlToImage = article?.urlToImageCD else {return}
+    guard let urlToImage = article?.urlToImage else {return}
     imageArticle.sd_setImage(with: URL(string: urlToImage), completed: nil)
-    titleArticle.text = article?.titleCD?.capitalized
-    authorArticle.text = article?.authorCD
+    titleArticle.text = article?.title?.capitalized
+    authorArticle.text = article?.author
     
     contentArticle.layer.cornerRadius = 7
     contentArticle.delegate = self
     
     let attributedOfString = [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 15)]
     
-    let stringContent = "\(article?.contentCD ?? "") - \(seeMore)"
+    let stringContent = "\(article?.content ?? "") - \(seeMore)"
     let completedConent = stringContent.replacingOccurrences(of: "[", with: "(", options: String.CompareOptions.literal, range: nil)
     let completedConent1 = completedConent.replacingOccurrences(of: "+", with: "", options: String.CompareOptions.literal, range: nil)
     let finalContent = completedConent1.replacingOccurrences(of: "]", with: ")", options: String.CompareOptions.literal, range: nil)
     let attributedString = NSMutableAttributedString(string: finalContent, attributes: attributedOfString as [NSAttributedString.Key : Any])
     
-    guard let url = article?.urlCD else {return}
+    guard let url = article?.url else {return}
     attributedString.setAsLink(textToFind: seeMore, urlString: url)
     
     contentArticle.attributedText = attributedString

@@ -42,7 +42,7 @@ class WebViewController: UIViewController {
     
     let refreshController = UIRefreshControl()
     refreshController.addTarget(self, action: #selector(pullToRefreshWebView(sender:)), for: .valueChanged)
-    refreshController.tintColor = #colorLiteral(red: 0.1203624085, green: 0.9065318704, blue: 0.7143992782, alpha: 1)
+    refreshController.tintColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
     refreshController.backgroundColor = .black
 
     webViewArticle.scrollView.addSubview(refreshController)

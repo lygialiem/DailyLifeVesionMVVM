@@ -36,14 +36,19 @@ class WorldClockCell: UITableViewCell {
   func setupCell(){
     
     let dateFormatter = DateFormatter()
-    dateFormatter.timeStyle = .long
+    //    dateFormatter.timeStyle = .long
+    dateFormatter.dateFormat = "h:mm:ss a ZZZZZ"
     dateFormatter.timeZone = TimeZone(identifier: idTimezone ?? "")
     let timeNow = Date()
     let stringDate = dateFormatter.string(from: timeNow)
     let splitSubStringDate = stringDate.split(separator: " ")
     
     timezone.text = "\(String(splitSubStringDate[0])) \(String(splitSubStringDate[1]))"
-    gmt.text = String(splitSubStringDate[2])
+    
+    if String(splitSubStringDate[2]) == "Z"{
+      gmt.text = "GMT+0"
+    }
+    gmt.text = "GMT\(String(splitSubStringDate[2]))"
     
     continentName.text = String((idTimezone?.split(separator: "/")[0]) ?? "")
     
@@ -51,7 +56,7 @@ class WorldClockCell: UITableViewCell {
     guard let splitStringNoneOptional = splitString else {return}
     
     if splitStringNoneOptional.count == 1{
-      cityName.text = "Your Current"
+      cityName.text = "Zulu Time"
       self.continentName.text = ""
     } else {
       cityName.text = (splitStringNoneOptional[1]).replacingOccurrences(of: "_", with: " ")

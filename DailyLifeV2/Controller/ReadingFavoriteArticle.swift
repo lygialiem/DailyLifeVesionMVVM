@@ -14,7 +14,7 @@ class ReadingFavoriteArticle: UIViewController {
   
   @IBOutlet var myCollectionView: UICollectionView!
   
-  var articles = [FavoriteArtilce]()
+  var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?
   
   override func viewDidLoad() {
@@ -36,7 +36,7 @@ class ReadingFavoriteArticle: UIViewController {
       , at: .centeredHorizontally, animated: false)
   }
   @IBAction func shareButton(_ sender: Any) {
-    let shareAction = UIActivityViewController(activityItems: [self.articles[indexPathOfDidSelectedArticle?.row ?? 0].urlCD ?? ""], applicationActivities: nil)
+    let shareAction = UIActivityViewController(activityItems: [self.articles[indexPathOfDidSelectedArticle?.row ?? 0].url ?? ""], applicationActivities: nil)
     self.present(shareAction, animated: true, completion: nil)
   }
 }

@@ -9,7 +9,7 @@
 //Linh: 3d152c6733e14015b46c1418d7567434
 //Lam: d5b74e34a5d84c6e975e1cfe78f4803d
 //Long: 2173e6f5b41e4cb7b3892eb3ace459c5
-//Liem: b7e4adff53ca4db185299d0f75eb3066
+//Liem: 7b3c1425392b4b1a9bbc9ab91f649a82
 import Foundation
 
 class NewsApiService{
@@ -18,11 +18,9 @@ class NewsApiService{
   
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
-  let API_KEY_NEWSAPI = "3d152c6733e14015b46c1418d7567434"
-//  var TOPIC_NEWSAPI = ["Entertainment", "Style", "Arts", "Travel", "Food", "Health", "Sport", "World", "Politics", "Business", "Opinion", "Technology", "Science"]
+  let API_KEY_NEWSAPI = "cfbda38924a94563bd5fbf7336983b0f"
   
-  
-  var TOPIC_NEWSAPI = ["Entertainment", "General", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
+  var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
   func getMoreNewsApi(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
@@ -36,6 +34,6 @@ class NewsApiService{
       } catch let jsonError{
         debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)
       }
-    }.resume()
+      }.resume()
   }
 }

@@ -1849,7 +1849,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nk7-yT-NoC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="145" id="Brw-av-NxZ" customClass="FavoriteCell" customModule="DailyLifeV2" customModuleProvider="target">
@@ -1926,7 +1926,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ioh-BI-oxn"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Liked Contents" id="2cB-wk-QBv">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="edit" id="FGb-6I-dvN">
+                            <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="editButtonAction:" destination="FqJ-5I-fWq" id="Jvx-BC-gMY"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Delete All" id="oFZ-CT-ms8">
                             <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -1934,7 +1941,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="deleteAllButton" destination="oFZ-CT-ms8" id="cvP-Mc-Ohx"/>
                         <outlet property="myTableView" destination="nk7-yT-NoC" id="Rhc-e7-URa"/>
                         <outlet property="swiftLabel" destination="g4z-O9-wef" id="8VL-tQ-GS1"/>
                         <segue destination="Jkk-hM-LBY" kind="show" identifier="ToFavoriteReading" id="NRu-S0-oya"/>
@@ -2188,7 +2197,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hfr-DM-0jB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yAw-lq-Twf">
                                     <size key="itemSize" width="375" height="554"/>
@@ -2198,7 +2207,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="mMN-Yp-veW" customClass="ReadingFavoriteReadingCollectionViewCell" customModule="DailyLifeV2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <rect key="frame" x="0.0" y="-22" width="375" height="554"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>

@@ -119,6 +119,20 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
     return 20
   }
   
+  override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    
+    if isFiltering(){
+      return nil
+    }
+    self.tableView.sectionIndexBackgroundColor = .clear
+    var array = [String]()
+    for i in 0..<sections.count{
+    array.append(sections[i].letter)
+    }
+    return array
+  }
+  
+  
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     
