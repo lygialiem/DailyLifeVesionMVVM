@@ -32,6 +32,11 @@ class WorldClockVC: UIViewController {
     myTableView.delegate = self
     navigationItem.leftBarButtonItem = editButtonItem
     
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+  }
+  
+  @objc func handleMoveTabbar(){
+    self.tabBarController?.selectedIndex = 0
   }
   
   override func setEditing(_ editing: Bool, animated: Bool) {

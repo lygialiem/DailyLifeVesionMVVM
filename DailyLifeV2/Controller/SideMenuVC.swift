@@ -106,13 +106,10 @@ extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    if indexPath.row ==
-//      ApiServices.instance.TOPIC_NEWSAPI.count{
-//      animateAddViewIn()
-//    } else {
+
       NotificationCenter.default.post(name: NSNotification.Name("MoveToTopic"), object: nil, userInfo: ["data": indexPath])
       NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
-//    }
+      NotificationCenter.default.post(name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
   }
 }
 

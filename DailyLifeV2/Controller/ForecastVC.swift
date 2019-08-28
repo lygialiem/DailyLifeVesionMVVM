@@ -91,10 +91,14 @@ class ForecastVC: UIViewController {
     setupTapToDimiss()
     self.tabBarController?.delegate = self
     self.searchTextfield.delegate = self
+    self.tabBarController?.tabBar.backgroundColor = .clear
 
-    
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
   }
   
+  @objc func handleMoveTabbar(){
+    self.tabBarController?.selectedIndex = 0
+  }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
   }
@@ -536,9 +540,9 @@ extension ForecastVC: UITextFieldDelegate{
           }
         })
       }
-      self.feedback.notificationOccurred(.success)
-    }
     
+    }
+      self.feedback.notificationOccurred(.success)
     self.animationOut(self.searchView)
     textField.resignFirstResponder()
     self.weatherTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: self.weatherTableView.frame.width, height: self.weatherTableView.frame.height), animated: true)
@@ -554,7 +558,7 @@ extension ForecastVC: UITabBarControllerDelegate{
       if scrollable == false{
         scrollable = true
       } else {
-        self.weatherTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.weatherTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: self.view.frame.width, height: 20), animated: true)
       }
     }
   }

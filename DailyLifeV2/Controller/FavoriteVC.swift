@@ -40,6 +40,12 @@ class FavoriteVC: UIViewController {
     self.swiftLabel.startBlink()
     myTableView.isHidden = false
     navigationController?.title = "Liked Contents"
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+  }
+  
+  @objc func handleMoveTabbar(){
+    self.tabBarController?.selectedIndex = 0
   }
   
   func removeItemAtIndexPathCoreData(atIndexPath indexPath: IndexPath){
@@ -54,6 +60,9 @@ class FavoriteVC: UIViewController {
   }
   
   @IBAction func deleteAllButtonByPressed(_ sender: Any) {
+    
+    
+    
     self.myTableView.isHidden = true
     
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}

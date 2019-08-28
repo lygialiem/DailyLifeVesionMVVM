@@ -14,6 +14,7 @@ class WeatherContainer: UIViewController {
   @IBOutlet var titleWeather: UILabel!
   @IBOutlet var panBar: UIView!
   @IBOutlet var handleAreaBar: UIView!
+  @IBOutlet var myImageBackground: UIImageView!
   
   var longitude: Double?
   var latitude: Double?
@@ -45,6 +46,51 @@ class WeatherContainer: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    let current = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "H"
+    let currentHour = dateFormatter.string(from: current)
+    guard let nowHour = Int(currentHour) else {return}
+    
+    switch nowHour {
+    case 0..<2:
+      myImageBackground.image = UIImage(named: "Solar Gradients1")
+    case 2..<3:
+      myImageBackground.image = UIImage(named: "Solar Gradients2")
+    case 3..<4:
+      myImageBackground.image = UIImage(named: "Solar Gradients3")
+    case 4..<5:
+      myImageBackground.image = UIImage(named: "Solar Gradients4")
+    case 5..<7:
+      myImageBackground.image = UIImage(named: "Solar Gradients5")
+    case 7..<8:
+      myImageBackground.image = UIImage(named: "Solar Gradients6")
+    case 8..<10:
+      myImageBackground.image = UIImage(named: "Solar Gradients7")
+    case 10..<12:
+      myImageBackground.image = UIImage(named: "Solar Gradients8")
+    case 12..<14:
+      myImageBackground.image = UIImage(named: "Solar Gradients9")
+    case 14..<15:
+      myImageBackground.image = UIImage(named: "Solar Gradients10")
+    case 15..<16:
+      myImageBackground.image = UIImage(named: "Solar Gradients11")
+    case 16..<17:
+      myImageBackground.image = UIImage(named: "Solar Gradients12")
+    case 17..<18:
+      myImageBackground.image = UIImage(named: "Solar Gradients13")
+    case 18..<19:
+      myImageBackground.image = UIImage(named: "Solar Gradients14")
+    case 19..<22:
+      myImageBackground.image = UIImage(named: "Solar Gradients15")
+    case 22...23:
+      myImageBackground.image = UIImage(named: "Solar Gradient16")
+  
+    default:
+      break
+    }
+    
+    
     
   }
   
@@ -83,11 +129,10 @@ extension WeatherContainer: UITableViewDelegate, UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
     switch indexPath.row {
       
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       let date = Calendar.current.date(byAdding: .calendar, value: time ?? 0, to: Date())
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "MMMM dd, yyyy"
@@ -95,119 +140,102 @@ extension WeatherContainer: UITableViewDelegate, UITableViewDataSource{
         let timeFormattered = dateFormatter.string(from: datee)
         cell.descriptionWeather.text = "\(timeFormattered)"
         cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
-        
         cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
         cell.iconWeather.tintColor = .white
         return cell
       }
       
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = summary!.capitalized
       cell.iconWeather.image = UIImage(named: "\(icon!)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 2:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(round((latitude ?? 0) * 1000) / 1000)°"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 3:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(round((longitude ?? 0) * 1000) / 1000)°"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 4:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(round(temperature ?? 0))°C"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 5:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(((humidity ?? 0) * 100).roundInt()) %"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 6:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(pressure ?? 0) hPa"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 7:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(0) km"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 8:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(precipIntensity ?? 0) mm/h"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 9:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(precipType ?? "None")"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 10:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(((precipProbability ?? 0) * 100).roundInt()) % "
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 11:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(dewPoint ?? 0)°C"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 12:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
-      cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
+    cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(windBearing ?? 0)°"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 13:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(ozone ?? 0) DU"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 14:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(((cloudCover ?? 0) * 100).roundInt()) %"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 15:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(visibility ?? 0) km"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)
       return cell
       
     case 16:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! WeatherContainerCell
       cell.titleWeather.text = WeatherApiService.instance.weatherTitles[indexPath.row].capitalized
       cell.descriptionWeather.text = "\(uvIndex ?? 0)"
       cell.iconWeather.image = UIImage(named: "\(indexPath.row)")?.withRenderingMode(.alwaysTemplate)

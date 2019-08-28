@@ -28,8 +28,6 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   var nameTemp = [String]()
   var arrayName = [Section]()
   
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -106,7 +104,11 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    if isFiltering(){
+      return filterContents[section].letter
+    }else {
     return sections[section].letter
+    }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,6 +151,8 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   
   func filterContentForSearch(_ searchText: String, scope: String = "All"){
     self.filterContents = sections.filterBy(keyword: searchText.replacingOccurrences(of: " ", with: "_"))
+    
+    print(filterContents)
   }
   
   func isFiltering() -> Bool {

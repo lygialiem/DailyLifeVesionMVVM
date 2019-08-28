@@ -474,6 +474,7 @@
                     <connections>
                         <outlet property="detailWeatherTableView" destination="QcL-er-AMc" id="CGa-we-hAT"/>
                         <outlet property="handleAreaBar" destination="tp4-FS-EwX" id="JxY-dI-3mu"/>
+                        <outlet property="myImageBackground" destination="W7y-ge-7Ma" id="Xlg-Cg-EHV"/>
                         <outlet property="panBar" destination="Ht7-in-t59" id="4bl-Pc-R0u"/>
                         <outlet property="titleWeather" destination="UTP-0K-F0l" id="EfX-xR-KAk"/>
                     </connections>
@@ -749,7 +750,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night" translatesAutoresizingMaskIntoConstraints="NO" id="8Iz-As-vP6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night" translatesAutoresizingMaskIntoConstraints="NO" id="8Iz-As-vP6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="6W7-af-kw5">

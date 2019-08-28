@@ -210,6 +210,7 @@
 			children = (
 				E780E5B12301938000869885 /* Main.storyboard */,
 				E71F711522C267D80050B506 /* LaunchScreen.storyboard */,
+				E7E3CA712311128000DD87B6 /* TestCell.xib */,
 				E774873923128E290096C1D8 /* daily.jpg */,
 				E79D0003230557BD0009AF58 /* DailyLife.jpg */,
 				E79D708A22DC50F3001125F6 /* PageCell.swift */,
@@ -227,7 +228,6 @@
 				E71B1BAC230D9B9E00DE0406 /* ForecastHourTableViewCell.swift */,
 				E72E499F230FF2E100E4FA8F /* DetailWeatherCell.swift */,
 				E72E49A12310092200E4FA8F /* SummaryForecastCell.swift */,
-				E7E3CA712311128000DD87B6 /* TestCell.xib */,
 				E774873B2312C9830096C1D8 /* CityForecastCell.swift */,
 				E774873F2312D9290096C1D8 /* DetailForecastCell.swift */,
 				E7406F092313E090005D1C84 /* WorldClockCell.swift */,
