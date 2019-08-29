@@ -20,13 +20,13 @@ class WeatherApiService{
   
   let APIXU_KEY = "c24ce9be9f664eb29a1141134192208"
   
-  func getWeatherApi(latitude: Double, longitude: Double, completion: @escaping (CurrentlyDarkSkyApi) -> Void){
-    let totalUrl = URL(string: "\(BASE_URL)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=daily,hourly,minutely,alerts,flags&units=ca")
+  func getWeatherApi(latitude: Double, longitude: Double, completion: @escaping (DarkSkyApi) -> Void){
+    let totalUrl = URL(string: "\(BASE_URL)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
     guard let url = totalUrl else {return}
     URLSession.shared.dataTask(with: url) { (data, response, error) in
       guard let data = data else {return}
       do{
-        let dataDecode = try JSONDecoder().decode(CurrentlyDarkSkyApi.self, from: data)
+        let dataDecode = try JSONDecoder().decode(DarkSkyApi.self, from: data)
         completion(dataDecode)
       }catch let jsonError{
         debugPrint(jsonError)
@@ -45,7 +45,7 @@ class WeatherApiService{
           let dataDecoded = try JSONDecoder().decode(ForecastApi.self, from: data)
           completion(dataDecoded)
         }catch let jsonError{
-          debugPrint("JSON ERROR: ",jsonError,"Error: ", error)
+          debugPrint("JSON ERROR: ",jsonError,"Error: ", error ?? Error())
         }
       }
       }.resume()

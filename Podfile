@@ -10,7 +10,6 @@ target 'DailyLifeV2' do
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'Socket.IO-Client-Swift'
   pod 'SDWebImage', '~> 5.0'
   pod 'RxSwift'
   pod 'RxCocoa'

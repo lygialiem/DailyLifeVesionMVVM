@@ -26,16 +26,18 @@ class MainVC: ButtonBarPagerTabStripViewController {
   var pageVCArray = [PageVC]()
   let appDelegate = UIApplication.shared.delegate as? AppDelegate
   var effect: UIVisualEffect!
+  var forecastData: DarkSkyApi?
+  var detailGPS: ReversedGeoLocation?
   
-  var newestLocaton: ((CLLocationCoordinate2D?) -> Void)?
+  var newestLocaton: ((CLLocation?) -> Void)?
   var statusUpdated: ((CLAuthorizationStatus?) -> Void)?
   var status: CLAuthorizationStatus{
     return CLLocationManager.authorizationStatus()
   }
   
-  var dataResponseWeather: ((CurrentlyDarkSkyApi)-> Void)?
+  var dataResponseWeather: ((DarkSkyApi)-> Void)?
   let manager = CLLocationManager()
- 
+  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -119,12 +121,26 @@ class MainVC: ButtonBarPagerTabStripViewController {
       manager.startUpdatingLocation()
       
       self.newestLocaton = { [weak self] (location) in
-        guard let wSelf = self else { return }
+        guard let wSelf = self, let location = location else { return }
         
-        guard let latitude = location?.latitude, let longitude = location?.longitude else {return}
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        let geoCoder = CLGeocoder()
+        
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placeMarks, error) in
+          if error == nil{
+            guard let placeMark = placeMarks?.first else {return}
+            
+            let reveresGeoCoder = ReversedGeoLocation(with: placeMark)
+            self?.detailGPS = reveresGeoCoder
+          }
+        })
         
         WeatherApiService.instance.getWeatherApi(latitude: latitude, longitude: longitude) { (dataResponse) in
           wSelf.dataResponseWeather?(dataResponse)
+          
+          wSelf.forecastData = dataResponse
           guard let temper = dataResponse.currently?.temperature else {
             return
           }
@@ -136,9 +152,11 @@ class MainVC: ButtonBarPagerTabStripViewController {
       }
     }
   }
+  
+  
   @IBAction func searchButtonAction(_ sender: Any) {
     let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
-   
+    
     presentPanModal(searchVc)
     
   }
@@ -182,7 +200,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
             self.apiOutOfDate.text = "Your Api Is Out Of Date"
           }
           pageVC.articlesOfConcern = dataApi.articles
-
+          
         }
         self.apiOutOfDate.isHidden = true
       }
@@ -202,54 +220,22 @@ class MainVC: ButtonBarPagerTabStripViewController {
     }
     return pageVCArray
   }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let weatherContainer = segue.destination as? WeatherContainer{
-      self.dataResponseWeather = {(dataResponseWeather) in
-        weatherContainer.latitude = dataResponseWeather.latitude
-        weatherContainer.longitude = dataResponseWeather.longitude
-        weatherContainer.time = dataResponseWeather.currently?.time
-        weatherContainer.summary = dataResponseWeather.currently?.summary
-        weatherContainer.temperature = dataResponseWeather.currently?.temperature
-        weatherContainer.apparentTemperature = dataResponseWeather.currently?.apparentTemperature
-        weatherContainer.humidity = dataResponseWeather.currently?.humidity
-        weatherContainer.pressure = dataResponseWeather.currently?.pressure
-        weatherContainer.nearestStormDistance = dataResponseWeather.currently?.nearestStormDistance
-        weatherContainer.precipIntensity = dataResponseWeather.currently?.precipIntensity
-        weatherContainer.precipType = dataResponseWeather.currently?.precipType
-        weatherContainer.precipProbability = dataResponseWeather.currently?.precipProbability
-        weatherContainer.dewPoint = dataResponseWeather.currently?.dewPoint
-        weatherContainer.windBearing = dataResponseWeather.currently?.windSpeed
-        weatherContainer.ozone = dataResponseWeather.currently?.ozone
-        weatherContainer.cloudCover = dataResponseWeather.currently?.cloudCover
-        weatherContainer.visibility = dataResponseWeather.currently?.visibility
-        weatherContainer.uvIndex = dataResponseWeather.currently?.uvIndex
-        weatherContainer.icon = dataResponseWeather.currently?.icon
-        DispatchQueue.main.async {
-          weatherContainer.detailWeatherTableView.dataSource = weatherContainer
-          weatherContainer.detailWeatherTableView.reloadData()
-        }
-      }
-    }
-  }
+
   
   @IBAction func openMenuPressed(_ sender: Any) {
     NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
   }
   
   @IBAction func weatherButtonByPressed(_ sender: Any) {
-    self.visualEffectView.isHidden = false
-    UIView.animate(withDuration: 0.3) {
-      if  self.isWeatherOpen{
-        self.weatherContainer.frame.origin.y = self.view.frame.height
-        self.isWeatherOpen = false
-        self.animateVisualEffectOUT()
-      } else {
-        self.weatherContainer.frame.origin.y = self.view.frame.height -  self.weatherContainer.frame.height
-        self.isWeatherOpen = true
-        self.animateVisualEffectIN()
-      }
+
+    let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastLocationTableVC
+    forecastLocationVC.dataForecast = self.forecastData
+    forecastLocationVC.detailGPS = self.detailGPS
+    DispatchQueue.main.async {
+      forecastLocationVC.tableView.reloadData()
     }
+    self.presentPanModal(forecastLocationVC)
+
   }
   
   func animateVisualEffectOUT(){
@@ -270,7 +256,7 @@ extension MainVC: CLLocationManagerDelegate{
       self.newestLocaton?(nil)
       return
     }
-    self.newestLocaton?(location.coordinate)
+    self.newestLocaton?(location)
   }
   
   private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

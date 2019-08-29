@@ -46,52 +46,7 @@ class WeatherContainer: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let current = Date()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "H"
-    let currentHour = dateFormatter.string(from: current)
-    guard let nowHour = Int(currentHour) else {return}
-    
-    switch nowHour {
-    case 0..<2:
-      myImageBackground.image = UIImage(named: "Solar Gradients1")
-    case 2..<3:
-      myImageBackground.image = UIImage(named: "Solar Gradients2")
-    case 3..<4:
-      myImageBackground.image = UIImage(named: "Solar Gradients3")
-    case 4..<5:
-      myImageBackground.image = UIImage(named: "Solar Gradients4")
-    case 5..<7:
-      myImageBackground.image = UIImage(named: "Solar Gradients5")
-    case 7..<8:
-      myImageBackground.image = UIImage(named: "Solar Gradients6")
-    case 8..<10:
-      myImageBackground.image = UIImage(named: "Solar Gradients7")
-    case 10..<12:
-      myImageBackground.image = UIImage(named: "Solar Gradients8")
-    case 12..<14:
-      myImageBackground.image = UIImage(named: "Solar Gradients9")
-    case 14..<15:
-      myImageBackground.image = UIImage(named: "Solar Gradients10")
-    case 15..<16:
-      myImageBackground.image = UIImage(named: "Solar Gradients11")
-    case 16..<17:
-      myImageBackground.image = UIImage(named: "Solar Gradients12")
-    case 17..<18:
-      myImageBackground.image = UIImage(named: "Solar Gradients13")
-    case 18..<19:
-      myImageBackground.image = UIImage(named: "Solar Gradients14")
-    case 19..<22:
-      myImageBackground.image = UIImage(named: "Solar Gradients15")
-    case 22...23:
-      myImageBackground.image = UIImage(named: "Solar Gradients16")
   
-    default:
-      break
-    }
-    
-    
-    
   }
   
   func setupPanBar(){

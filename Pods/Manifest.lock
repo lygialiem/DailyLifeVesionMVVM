@@ -11,9 +11,6 @@ PODS:
   - SDWebImage (5.1.0):
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
-  - Socket.IO-Client-Swift (15.1.0):
-    - Starscream (~> 3.1)
-  - Starscream (3.1.0)
   - SwiftyJSON (5.0.0)
   - XLPagerTabStrip (8.1.1)
 
@@ -24,7 +21,6 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SDWebImage (~> 5.0)
-  - Socket.IO-Client-Swift
   - SwiftyJSON
   - XLPagerTabStrip (~> 8.0)
 
@@ -37,8 +33,6 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SDWebImage
-    - Socket.IO-Client-Swift
-    - Starscream
     - SwiftyJSON
     - XLPagerTabStrip
 
@@ -50,11 +44,9 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
-  Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
-  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 64bb6303a693a2ea0c35883137bd72d4e5456e16
+PODFILE CHECKSUM: 22c5ffeb581cc84032bc12ddace4427ae05df207
 
 COCOAPODS: 1.5.2

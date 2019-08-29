@@ -18,7 +18,7 @@ class NewsApiService{
   
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
-  let API_KEY_NEWSAPI = "8eb6b45740c148be81d311edae1ffd0a"
+  let API_KEY_NEWSAPI = "7865a5d49d1d40e79fe06e8b407ca8a8"
   
   
   var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]

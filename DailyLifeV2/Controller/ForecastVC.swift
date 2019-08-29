@@ -419,7 +419,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
         return 100
       case 2:
-        return 50
+        return 40
       case 3:
         return UITableView.automaticDimension
       case 4:

@@ -8,10 +8,26 @@
 
 import Foundation
 
-struct CurrentlyDarkSkyApi: Decodable{
+struct DarkSkyApi: Decodable{
   var currently: Currently?
   var latitude: Double?
   var longitude: Double?
+  var daily: Daily?
+}
+
+
+
+struct Daily: Decodable{
+  var summary: String?
+  var icon: String?
+  var data: [Data]?
+}
+
+struct Data: Decodable{
+  var time: Int?
+  var temperatureMax: Double?
+  var temperatureMin: Double?
+  var icon: String?
 }
 
 struct Currently: Decodable {
@@ -33,6 +49,8 @@ struct Currently: Decodable {
   var visibility: Double?
   var temperature: Double?
   var apparentTemperature: Double?
+  var windGust: Double?
+  
 }
 
 

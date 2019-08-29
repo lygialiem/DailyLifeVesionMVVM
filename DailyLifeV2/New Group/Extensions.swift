@@ -62,7 +62,7 @@ extension Int{
     let date = NSDate(timeIntervalSince1970: TimeInterval(self))
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = dateFormatType
-    return dateFormatter.string(from: date as Date)
+    return (dateFormatter.string(from: date as Date)).capitalized
   }
 }
 
@@ -73,7 +73,7 @@ extension Double{
 }
 
 extension UIImageView{
-  func checkCurrentTime(imageDay: String, imageNight: String, timeDay: Int, timeNight: Int){
+  func checkCurrentTime(image: String, timeDay: Int, timeNight: Int){
     let date = Date()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH"
@@ -81,11 +81,11 @@ extension UIImageView{
     
     if curretnDate! >= timeDay && curretnDate! < timeNight{
       DispatchQueue.main.async {
-        self.image = UIImage(named: imageDay)
+        self.image = UIImage(named: "hourlyDay/\(image)")
       }
     }else {
       DispatchQueue.main.async {
-        self.image = UIImage(named: imageNight)
+        self.image = UIImage(named: "hourlyNight/\(image)")
       }
     }
   }
