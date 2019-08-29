@@ -51,6 +51,8 @@
 		E79A149823086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A149723086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift */; };
 		E79D0004230557BD0009AF58 /* DailyLife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E79D0003230557BD0009AF58 /* DailyLife.jpg */; };
 		E79D708B22DC50F3001125F6 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D708A22DC50F3001125F6 /* PageCell.swift */; };
+		E7B5F7842317844300BA1387 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F7832317844300BA1387 /* SearchVC.swift */; };
+		E7B5F7AA23179BB200BA1387 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F7A923179BB200BA1387 /* TabbarController.swift */; };
 		E7BDA79623046AE500174257 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDA79523046AE500174257 /* WebViewController.swift */; };
 		E7C8E37222C3BC5E00235DA5 /* NewsApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8E37122C3BC5E00235DA5 /* NewsApiService.swift */; };
 		E7C8E37822C3C4E300235DA5 /* NewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8E37722C3C4E300235DA5 /* NewsApi.swift */; };
@@ -110,6 +112,8 @@
 		E79A149723086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingFavoriteReadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		E79D0003230557BD0009AF58 /* DailyLife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DailyLife.jpg; sourceTree = "<group>"; };
 		E79D708A22DC50F3001125F6 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		E7B5F7832317844300BA1387 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		E7B5F7A923179BB200BA1387 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabbarController.swift; path = ../View/TabbarController.swift; sourceTree = "<group>"; };
 		E7BDA79523046AE500174257 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E7C8E37122C3BC5E00235DA5 /* NewsApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApiService.swift; sourceTree = "<group>"; };
 		E7C8E37722C3C4E300235DA5 /* NewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApi.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 		E71F711E22C26B170050B506 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E7B5F7A923179BB200BA1387 /* TabbarController.swift */,
 				E71F710E22C267D60050B506 /* HomeVC.swift */,
 				E71F712222C27C2C0050B506 /* MainVC.swift */,
 				E71F712422C27E890050B506 /* SideMenuVC.swift */,
@@ -201,6 +206,7 @@
 				E76A604E230BE62200B3E4A3 /* ForecastVC.swift */,
 				E7406F052313DD90005D1C84 /* WorldClockVC.swift */,
 				E7406F072313DF5C005D1C84 /* ListCityTableVC.swift */,
+				E7B5F7832317844300BA1387 /* SearchVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDB-Swift/MMDB_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -362,6 +369,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDB_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanModal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -413,6 +421,7 @@
 				E71F712722C284630050B506 /* PageVC.swift in Sources */,
 				E71F712522C27E890050B506 /* SideMenuVC.swift in Sources */,
 				E70F3A6C230E89990051F46C /* LocationForecastCell in Sources */,
+				E7B5F7842317844300BA1387 /* SearchVC.swift in Sources */,
 				E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */,
 				E72E49A22310092200E4FA8F /* SummaryForecastCell.swift in Sources */,
 				E76A604D230BDBB000B3E4A3 /* WeatherApiService.swift in Sources */,
@@ -443,6 +452,7 @@
 				E70D8102230EDD1D0059D289 /* ForecastApi.swift in Sources */,
 				E70F3A6E230E8C9B0051F46C /* SearchForecastCell.swift in Sources */,
 				E70D8106230EF7B70059D289 /* HourlyDarkSkyApi.swift in Sources */,
+				E7B5F7AA23179BB200BA1387 /* TabbarController.swift in Sources */,
 				E76A604B230BD93500B3E4A3 /* CurrentlyDarkSkyApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,10 +10,10 @@ import UIKit
 
 class FavoriteVC: UIViewController {
   
-  @IBOutlet var deleteAllButton: UIBarButtonItem!
   @IBOutlet var myTableView: UITableView!
   var articlesCoreData = [Article]()
   @IBOutlet var swiftLabel: UILabel!
+  @IBOutlet var menuButton: UIBarButtonItem!
   
   let feedback = UINotificationFeedbackGenerator()
   
@@ -22,7 +22,7 @@ class FavoriteVC: UIViewController {
     self.swiftLabel.stopBlink()
     self.swiftLabel.startBlink()
     CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
-    
+      
       articlesCoreData = Array(repeating: Article(), count: favoriteArticlesCD.count)
       for i in 0..<favoriteArticlesCD.count{
         articlesCoreData[i].title = favoriteArticlesCD[i].titleCD
@@ -36,8 +36,14 @@ class FavoriteVC: UIViewController {
       self.myTableView.reloadData()
       if favoriteArticlesCD == []{
         self.myTableView.isHidden = true
+        self.myTableView.setEditing(myTableView.isEditing, animated: true)
+        navigationItem.leftBarButtonItems = [menuButton]
+        self.myTableView.isEditing = false
+        
       } else {
         self.myTableView.isHidden = false
+        self.navigationItem.leftBarButtonItems = [menuButton,editButtonItem]
+        myTableView.setEditing(isEditing, animated: true)
       }
       self.myTableView.reloadData()
     }
@@ -45,14 +51,12 @@ class FavoriteVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     myTableView.delegate = self
     myTableView.dataSource = self
-    self.deleteAllButton.isEnabled = false
+    
     self.swiftLabel.startBlink()
     myTableView.isHidden = false
     navigationController?.title = "Liked Contents"
-    navigationItem.leftBarButtonItem = editButtonItem
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
   }
@@ -72,10 +76,25 @@ class FavoriteVC: UIViewController {
     }
   }
   
-  @IBAction func deleteAllButtonByPressed(_ sender: Any) {
-    
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: true)
+    myTableView.setEditing(!myTableView.isEditing, animated: true)
+  
+    if editing{
+      let deleteAllButton = UIBarButtonItem(title: "Delete All", style: .plain, target: self, action: #selector(handleDeleteAllButton))
+      navigationItem.rightBarButtonItems = [deleteAllButton]
+    } else {
+      navigationItem.rightBarButtonItem = nil
+    }
+  }
+  
+  
+  @objc func handleDeleteAllButton(){
+    isEditing = false
     self.myTableView.isHidden = true
-    
+    self.navigationItem.leftBarButtonItems = [menuButton]
+    self.navigationItem.rightBarButtonItem = nil
+ 
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
     let managedContext = appDelegate.persistentContainer.viewContext
     
@@ -86,7 +105,6 @@ class FavoriteVC: UIViewController {
       self.feedback.notificationOccurred(.success)
       do{
         try managedContext.save()
-       
         self.myTableView.reloadData()
         NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
       } catch {
@@ -96,21 +114,9 @@ class FavoriteVC: UIViewController {
   }
   
   
-  @IBAction func editButtonAction(_ sender: UIBarButtonItem) {
- 
-  }
-  
-  override func setEditing(_ editing: Bool, animated: Bool) {
-    super.setEditing(!isEditing, animated: true)
-    myTableView.setEditing(!myTableView.isEditing, animated: true)
+  @IBAction func menuButtonPressed(_ sender: Any) {
     
-    if myTableView.isEditing{
-         self.deleteAllButton.isEnabled = true
-    } else {
-      self.deleteAllButton.isEnabled = false
-    }
-    
-    
+    NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
   }
 }
 
@@ -134,7 +140,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-   
+    
     return true
   }
   
@@ -147,17 +153,19 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {(rowAction, indexPath) in
       
       CoreDataServices.instance.fetchCoreData(completion: { (coreDatas) in
-
+        
         self.removeItemAtIndexPathCoreData(atIndexPath: indexPath, element: coreDatas)
         self.articlesCoreData.remove(at: indexPath.row)
         
         if self.articlesCoreData.isEmpty{
           self.myTableView.isHidden = true
+           self.isEditing = false
+           self.navigationItem.leftBarButtonItems = [self.menuButton]
         } else {
           self.myTableView.isHidden = false
         }
       })
-    
+      
       tableView.deleteRows(at: [indexPath], with: .bottom)
       self.feedback.notificationOccurred(.success)
       NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
@@ -190,18 +198,18 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let managed = delegate.persistentContainer.viewContext
-
+    
     let temp1 = articlesCoreData[sourceIndexPath.row]
     let temp2 = articlesCoreData[destinationIndexPath.row]
-
+    
     articlesCoreData[sourceIndexPath.row] = temp2
     articlesCoreData[destinationIndexPath.row] = temp1
     tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-
+    
     for i in 0..<articlesCoreData.count{
       print("ARTICLE MOVED",articlesCoreData[i].title ?? "")
     }
-
+    
     CoreDataServices.instance.fetchCoreData { (CoreDatas) in
       for i in 0..<CoreDatas.count{
         managed.delete(CoreDatas[i])
@@ -212,10 +220,10 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
         print("Can't save")
       }
     }
-
+    
     for i in 0..<articlesCoreData.count{
       let coreData = FavoriteArtilce(context: managed)
-
+      
       coreData.titleCD = articlesCoreData[i].title
       coreData.urlToImageCD = articlesCoreData[i].urlToImage
       coreData.publishedAtCD = articlesCoreData[i].publishedAt

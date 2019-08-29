@@ -36,8 +36,6 @@ class ForecastVC: UIViewController {
    
     self.navigationController?.navigationBar.isHidden = true
     
-    
-    
     snipper.startAnimating()
     self.addCityBtn.isHidden = true
     self.addCityLabel.isHidden = true
@@ -92,6 +90,7 @@ class ForecastVC: UIViewController {
     self.tabBarController?.delegate = self
     self.searchTextfield.delegate = self
     self.tabBarController?.tabBar.backgroundColor = .clear
+  
 
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     

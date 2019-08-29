@@ -9,6 +9,8 @@
 import UIKit
 import XLPagerTabStrip
 import CoreLocation
+import PanModal
+
 
 class MainVC: ButtonBarPagerTabStripViewController {
   
@@ -27,11 +29,13 @@ class MainVC: ButtonBarPagerTabStripViewController {
   
   var newestLocaton: ((CLLocationCoordinate2D?) -> Void)?
   var statusUpdated: ((CLAuthorizationStatus?) -> Void)?
-  var dataResponseWeather: ((CurrentlyDarkSkyApi)-> Void)?
-  let manager = CLLocationManager()
   var status: CLAuthorizationStatus{
     return CLLocationManager.authorizationStatus()
   }
+  
+  var dataResponseWeather: ((CurrentlyDarkSkyApi)-> Void)?
+  let manager = CLLocationManager()
+ 
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -54,6 +58,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
     visualEffectView.effect = nil
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleAreaBar(notificaton:)), name: NSNotification.Name("HandleAreaBar"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: NSNotification.Name("OpenSearchVC"), object: nil)
     
     btnBarView.clipsToBounds = true
     btnBarView.layer.cornerRadius = 12
@@ -94,6 +99,13 @@ class MainVC: ButtonBarPagerTabStripViewController {
     }
   }
   
+  @objc func OpenSearchVC(){
+    guard let storyboard  = storyboard else {return}
+    let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+    self.presentPanModal(searchVC)
+    
+  }
+  
   @objc func moveToTopic(notification: Notification){
     let indexPath = notification.userInfo?["data"] as! IndexPath
     self.moveToViewController(at: indexPath.row, animated: false)
@@ -124,6 +136,14 @@ class MainVC: ButtonBarPagerTabStripViewController {
       }
     }
   }
+  @IBAction func searchButtonAction(_ sender: Any) {
+    let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+   
+    presentPanModal(searchVc)
+    
+  }
+  
+  
   
   func configureButtonBar() {
     settings.style.selectedBarHeight = 4

@@ -18,9 +18,12 @@ class ReadingCollectionViewCell: UICollectionViewCell {
   @IBOutlet var myTableView: UITableView!
   
   var delegate: ReadingCollectionViewCellDelegate?
+  
+  
   var article: Article?
   var articlesOfConcern = [Article]()
   var fontSize: CGFloat?
+  var concernedTitle: String?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -64,7 +67,7 @@ override  func prepareForReuse() {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! ContentCell
-      cell.configureContent(article: self.article!)
+      cell.configureContent(article: self.article ?? Article())
       cell.delegate = self
       return cell
     } else if indexPath.section == 1{

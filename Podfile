@@ -12,8 +12,9 @@ target 'DailyLifeV2' do
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
   pod 'SDWebImage', '~> 5.0'
-  pod "RxSwift"
-  pod "RxCocoa"
-  pod "MMDB-Swift"
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'MMDB-Swift'
+  pod 'PanModal'
 
 end

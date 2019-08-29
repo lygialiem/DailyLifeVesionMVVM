@@ -19,9 +19,6 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   var menuBarTitle: String = ""
   var currentPage = 2
   var articlesOfConcern = [Article]()
-  
-  
-  
   let refreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
@@ -132,10 +129,11 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     guard let storyboard = self.storyboard else { return }
     let readingVC = storyboard.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
-    readingVC.articlesOfConcern = self.articlesOfConcern
+   
+//    readingVC.articlesOfConcern = self.articlesOfConcern
     readingVC.articles = self.articles
     readingVC.indexPathOfDidSelectedArticle = indexPath
-    
+    readingVC.concernedTitle = menuBarTitle
     readingVC.title = menuBarTitle
     readingVC.navigationItem.backBarButtonItem?.title = ""
     readingVC.view.layoutIfNeeded()

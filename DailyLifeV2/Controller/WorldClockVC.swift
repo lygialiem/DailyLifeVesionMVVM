@@ -11,9 +11,11 @@ import UIKit
 class WorldClockVC: UIViewController {
   
   var stringArray = [String]()
-  @IBOutlet var editButton: UIBarButtonItem!
   @IBOutlet var myTableView: UITableView!
   @IBOutlet var addButton: UIBarButtonItem!
+  @IBOutlet var menuButton: UIBarButtonItem!
+  
+
   
   let feedback = UINotificationFeedbackGenerator()
   
@@ -22,6 +24,14 @@ class WorldClockVC: UIViewController {
     
     stringArray = getUserDefault()
     
+    if stringArray.isEmpty{
+      self.navigationItem.leftBarButtonItems = [menuButton]
+      self.navigationItem.rightBarButtonItem = addButton
+      self.myTableView.setEditing(isEditing, animated: false)
+    }else{
+      self.navigationItem.rightBarButtonItem = addButton
+      self.navigationItem.leftBarButtonItems = [menuButton, editButtonItem]
+    }
   }
   
   
@@ -41,9 +51,9 @@ class WorldClockVC: UIViewController {
   
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(!isEditing, animated: true)
-    
+
     myTableView.setEditing(!myTableView.isEditing, animated: true)
-    
+
     if editing{
       let deleteAllButton = UIBarButtonItem(title: "Delete All", style: .plain, target: self, action: #selector(handleDeleteAllButton))
       navigationItem.rightBarButtonItems = [deleteAllButton]
@@ -53,17 +63,20 @@ class WorldClockVC: UIViewController {
   }
   
   
-  
-  @IBAction func AddMoreCityButton(_ sender: Any) {
-    
+  @IBAction func menuButtonPressed(_ sender: Any) {
+    NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
   }
   
   
   @objc func handleDeleteAllButton(){
+    self.navigationItem.leftBarButtonItems = [menuButton]
+    self.navigationItem.rightBarButtonItem = addButton
+    self.isEditing = false
     self.feedback.notificationOccurred(.success)
     self.stringArray = []
     self.setUserDefault()
     self.myTableView.reloadData()
+    self.navigationItem.rightBarButtonItem = self.addButton
   }
   
   func setUserDefault(){
@@ -117,6 +130,7 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+  
     switch indexPath.section {
     case 0:
       return false
@@ -130,6 +144,11 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
       stringArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
       setUserDefault()
+      if stringArray.isEmpty{
+        self.navigationItem.leftBarButtonItems = [menuButton]
+      } else {
+        self.navigationItem.leftBarButtonItems = [menuButton, editButtonItem]
+      }
     }
   }
   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -164,10 +183,13 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
 
 extension WorldClockVC: WordClockDidSelect{
   func addWorldClock(timezone: String) {
-    self.stringArray.append(timezone)
-    self.setUserDefault()
-    myTableView.insertRows(at: [
-      NSIndexPath(row: stringArray.count - 1, section: 1) as IndexPath], with: .automatic)
+    
+    if !self.stringArray.contains(timezone){
+      self.stringArray.append(timezone)
+      self.setUserDefault()
+      myTableView.insertRows(at: [
+        NSIndexPath(row: stringArray.count - 1, section: 1) as IndexPath], with: .automatic)
+    }
   }
 }
 

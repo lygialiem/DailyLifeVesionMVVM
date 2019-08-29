@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var location = CLLocationManager()
 
+  let locationServices = MainVC()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-    
     
     location.requestWhenInUseAuthorization()
 //

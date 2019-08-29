@@ -16,7 +16,7 @@ class ReadingVC: UIViewController {
   
   var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?
-  var articlesOfConcern = [Article]()
+  var concernedTitle: String?
   
   deinit {
     NotificationCenter.default.removeObserver(self)
@@ -31,12 +31,12 @@ class ReadingVC: UIViewController {
     self.readingCollectionView.reloadData()
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveToWebViewViewController(notification:)) , name: NSNotification.Name("NavigateToWebViewVCFromFirstCell"), object: nil)
-
+    
     guard let indexPath = indexPathOfDidSelectedArticle else {return}
     readingCollectionView.scrollToItem(at: indexPath
       , at: .centeredHorizontally, animated: false)
   }
-
+  
   @objc func handleMoveToWebViewViewController(notification: Notification){
     let webViewController = notification.userInfo!["data"] as! WebViewController
     navigationController?.pushViewController(webViewController, animated: true)
@@ -61,10 +61,17 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "readingHorizoneCell", for: indexPath) as! ReadingCollectionViewCell
-    
+//    readingCell.myTableView.dataSource = nil
+    NewsApiService.instance.getConcernrdNewsApi(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
+      
+      DispatchQueue.main.async {
+        readingCell.articlesOfConcern = data.articles
+        readingCell.myTableView.reloadData()
+      }
+    }
     readingCell.delegate = self
     readingCell.article = articles[indexPath.row]
-    readingCell.articlesOfConcern = articlesOfConcern 
+
     return readingCell
   }
   
@@ -73,7 +80,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-   
+    
     return CGSize(width: self.view.frame.width, height: self.readingCollectionView.frame.height)
   }
 }
@@ -84,5 +91,6 @@ extension ReadingVC: ReadingCollectionViewCellDelegate{
     let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     self.navigationController?.pushViewController(webViewViewController, animated: true)
+  
   }
 }

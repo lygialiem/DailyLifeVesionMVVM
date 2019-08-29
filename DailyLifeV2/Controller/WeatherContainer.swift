@@ -84,7 +84,7 @@ class WeatherContainer: UIViewController {
     case 19..<22:
       myImageBackground.image = UIImage(named: "Solar Gradients15")
     case 22...23:
-      myImageBackground.image = UIImage(named: "Solar Gradient16")
+      myImageBackground.image = UIImage(named: "Solar Gradients16")
   
     default:
       break
