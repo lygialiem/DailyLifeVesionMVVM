@@ -25,12 +25,12 @@ class SearchVC: UITableViewController{
     self.mySearchBar.delegate = self
     self.mySearchBar.backgroundColor = .black
     self.mySearchBar.barStyle = .black
-    self.mySearchBar.placeholder = "Please Type What You Need"
+    self.mySearchBar.placeholder = self.getUserDefault()
     self.tableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
     
     let topic = self.getUserDefault()
     
-    NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 20) { (articles) in
+    NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 10) { (articles) in
       
       self.articles = articles.articles
       
@@ -89,6 +89,8 @@ class SearchVC: UITableViewController{
     
     NotificationCenter.default.post(name: NSNotification.Name("searchVCToReadingVC"), object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
     self.dismiss(animated: true, completion: nil)
+    
+    
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,7 +123,7 @@ extension SearchVC: UISearchBarDelegate{
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    self.dismiss(animated: true, completion: nil)
+    
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

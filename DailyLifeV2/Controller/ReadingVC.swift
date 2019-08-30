@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import SafariServices
 
-class ReadingVC: UIViewController {
+class ReadingVC: UIViewController{
   
   @IBOutlet var readingCollectionView: UICollectionView!
   

@@ -59,9 +59,8 @@ class MainVC: ButtonBarPagerTabStripViewController {
     visualEffectView.effect = nil
     
     NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: NSNotification.Name("OpenSearchVC"), object: nil)
-    
-    
     NotificationCenter.default.addObserver(self, selector: #selector(handleSearchVCToReadingVC(notify:)), name: NSNotification.Name("searchVCToReadingVC"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleTabbarIndex0(notify:)), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     
     btnBarView.clipsToBounds = true
     btnBarView.layer.cornerRadius = 12
@@ -75,11 +74,19 @@ class MainVC: ButtonBarPagerTabStripViewController {
     
   }
   
+  @objc func handleTabbarIndex0(notify:  Notification){
+    tabBarController?.selectedIndex = 0
+  }
+  
   @objc func handleSearchVCToReadingVC(notify: Notification){
     
     guard let article = notify.userInfo?["data"] as? [Article],let indexPathDidSelect = notify.userInfo?["indexPath"] as? IndexPath,  let concernedTitle = notify.userInfo?["topic"] as? String else {return}
     
-    print(concernedTitle)
+    
+    if let viewcontrollers = navigationController?.viewControllers{
+      let filteredViewcontroller = viewcontrollers.filter({!($0 is ReadingVC) && !($0 is WebViewController)})
+      self.navigationController?.viewControllers = filteredViewcontroller
+    }
     
     let readingVc = storyboard?.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
     
@@ -89,7 +96,9 @@ class MainVC: ButtonBarPagerTabStripViewController {
     readingVc.view.layoutIfNeeded()
     readingVc.readingCollectionView.reloadData()
   
+    NotificationCenter.default.post(name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     self.navigationController?.pushViewController(readingVc, animated: true)
+    
   }
   
   deinit {

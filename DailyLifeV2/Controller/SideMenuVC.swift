@@ -85,15 +85,10 @@ extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfSideMenu", for: indexPath) as! SideMenuCell
-//    if indexPath.row == ApiServices.instance.TOPIC_NEWSAPI.count{
-//      cell.imageName = "addImage"
-//      cell.topicName = "Add"
-//      return cell
-//    } else {
+
       cell.imageName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
       cell.topicName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
       return cell
-//    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
