@@ -60,6 +60,9 @@ class MainVC: ButtonBarPagerTabStripViewController {
     
     NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: NSNotification.Name("OpenSearchVC"), object: nil)
     
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(handleSearchVCToReadingVC(notify:)), name: NSNotification.Name("searchVCToReadingVC"), object: nil)
+    
     btnBarView.clipsToBounds = true
     btnBarView.layer.cornerRadius = 12
     btnBarView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -70,6 +73,23 @@ class MainVC: ButtonBarPagerTabStripViewController {
     temperatureButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
     
     
+  }
+  
+  @objc func handleSearchVCToReadingVC(notify: Notification){
+    
+    guard let article = notify.userInfo?["data"] as? [Article],let indexPathDidSelect = notify.userInfo?["indexPath"] as? IndexPath,  let concernedTitle = notify.userInfo?["topic"] as? String else {return}
+    
+    print(concernedTitle)
+    
+    let readingVc = storyboard?.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
+    
+    readingVc.articles = article
+    readingVc.indexPathOfDidSelectedArticle = indexPathDidSelect
+    readingVc.concernedTitle = concernedTitle
+    readingVc.view.layoutIfNeeded()
+    readingVc.readingCollectionView.reloadData()
+  
+    self.navigationController?.pushViewController(readingVc, animated: true)
   }
   
   deinit {
@@ -133,6 +153,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
   
   @IBAction func searchButtonAction(_ sender: Any) {
     let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+    searchVc.delegate = self
     
     presentPanModal(searchVc)
     
@@ -243,5 +264,19 @@ extension MainVC: CLLocationManagerDelegate{
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     print("Location Status:",status)
     self.statusUpdated?(status)
+  }
+}
+
+extension MainVC: SearchVCToReadingFavoriteVC{
+  func searchVCToReadingFavoriteVC(articles: [Article], indexPathDidSelect: IndexPath) {
+    let readingFavoriteVC = storyboard?.instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle
+    readingFavoriteVC.articles = articles
+    readingFavoriteVC.indexPathOfDidSelectedArticle = indexPathDidSelect
+    
+    DispatchQueue.main.async {
+      readingFavoriteVC.myCollectionView.reloadData()
+    }
+    
+    self.navigationController?.pushViewController(readingFavoriteVC, animated: true)
   }
 }

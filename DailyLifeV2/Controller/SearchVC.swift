@@ -17,23 +17,24 @@ class SearchVC: UITableViewController{
   
   var searchText = ""
   var currentPage = 2
+  var delegate: SearchVCToReadingFavoriteVC?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tapToResignFirstResponder()
     self.mySearchBar.delegate = self
     self.mySearchBar.backgroundColor = .black
     self.mySearchBar.barStyle = .black
     self.mySearchBar.placeholder = "Please Type What You Need"
     self.tableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
     
-    guard let userDefault = UserDefaults.standard.value(forKey: "searchTopic") as? String else {return}
+    let topic = self.getUserDefault()
     
-    NewsApiService.instance.getSearchArticles(topic: userDefault, page: 1, numberOfArticles: 20) { (articles) in
-     
+    NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 20) { (articles) in
+      
+      self.articles = articles.articles
+      
       DispatchQueue.main.async {
-         self.articles = articles.articles
         self.tableView.reloadData()
       }
     }
@@ -45,9 +46,15 @@ class SearchVC: UITableViewController{
   }
   
   @objc func handleTap(){
-    self.mySearchBar.becomeFirstResponder()
-   
+    
+    
   }
+  
+  func getUserDefault() -> String{
+    guard let value = UserDefaults.standard.value(forKey: "searchTopic") as? String else {return String()}
+    return value
+  }
+  
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100
@@ -59,11 +66,11 @@ class SearchVC: UITableViewController{
   
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
+    let topic = self.getUserDefault()
     if indexPath.row == articles.count - 3{
       let numberOfPage = 5
       if currentPage <= numberOfPage{
-        NewsApiService.instance.getSearchArticles(topic: searchText , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
+        NewsApiService.instance.getSearchArticles(topic: topic , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
           for article in dataApi.articles{
             self.articles.append(article)
           }
@@ -77,15 +84,11 @@ class SearchVC: UITableViewController{
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print(1)
-    let readingFavoriteArticle = storyboard?.instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle
     
-    readingFavoriteArticle.articles = self.articles
-    readingFavoriteArticle.indexPathOfDidSelectedArticle = indexPath
-    readingFavoriteArticle.view.layoutIfNeeded()
-    readingFavoriteArticle.myCollectionView.reloadData()
+    let topic = self.getUserDefault()
     
-    self.navigationController?.pushViewController(readingFavoriteArticle, animated: true)
+    NotificationCenter.default.post(name: NSNotification.Name("searchVCToReadingVC"), object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
+    self.dismiss(animated: true, completion: nil)
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,7 +113,8 @@ extension SearchVC: PanModalPresentable{
 
 
 extension SearchVC: UISearchBarDelegate{
-
+  
+  
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     print("DID END")
   }
@@ -121,9 +125,8 @@ extension SearchVC: UISearchBarDelegate{
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchText = searchBar.text ?? ""
     if searchBar.text == "" || searchBar.text == " "{
-      searchBar.placeholder = "Please Type What You Need"
+      searchBar.placeholder = "Type What You Need"
     } else {
       NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 20) { (articles) in
         self.articles = articles.articles
@@ -137,4 +140,8 @@ extension SearchVC: UISearchBarDelegate{
       }
     }
   }
+}
+
+protocol SearchVCToReadingFavoriteVC {
+  func searchVCToReadingFavoriteVC(articles: [Article], indexPathDidSelect: IndexPath)
 }

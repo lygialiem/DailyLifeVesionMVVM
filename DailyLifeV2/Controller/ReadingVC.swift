@@ -39,7 +39,14 @@ class ReadingVC: UIViewController {
   
   @objc func handleMoveToWebViewViewController(notification: Notification){
     let webViewController = notification.userInfo!["data"] as! WebViewController
+    
+    guard let topViewController = navigationController?.topViewController else {return}
+    if topViewController == webViewController{
+      topViewController.dismiss(animated: false, completion: nil)
+    }
+    
     navigationController?.pushViewController(webViewController, animated: true)
+  
   }
   
   func setupReadingCollectionView(){
@@ -48,6 +55,7 @@ class ReadingVC: UIViewController {
     readingCollectionView.isPagingEnabled = true
     
   }
+  
   @IBAction func shareButton(_ sender: Any) {
     let shareAction = UIActivityViewController(activityItems: [articles[indexPathOfDidSelectedArticle?.row ?? 0].url ?? ""], applicationActivities: nil)
     self.present(shareAction, animated: true, completion: nil)
@@ -61,7 +69,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "readingHorizoneCell", for: indexPath) as! ReadingCollectionViewCell
-//    readingCell.myTableView.dataSource = nil
+    
     NewsApiService.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
       
       DispatchQueue.main.async {
@@ -71,7 +79,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
     }
     readingCell.delegate = self
     readingCell.article = articles[indexPath.row]
-
+    
     return readingCell
   }
   
@@ -91,6 +99,6 @@ extension ReadingVC: ReadingCollectionViewCellDelegate{
     let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     self.navigationController?.pushViewController(webViewViewController, animated: true)
-  
+    
   }
 }

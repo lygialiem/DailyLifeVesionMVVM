@@ -18,6 +18,7 @@ class ContentCell: UITableViewCell {
     super.awakeFromNib()
 
     
+    
     selectionStyle = UITableViewCell.SelectionStyle.none
 
   }

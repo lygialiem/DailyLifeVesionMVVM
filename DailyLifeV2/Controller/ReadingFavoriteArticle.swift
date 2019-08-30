@@ -32,8 +32,8 @@ class ReadingFavoriteArticle: UIViewController {
     myCollectionView.delegate = self
     myCollectionView.dataSource = self
     myCollectionView.isPagingEnabled = true
-    myCollectionView.scrollToItem(at: indexPathOfDidSelectedArticle!
-      , at: .centeredHorizontally, animated: false)
+//    myCollectionView.scrollToItem(at: indexPathOfDidSelectedArticle!
+//      , at: .centeredHorizontally, animated: false)
   }
   @IBAction func shareButton(_ sender: Any) {
     let shareAction = UIActivityViewController(activityItems: [self.articles[indexPathOfDidSelectedArticle?.row ?? 0].url ?? ""], applicationActivities: nil)
