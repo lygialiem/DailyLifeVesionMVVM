@@ -31,23 +31,24 @@ class ReadingCollectionViewCell: UICollectionViewCell {
     setupMyTableView()
     
   }
- 
+  
   func setupMyTableView(){
     
     myTableView.delegate = self
     myTableView.dataSource = self
     myTableView.estimatedRowHeight = 1000
-
+    
     myTableView.rowHeight = UITableView.automaticDimension
+    myTableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
   }
 }
 
 extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
   
-override  func prepareForReuse() {
+  override  func prepareForReuse() {
     super.prepareForReuse()
- 
-  myTableView.reloadData()
+    
+    myTableView.reloadData()
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,6 +65,16 @@ override  func prepareForReuse() {
     return Int()
   }
   
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    switch section {
+    case 0:
+      return 0
+    case 1: return 20
+    default:
+      return 0
+    }
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! ContentCell
@@ -71,10 +82,9 @@ override  func prepareForReuse() {
       cell.delegate = self
       return cell
     } else if indexPath.section == 1{
-      let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! ConcernCell
-     
-         cell.configureContent(article: (self.articlesOfConcern[indexPath.row]))
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
       
+      cell.configureCell(article: articlesOfConcern[indexPath.row])
       return cell
     }
     return UITableViewCell()
@@ -89,16 +99,17 @@ override  func prepareForReuse() {
     return CGFloat()
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    switch section{
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    switch section {
     case 0:
-      return ""
+      return UIView()
     case 1:
-      return "Concerned Article"
+      let section = tableView.dequeueReusableCell(withIdentifier: "section1") as! SearchForecast
+     section.headerConcernedArticle.text = "Concerned Articles"
+      return section
     default:
-      break
+      return UIView()
     }
-    return String()
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

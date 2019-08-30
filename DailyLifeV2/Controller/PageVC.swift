@@ -61,7 +61,7 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   // Use indexOfNewArticle to insert new Article to newFeeds:
   var indexOfNewArticle = 0
   @objc func handleRefreshControl(){
-    NewsApiService.instance.getMoreNewsApi(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
+    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
       for index in 0..<dataApi.articles.count{
         if dataApi.articles[index].title != self.articles[index].title{
           self.articles.insert(dataApi.articles[index], at: self.indexOfNewArticle)
@@ -145,10 +145,10 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     
-    if indexPath.row == articles.count - 1{
+    if indexPath.row == articles.count - 3{
       let numberOfPage = 5
       if currentPage <= numberOfPage{
-        NewsApiService.instance.getMoreNewsApi(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
+        NewsApiService.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
           for article in dataApi.articles{
             self.articles.append(article)
           }

@@ -23,6 +23,8 @@ class SearchForecast: UITableViewCell {
   @IBOutlet var apixuBtn: UIButton!
   @IBOutlet var seatchBtn: UIButton!
   
+  @IBOutlet var headerConcernedArticle: UILabel!
+  
   var delegate: moveToWebVC?
   
   override func awakeFromNib() {

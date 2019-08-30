@@ -28,6 +28,7 @@ struct Data: Decodable{
   var temperatureMax: Double?
   var temperatureMin: Double?
   var icon: String?
+  var precipProbability: Double?
 }
 
 struct Currently: Decodable {

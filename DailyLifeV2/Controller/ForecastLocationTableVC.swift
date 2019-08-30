@@ -133,7 +133,7 @@ class ForecastLocationTableVC: UITableViewController {
         cell.title1.text = "Precip Intensity"
         cell.title2.text = "Precip Probability"
         cell.para1.text = "\(dataForecast?.currently?.precipIntensity ?? 0) mm/h"
-        cell.para2.text = "\((dataForecast?.currently?.precipProbability ?? 0) * 100) %"
+        cell.para2.text = "\(((dataForecast?.currently?.precipProbability ?? 0) * 100).roundInt()) %"
         return cell
       case 3:
         cell.title1.text = "Humidity"

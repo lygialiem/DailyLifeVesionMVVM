@@ -16,8 +16,6 @@ class MainVC: ButtonBarPagerTabStripViewController {
   
   @IBOutlet var temperatureButton: UIButton!
   @IBOutlet var visualEffectView: UIVisualEffectView!
-  @IBOutlet var weatherContainer: UIView!
-  @IBOutlet var weatherContainerConstraint: NSLayoutConstraint!
   @IBOutlet var snipper: UIActivityIndicatorView!
   @IBOutlet var btnBarView: UIView!
   @IBOutlet var apiOutOfDate: UILabel!
@@ -48,7 +46,8 @@ class MainVC: ButtonBarPagerTabStripViewController {
   
   override func viewDidLoad() {
     
-    weatherContainerConstraint.constant = -(self.view.frame.height - 20 - self.view.safeAreaInsets.top - 30)
+    temperatureButton.isEnabled = false
+    
     configureButtonBar()
     super.viewDidLoad()
     
@@ -59,7 +58,6 @@ class MainVC: ButtonBarPagerTabStripViewController {
     visualEffectView.isHidden = true
     visualEffectView.effect = nil
     
-    NotificationCenter.default.addObserver(self, selector: #selector(handleAreaBar(notificaton:)), name: NSNotification.Name("HandleAreaBar"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: NSNotification.Name("OpenSearchVC"), object: nil)
     
     btnBarView.clipsToBounds = true
@@ -71,34 +69,11 @@ class MainVC: ButtonBarPagerTabStripViewController {
     temperatureButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     temperatureButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
     
+    
   }
   
   deinit {
     NotificationCenter.default.removeObserver(self)
-  }
-  
-  @objc func handleAreaBar(notificaton: Notification){
-    let gesture = notificaton.userInfo?["data"] as? UIPanGestureRecognizer
-    let translation = gesture?.translation(in: self.view).y
-    guard let translatedIndex = translation else {return}
-    
-    if translatedIndex >= CGFloat(0){
-      self.weatherContainer.frame.origin.y = self.view.frame.height -  self.weatherContainer.frame.height + translatedIndex
-    }
-    
-    UIView.animate(withDuration: 0.3) {
-      if gesture?.state == .ended{
-        if self.weatherContainer.frame.origin.y <= 300{
-          self.weatherContainer.frame.origin.y = self.view.frame.height - self.weatherContainer.frame.height
-          self.isWeatherOpen = true
-          
-        } else {
-          self.weatherContainer.frame.origin.y = self.view.frame.height
-          self.isWeatherOpen = false
-          self.animateVisualEffectOUT()
-        }
-      }
-    }
   }
   
   @objc func OpenSearchVC(){
@@ -146,7 +121,9 @@ class MainVC: ButtonBarPagerTabStripViewController {
           }
           DispatchQueue.main.async {
             wSelf.temperatureButton.setTitle("\(round(temper * 10) / 10)°C", for: .normal)
+             wSelf.temperatureButton.isEnabled = true
           }
+         
           wSelf.manager.stopUpdatingLocation()
         }
       }
@@ -192,7 +169,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
       
       pageVC.menuBarTitle = NewsApiService.instance.TOPIC_NEWSAPI[i]
       DispatchQueue.main.async {
-        NewsApiService.instance.getMoreNewsApi(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 3,numberOfArticles: 10) { (dataApi) in
+        NewsApiService.instance.getArticles(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 3,numberOfArticles: 10) { (dataApi) in
           
           if dataApi.status == "error"{
             self.snipper.stopAnimating()
@@ -206,7 +183,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
       }
       
       
-      NewsApiService.instance.getMoreNewsApi(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 1, numberOfArticles: 20) {(dataApi) in
+      NewsApiService.instance.getArticles(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 1, numberOfArticles: 20) {(dataApi) in
         
         pageVC.articles = dataApi.articles
         if i == 0 {

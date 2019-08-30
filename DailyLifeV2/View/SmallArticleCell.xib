@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SmallArticleCell" rowHeight="120" id="KGk-i7-Jjw" customClass="SmallArticleCell" customModule="DailyLifeV2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="9p0-SG-AcA">
+                        <rect key="frame" x="5" y="5" width="150" height="84.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="9p0-SG-AcA" secondAttribute="height" multiplier="16:9" id="ITB-GP-3VN"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyW-IV-LZj">
+                        <rect key="frame" x="160" y="5" width="210" height="69"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="2019-08-01 " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEP-0I-BHy">
+                        <rect key="frame" x="160" y="79" width="210" height="15.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cyW-IV-LZj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="0Zy-mj-jyg"/>
+                    <constraint firstItem="9p0-SG-AcA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="9Om-VF-Ras"/>
+                    <constraint firstAttribute="trailing" secondItem="qEP-0I-BHy" secondAttribute="trailing" constant="5" id="IPj-wO-p0L"/>
+                    <constraint firstItem="qEP-0I-BHy" firstAttribute="top" secondItem="cyW-IV-LZj" secondAttribute="bottom" constant="5" id="Img-EK-l5V"/>
+                    <constraint firstAttribute="trailing" secondItem="cyW-IV-LZj" secondAttribute="trailing" constant="5" id="KPK-iw-OUw"/>
+                    <constraint firstItem="cyW-IV-LZj" firstAttribute="leading" secondItem="9p0-SG-AcA" secondAttribute="trailing" constant="5" id="N8k-gc-XQP"/>
+                    <constraint firstAttribute="bottom" secondItem="qEP-0I-BHy" secondAttribute="bottom" constant="5" id="Nrl-9R-Toe"/>
+                    <constraint firstItem="qEP-0I-BHy" firstAttribute="leading" secondItem="9p0-SG-AcA" secondAttribute="trailing" constant="5" id="S4L-Kl-U1D"/>
+                    <constraint firstItem="9p0-SG-AcA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="eL7-VC-I8S"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9p0-SG-AcA" secondAttribute="bottom" constant="5" id="yF3-FK-w6V"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="9p0-SG-AcA" firstAttribute="width" secondItem="KGk-i7-Jjw" secondAttribute="width" multiplier="0.8:2" id="drn-fk-D1D"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="myImage" destination="9p0-SG-AcA" id="ycb-cD-cKe"/>
+                <outlet property="myPublish" destination="qEP-0I-BHy" id="aFO-L4-nOL"/>
+                <outlet property="myTitle" destination="cyW-IV-LZj" id="s5y-SG-4I1"/>
+            </connections>
+            <point key="canvasLocation" x="90.579710144927546" y="54.241071428571423"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="noImage" width="110" height="84"/>
+    </resources>
+</document>

@@ -59,6 +59,8 @@ class FavoriteVC: UIViewController {
     navigationController?.title = "Liked Contents"
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+    myTableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
+    
   }
   
   @objc func handleMoveTabbar(){
@@ -128,9 +130,11 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
+
+    let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
     
     cell.configureCell(article: articlesCoreData[indexPath.row])
+    
     
     return cell
   }

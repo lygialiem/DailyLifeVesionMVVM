@@ -36,16 +36,19 @@ class PageCell: UICollectionViewCell {
     DispatchQueue.main.async {
       self.articles = articles
       
-      guard let title = articles?.title else {return}
+      guard let title = articles?.title, let image = articles?.urlToImage, let timePublished = articles?.publishedAt  else {return}
+      
       self.titleArticle.text = title.capitalized
       
-      guard let timePublished = articles?.publishedAt else {return}
-      let isoFormatter = ISO8601DateFormatter()
-      let timePublishedFormatter = isoFormatter.date(from: timePublished)
-      self.timePublishedArticle.text = "\(timePublishedFormatter!)".replacingOccurrences(of: "+0000", with: "", options: .caseInsensitive, range: nil)
-      
-      guard let image = articles?.urlToImage else {return}
       self.imageArticle.sd_setImage(with: URL(string: image))
+      
+      let subString = timePublished.replacingOccurrences(of: "T", with: " ")
+      let subString2 = subString.replacingOccurrences(of: "Z", with: "")
+      let splitSubString = subString2.split(separator: " ")
+      
+      let timePublish = timePublished.changeFormatTime(from: "yyyy-MM-dd", to: "MMMM dd, yyyy")
+      self.timePublishedArticle.text = "\(timePublish) \(splitSubString[1])"
+      
     }
   }
   
