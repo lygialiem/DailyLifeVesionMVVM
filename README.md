@@ -22,8 +22,7 @@ The design of this app is familiar, easy to read with the user. The basic colors
 
 - **You can search the articles which relate to your typing-keyword at search-button placed at the center of Tabbar.**
 
-<img width="453" alt="Screen Shot 2019-08-31 at 11 10 16" src="https://user-images.githubusercontent.com/47914998/64061096-c42ea100-cbff-11e9-819c-e312e2765dd2.png">
-
+<img width="453" alt="Screen Shot 2019-08-31 at 11 10 16" src="https://user-images.githubusercontent.com/47914998/64061096-c42ea100-cbff-11e9-819c-e312e2765dd2.png"> 
 
 - **You can like or share whatever articles by touching the like-button or share-button, and all that articles will be in your Liked Tab.**
 
