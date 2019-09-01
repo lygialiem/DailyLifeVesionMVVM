@@ -51,8 +51,9 @@ class MainVC: ButtonBarPagerTabStripViewController {
     configureButtonBar()
     super.viewDidLoad()
     
-    snipper.hidesWhenStopped = true
-    snipper.startAnimating()
+    
+//    snipper.startAnimating()
+    snipper.isHidden = true
     
     effect = visualEffectView.effect
     visualEffectView.isHidden = true
@@ -168,8 +169,6 @@ class MainVC: ButtonBarPagerTabStripViewController {
     
   }
   
-  
-  
   func configureButtonBar() {
     settings.style.selectedBarHeight = 4
     settings.style.selectedBarBackgroundColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
@@ -197,32 +196,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
     for i in 0..<NewsApiService.instance.TOPIC_NEWSAPI.count{
       let pageVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
       
-      pageVC.menuBarTitle = NewsApiService.instance.TOPIC_NEWSAPI[i]
-      DispatchQueue.main.async {
-        NewsApiService.instance.getArticles(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 3,numberOfArticles: 10) { (dataApi) in
-          
-          if dataApi.status == "error"{
-            self.snipper.stopAnimating()
-            self.apiOutOfDate.isHidden = false
-            self.apiOutOfDate.text = "Your Api Is Out Of Date"
-          }
-          pageVC.articlesOfConcern = dataApi.articles
-          
-        }
-        self.apiOutOfDate.isHidden = true
-      }
-      
-      
-      NewsApiService.instance.getArticles(topic: NewsApiService.instance.TOPIC_NEWSAPI[i], page: 1, numberOfArticles: 20) {(dataApi) in
-        
-        pageVC.articles = dataApi.articles
-        if i == 0 {
-          DispatchQueue.main.async {
-            pageVC.newsFeedCV.reloadData()
-            self.snipper.stopAnimating()
-          }
-        }
-      }
+      pageVC.menuBarTitle = NewsApiService.instance.TOPIC_NEWSAPI[i]  
       pageVCArray.append(pageVC)
     }
     return pageVCArray
@@ -235,7 +209,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
   
   @IBAction func weatherButtonByPressed(_ sender: Any) {
 
-    let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastLocationTableVC
+    let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastGPS
     forecastLocationVC.dataForecast = self.forecastData
     forecastLocationVC.detailGPS = self.detailGPS
     DispatchQueue.main.async {

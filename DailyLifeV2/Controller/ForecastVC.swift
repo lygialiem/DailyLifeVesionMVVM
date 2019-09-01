@@ -50,6 +50,7 @@ class ForecastVC: UIViewController {
           self.weatherTableView.isHidden = true
           
           self.snipper.stopAnimating()
+          self.snipper.isHidden = true
         }
       } else {
         WeatherApiService.instance.getCountryForecastApi(nameOfCountry: name.first?.nameCD ?? "", completion: {(data) in
@@ -77,8 +78,6 @@ class ForecastVC: UIViewController {
       }
     }
   }
-  
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()

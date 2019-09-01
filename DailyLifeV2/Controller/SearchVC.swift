@@ -30,12 +30,15 @@ class SearchVC: UITableViewController{
     
     let topic = self.getUserDefault()
     
-    NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 10) { (articles) in
+    
+    if topic != ""{
+      NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 10) { (articles) in
       
-      self.articles = articles.articles
-      
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
+        self.articles = articles.articles
+        
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
       }
     }
   }
@@ -132,7 +135,6 @@ extension SearchVC: UISearchBarDelegate{
     } else {
       NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 20) { (articles) in
         self.articles = articles.articles
-        
         DispatchQueue.main.async {
           UserDefaults.standard.set(searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", forKey: "searchTopic")
           UserDefaults.standard.synchronize()

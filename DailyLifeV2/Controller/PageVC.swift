@@ -30,6 +30,13 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
     
+    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 10) { (articles) in
+      
+      DispatchQueue.main.async {
+        self.articles = articles.articles
+        self.newsFeedCV.reloadData()
+      }
+    }
   }
   
   deinit {
@@ -61,16 +68,19 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   // Use indexOfNewArticle to insert new Article to newFeeds:
   var indexOfNewArticle = 0
   @objc func handleRefreshControl(){
-    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
-      for index in 0..<dataApi.articles.count{
-        if dataApi.articles[index].title != self.articles[index].title{
-          self.articles.insert(dataApi.articles[index], at: self.indexOfNewArticle)
-          self.indexOfNewArticle += 1
+    
+    if !self.articles.isEmpty {
+      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
+        for index in 0..<dataApi.articles.count{
+          if dataApi.articles[index].title != self.articles[index].title{
+            self.articles.insert(dataApi.articles[index], at: self.indexOfNewArticle)
+            self.indexOfNewArticle += 1
+          }
         }
-      }
-      DispatchQueue.main.async {
-        self.newsFeedCV.reloadData()
-        self.refreshControl.endRefreshing()
+        DispatchQueue.main.async {
+          self.newsFeedCV.reloadData()
+          self.refreshControl.endRefreshing()
+        }
       }
     }
   }
@@ -130,7 +140,6 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     guard let storyboard = self.storyboard else { return }
     let readingVC = storyboard.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
    
-//    readingVC.articlesOfConcern = self.articlesOfConcern
     readingVC.articles = self.articles
     readingVC.indexPathOfDidSelectedArticle = indexPath
     readingVC.concernedTitle = menuBarTitle
@@ -145,7 +154,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     
-    if indexPath.row == articles.count - 3{
+    if indexPath.row == articles.count - 5{
       let numberOfPage = 5
       if currentPage <= numberOfPage{
         NewsApiService.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in

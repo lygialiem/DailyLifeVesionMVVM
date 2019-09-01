@@ -18,14 +18,14 @@ class NewsApiService{
   
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
-  let API_KEY_NEWSAPI = "346f025ac0684fd1936311a8434fe00a"
-  
+  let BASE_URL_SearchNEWSAPI = "https://newsapi.org/v2/everything?qInTitle="
+  let API_KEY_NEWSAPI = "3d152c6733e14015b46c1418d7567434"
   
   var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
   func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
-    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&domains=cnn.com,nytimes.com,vice.com,foxnews.com,news.google.com,espn.com"
+    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&domains=nytimes.com,vice.com,foxnews.com,news.google.com,espn.com"
     guard let url = URL(string: totalUrl) else {return}
     URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
       guard let data = dataApi else {return}
@@ -38,16 +38,16 @@ class NewsApiService{
       }.resume()
   }
   
-  
-  
   func getSearchArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
-    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&domains=cnn.com,nytimes.com,vice.com,foxnews.com,news.google.com,espn.com"
+    let totalUrl =  "\(BASE_URL_SearchNEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)"
     guard let url = URL(string: totalUrl) else {return}
     URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
       guard let data = dataApi else {return}
       do{
         let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
+        
+        
         completion(dataDecode)
       } catch let jsonError{
         debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)

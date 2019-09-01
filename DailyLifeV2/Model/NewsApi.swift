@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NewsApi: Decodable{
+struct NewsApi: Decodable, Hashable{
   var status: String?
   var totalResults: Int?
   var articles: [Article]
@@ -16,7 +16,7 @@ struct NewsApi: Decodable{
   var message: String?
 }
 
-struct Article: Decodable{
+struct Article: Decodable, Hashable{
   var source: Source?
   var author: String?
   var title: String?
@@ -27,7 +27,7 @@ struct Article: Decodable{
   var content: String?
 }
 
-struct Source: Decodable{
+struct Source: Decodable, Hashable{
   var id: String?
   var name: String?
 }

@@ -31,17 +31,31 @@ extension UILabel {
   }
 }
 
-public extension Array where Element: Hashable {
-  
-  /// Return the array with all duplicates removed.
-  ///
-  /// i.e. `[ 1, 2, 3, 1, 2 ].uniqued() == [ 1, 2, 3 ]`
-  ///
-  /// - note: Taken from stackoverflow.com/a/46354989/3141234, as
-  ///         per @Alexander's comment.
-  func uniqued() -> [Element] {
-    var seen = Set<Element>()
-    return self.filter { seen.insert($0).inserted }
+//public extension Array where Element: Hashable {
+//  
+//  /// Return the array with all duplicates removed.
+//  ///
+//  /// i.e. `[ 1, 2, 3, 1, 2 ].uniqued() == [ 1, 2, 3 ]`
+//  ///
+//  /// - note: Taken from stackoverflow.com/a/46354989/3141234, as
+//  ///         per @Alexander's comment.
+//  func uniqued() -> [Element] {
+//    var seen = Set<Element>()
+//    return self.filter { seen.insert($0).inserted }
+//  }
+//}
+
+extension Array where Element: Hashable {
+  var uniques: Array {
+    var buffer = Array()
+    var added = Set<Element>()
+    for elem in self {
+      if !added.contains(elem) {
+        buffer.append(elem)
+        added.insert(elem)
+      }
+    }
+    return buffer
   }
 }
 
