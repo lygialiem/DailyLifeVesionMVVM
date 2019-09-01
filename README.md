@@ -20,17 +20,17 @@ I'm converting the App from MVC to MVVM... .App will be updated continuously
 
 ## Feature
 
-- **Bringing newest artilces from popular sources in the world with 12 subjects at Home Tab.**
+- Bringing newest artilces from popular sources in the world with 12 subjects at Home Tab.
 
-- **You can search the articles which relate to your typing-keyword at search-button placed at the center of Tabbar.**
+- You can search the articles which relate to your typing-keyword at search-button placed at the center of Tabbar.
 
-- **You can like or share whatever articles by touching the like-button or share-button, and all that articles will be in your Liked Tab.**
+- You can like or share whatever articles by touching the like-button or share-button, and all that articles will be in your Liked Tab.
 
-- **Information about forecast weather based on your GPS-device or specificed Cities at Forecast Tab.**
+- Information about forecast weather based on your GPS-device or specificed Cities at Forecast Tab.
 
-- **The convenience of transition to bring your best experiment.**
+- The convenience of transition to bring your best experiment.
 
-- **Timezone of standard cities in the world at World Clock Tab.**
+- Timezone of standard cities in the world at World Clock Tab.
 
 ## Author
 
