@@ -31,43 +31,17 @@ extension UILabel {
   }
 }
 
-//public extension Array where Element: Hashable {
-//  
-//  /// Return the array with all duplicates removed.
-//  ///
-//  /// i.e. `[ 1, 2, 3, 1, 2 ].uniqued() == [ 1, 2, 3 ]`
-//  ///
-//  /// - note: Taken from stackoverflow.com/a/46354989/3141234, as
-//  ///         per @Alexander's comment.
-//  func uniqued() -> [Element] {
-//    var seen = Set<Element>()
-//    return self.filter { seen.insert($0).inserted }
-//  }
-//}
-
-extension Array where Element: Hashable {
-  var uniques: Array {
-    var buffer = Array()
-    var added = Set<Element>()
-    for elem in self {
-      if !added.contains(elem) {
-        buffer.append(elem)
-        added.insert(elem)
-      }
+extension Array
+{
+  func uniqueValues<V:Equatable>( value:(Element)->V) -> [Element]
+  {
+    var result:[Element] = []
+    for element in self
+    {
+      if !result.contains(where: { value($0) == value(element) })
+      { result.append(element) }
     }
-    return buffer
-  }
-}
-
-extension UITextView{
-  func textViewDidChangeHeight() {
-    self.translatesAutoresizingMaskIntoConstraints = true
-    let fixedWidth = self.frame.size.width
-    self.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-    let newSize = self.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-    var newFrame = self.frame
-    newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-    self.frame = newFrame
+    return result
   }
 }
 

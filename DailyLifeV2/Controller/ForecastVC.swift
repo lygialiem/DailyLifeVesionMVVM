@@ -22,6 +22,7 @@ class ForecastVC: UIViewController {
   @IBOutlet var addCityLabel: UILabel!
   @IBOutlet var detailView: UIView!
   @IBOutlet var snipper: UIActivityIndicatorView!
+  @IBOutlet var imageBackground: UIImageView!
   
   
   var indexPathDidSelect: IndexPath?
@@ -33,7 +34,7 @@ class ForecastVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     scrollable = false
-   
+    
     self.navigationController?.navigationBar.isHidden = true
     
     snipper.startAnimating()
@@ -83,19 +84,68 @@ class ForecastVC: UIViewController {
     super.viewDidLoad()
     
     setupTableView()
-    self.navigationController?.navigationBar.isHidden = true
     setupSearchCityView()
     setupTapToDimiss()
-    self.tabBarController?.delegate = self
+    imageBackgroundChangeBasedHour()
+    
     self.searchTextfield.delegate = self
+    self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.delegate = self
     self.tabBarController?.tabBar.backgroundColor = .clear
-  
-
+    
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     
-     weatherTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
-      detailTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
+    weatherTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
+    detailTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
   }
+  
+  
+  func imageBackgroundChangeBasedHour(){
+    let current = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "H"
+    let currentHour = dateFormatter.string(from: current)
+    guard let nowHour = Int(currentHour) else {return}
+    
+    switch nowHour {
+    case 0..<2:
+      self.imageBackground.image = UIImage(named: "Solar Gradients1")
+    case 2..<3:
+      self.imageBackground.image = UIImage(named: "Solar Gradients2")
+    case 3..<4:
+      self.imageBackground.image = UIImage(named: "Solar Gradients3")
+    case 4..<5:
+      self.imageBackground.image = UIImage(named: "Solar Gradients4")
+    case 5..<7:
+      self.imageBackground.image = UIImage(named: "Solar Gradients5")
+    case 7..<8:
+      self.imageBackground.image = UIImage(named: "Solar Gradients6")
+    case 8..<10:
+      self.imageBackground.image = UIImage(named: "Solar Gradients7")
+    case 10..<12:
+      self.imageBackground.image = UIImage(named: "Solar Gradients8")
+    case 12..<14:
+      self.imageBackground.image = UIImage(named: "Solar Gradients9")
+    case 14..<15:
+      self.imageBackground.image = UIImage(named: "Solar Gradients10")
+    case 15..<16:
+      self.imageBackground.image = UIImage(named: "Solar Gradients11")
+    case 16..<17:
+      self.imageBackground.image = UIImage(named: "Solar Gradients12")
+    case 17..<18:
+      self.imageBackground.image = UIImage(named: "Solar Gradients13")
+    case 18..<19:
+      self.imageBackground.image = UIImage(named: "Solar Gradients14")
+    case 19..<22:
+      self.imageBackground.image = UIImage(named: "Solar Gradients15")
+    case 22...23:
+      self.imageBackground.image = UIImage(named: "Solar Gradients16")
+      
+    default:
+      break
+    }
+  }
+  
   
   @objc func handleMoveTabbar(){
     self.tabBarController?.selectedIndex = 0
@@ -259,7 +309,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         return cell
         
       case 4:
-         let detailForecastCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+        let detailForecastCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
         switch indexPath.row{
         case 0:
           
@@ -297,7 +347,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
           detailForecastCell.para1.text = "\(forecastData?.current?.gust_kph ?? 0) km/h"
           detailForecastCell.para2.text = "\(forecastData?.current?.pressure_mb ?? 0) hPa"
           return detailForecastCell
-         
+          
         case 5:
           detailForecastCell.title1.text = "Visibility"
           detailForecastCell.title2.text = "UV Index"
@@ -312,65 +362,65 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
       }
     } else if tableView.tag == 1  {
-       let detailDailyForecasrCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
-       guard let indexPathDidSelected = indexPathDidSelect else {return UITableViewCell()}
-        switch indexPath.row{
-        case 0:
-          let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell") as! DetailForecastCell
-          guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
-          cell.dateForecast.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].date ?? "").changeFormatTime(from: "YYYY-MM-dd", to: "MMMM dd, YYYY"))"
-          return cell
-        case 1:
-          let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! DetailForecastCell
-          guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
-          cell.summary.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].day?.condition?.text ?? "").capitalized)"
-          return cell
-          
-        case 2:
-         
-          detailDailyForecasrCell.title1.text = "Sunrise"
-          detailDailyForecasrCell.title2.text = "Sunset"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.sunrise ?? "")"
-          detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.sunset ?? "")"
-          return detailDailyForecasrCell
-         
-        case 3:
-          detailDailyForecasrCell.title1.text = "Moonrise"
-          detailDailyForecasrCell.title2.text = "Moonset"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.moonrise ?? "")"
-          detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.moonset ?? "")"
-          return detailDailyForecasrCell
-          
-        case 4:
-          detailDailyForecasrCell.title1.text = "Highest Temp"
-          detailDailyForecasrCell.title2.text = "Lowest Temp"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.maxtemp_c ?? 0)ºC"
-          detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.mintemp_c ?? 0)ºC"
-          return detailDailyForecasrCell
-         
-        case 5:
-          detailDailyForecasrCell.title1.text = "Avg Temp"
-          detailDailyForecasrCell.title2.text = "Precipitation"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avgtemp_c ?? 0)ºC"
-          detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.totalprecip_mm ?? 0) mm/h"
-          return detailDailyForecasrCell
-         
-        case 6:
-          detailDailyForecasrCell.title1.text = "Wind Gust"
-          detailDailyForecasrCell.title2.text = "Humidity"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.maxwind_kph ?? 0) km/h"
-          detailDailyForecasrCell.para2.text = "\(Int(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avghumidity ?? 0)) %"
-          return detailDailyForecasrCell
-         
-        case 7:
-          detailDailyForecasrCell.title1.text = "Visibility"
-          detailDailyForecasrCell.title2.text = "UV Index"
-          detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avgvis_km ?? 0) km"
-          detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.uv ?? 0)"
-          return detailDailyForecasrCell
-        default:
-          return UITableViewCell()
-        }
+      let detailDailyForecasrCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+      guard let indexPathDidSelected = indexPathDidSelect else {return UITableViewCell()}
+      switch indexPath.row{
+      case 0:
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell") as! DetailForecastCell
+        guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
+        cell.dateForecast.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].date ?? "").changeFormatTime(from: "YYYY-MM-dd", to: "MMMM dd, YYYY"))"
+        return cell
+      case 1:
+        let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! DetailForecastCell
+        guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
+        cell.summary.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].day?.condition?.text ?? "").capitalized)"
+        return cell
+        
+      case 2:
+        
+        detailDailyForecasrCell.title1.text = "Sunrise"
+        detailDailyForecasrCell.title2.text = "Sunset"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.sunrise ?? "")"
+        detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.sunset ?? "")"
+        return detailDailyForecasrCell
+        
+      case 3:
+        detailDailyForecasrCell.title1.text = "Moonrise"
+        detailDailyForecasrCell.title2.text = "Moonset"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.moonrise ?? "")"
+        detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].astro?.moonset ?? "")"
+        return detailDailyForecasrCell
+        
+      case 4:
+        detailDailyForecasrCell.title1.text = "Highest Temp"
+        detailDailyForecasrCell.title2.text = "Lowest Temp"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.maxtemp_c ?? 0)ºC"
+        detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.mintemp_c ?? 0)ºC"
+        return detailDailyForecasrCell
+        
+      case 5:
+        detailDailyForecasrCell.title1.text = "Avg Temp"
+        detailDailyForecasrCell.title2.text = "Precipitation"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avgtemp_c ?? 0)ºC"
+        detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.totalprecip_mm ?? 0) mm/h"
+        return detailDailyForecasrCell
+        
+      case 6:
+        detailDailyForecasrCell.title1.text = "Wind Gust"
+        detailDailyForecasrCell.title2.text = "Humidity"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.maxwind_kph ?? 0) km/h"
+        detailDailyForecasrCell.para2.text = "\(Int(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avghumidity ?? 0)) %"
+        return detailDailyForecasrCell
+        
+      case 7:
+        detailDailyForecasrCell.title1.text = "Visibility"
+        detailDailyForecasrCell.title2.text = "UV Index"
+        detailDailyForecasrCell.para1.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.avgvis_km ?? 0) km"
+        detailDailyForecasrCell.para2.text = "\(forecastData?.forecast?.forecastday?[indexPathDidSelected.row].day?.uv ?? 0)"
+        return detailDailyForecasrCell
+      default:
+        return UITableViewCell()
+      }
     }
     return UITableViewCell()
   }
@@ -491,8 +541,6 @@ extension ForecastVC: UITextFieldDelegate{
     self.addCityLabel.isHidden = true
     self.weatherTableView.isHidden = true
     
-    
-    
     CoreDataServices.instance.fetchCoreDateCountryName { (countryName) in
       guard (countryName.first?.nameCD) != nil else {return}
       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -544,9 +592,9 @@ extension ForecastVC: UITextFieldDelegate{
           }
         })
       }
-    
+      
     }
-      self.feedback.notificationOccurred(.success)
+    self.feedback.notificationOccurred(.success)
     self.animationOut(self.searchView)
     textField.resignFirstResponder()
     self.weatherTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: self.weatherTableView.frame.width, height: self.weatherTableView.frame.height), animated: true)

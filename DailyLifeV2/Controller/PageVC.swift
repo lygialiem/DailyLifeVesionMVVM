@@ -82,6 +82,11 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
           self.refreshControl.endRefreshing()
         }
       }
+    } else {
+      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (data) in
+        self.articles = data.articles
+        self.newsFeedCV.reloadData()
+      }
     }
   }
   

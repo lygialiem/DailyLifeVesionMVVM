@@ -105,7 +105,7 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
       return UIView()
     case 1:
       let section = tableView.dequeueReusableCell(withIdentifier: "section1") as! SearchForecast
-     section.headerConcernedArticle.text = "Concerned Articles"
+     section.headerConcernedArticle.text = "Another Articles"
       return section
     default:
       return UIView()

@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="9p0-SG-AcA">
-                        <rect key="frame" x="5" y="5" width="150" height="84.5"/>
+                        <rect key="frame" x="5" y="5" width="159" height="89.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="9p0-SG-AcA" secondAttribute="height" multiplier="16:9" id="ITB-GP-3VN"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyW-IV-LZj">
-                        <rect key="frame" x="160" y="5" width="210" height="69"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyW-IV-LZj">
+                        <rect key="frame" x="169" y="5" width="201" height="84.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="2019-08-01 " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEP-0I-BHy">
-                        <rect key="frame" x="160" y="79" width="210" height="15.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEP-0I-BHy">
+                        <rect key="frame" x="169" y="94.5" width="201" height="0.0"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -48,13 +48,10 @@
                     <constraint firstAttribute="bottom" secondItem="qEP-0I-BHy" secondAttribute="bottom" constant="5" id="Nrl-9R-Toe"/>
                     <constraint firstItem="qEP-0I-BHy" firstAttribute="leading" secondItem="9p0-SG-AcA" secondAttribute="trailing" constant="5" id="S4L-Kl-U1D"/>
                     <constraint firstItem="9p0-SG-AcA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="eL7-VC-I8S"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9p0-SG-AcA" secondAttribute="bottom" constant="5" id="yF3-FK-w6V"/>
+                    <constraint firstAttribute="bottom" secondItem="9p0-SG-AcA" secondAttribute="bottom" constant="5" id="yF3-FK-w6V"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <constraints>
-                <constraint firstItem="9p0-SG-AcA" firstAttribute="width" secondItem="KGk-i7-Jjw" secondAttribute="width" multiplier="0.8:2" id="drn-fk-D1D"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="myImage" destination="9p0-SG-AcA" id="ycb-cD-cKe"/>

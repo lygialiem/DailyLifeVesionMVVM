@@ -15,8 +15,6 @@ class WorldClockVC: UIViewController {
   @IBOutlet var addButton: UIBarButtonItem!
   @IBOutlet var menuButton: UIBarButtonItem!
   
-
-  
   let feedback = UINotificationFeedbackGenerator()
   
   override func viewWillAppear(_ animated: Bool) {
@@ -40,8 +38,7 @@ class WorldClockVC: UIViewController {
     
     myTableView.dataSource = self
     myTableView.delegate = self
-    navigationItem.leftBarButtonItem = editButtonItem
-    
+   
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
   }
   
@@ -62,11 +59,10 @@ class WorldClockVC: UIViewController {
     }
   }
   
-  
-  @IBAction func menuButtonPressed(_ sender: Any) {
+  @IBAction func menuButtonByPressed(_ sender: Any) {
     NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
   }
-  
+ 
   
   @objc func handleDeleteAllButton(){
     self.navigationItem.leftBarButtonItems = [menuButton]

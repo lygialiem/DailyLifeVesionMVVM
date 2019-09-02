@@ -19,13 +19,13 @@ class NewsApiService{
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
   let BASE_URL_SearchNEWSAPI = "https://newsapi.org/v2/everything?qInTitle="
-  let API_KEY_NEWSAPI = "3d152c6733e14015b46c1418d7567434"
+  let API_KEY_NEWSAPI = "d5b74e34a5d84c6e975e1cfe78f4803d"
   
   var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
   func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
-    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&domains=nytimes.com,vice.com,foxnews.com,news.google.com,espn.com"
+    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&sources=abc-news,ars-technica,ary-news,associated-press,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge"
     guard let url = URL(string: totalUrl) else {return}
     URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
       guard let data = dataApi else {return}
@@ -46,8 +46,7 @@ class NewsApiService{
       guard let data = dataApi else {return}
       do{
         let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
-        
-        
+      
         completion(dataDecode)
       } catch let jsonError{
         debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)

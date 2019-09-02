@@ -20,6 +20,7 @@ class SmallArticleCell: UITableViewCell {
        self.selectionStyle = .none
     }
   
+  
   func configureCell(article: Article ){
     guard let urlToImage = article.urlToImage, let timePublishedArticle = article.publishedAt, let titleArticle = article.title   else {return}
     

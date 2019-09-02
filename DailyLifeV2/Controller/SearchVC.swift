@@ -25,18 +25,18 @@ class SearchVC: UITableViewController{
     self.mySearchBar.delegate = self
     self.mySearchBar.backgroundColor = .black
     self.mySearchBar.barStyle = .black
-    self.mySearchBar.placeholder = self.getUserDefault()
+    self.mySearchBar.placeholder = self.getUserDefault().replacingOccurrences(of: "%20", with: " ")
     self.tableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
     
     let topic = self.getUserDefault()
-    
-    
+  
     if topic != ""{
-      NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 10) { (articles) in
-      
-        self.articles = articles.articles
+      NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 15) { (articles) in
         
         DispatchQueue.main.async {
+          let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
+          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
+          self.articles = alwaysHaveImageArticles
           self.tableView.reloadData()
         }
       }
@@ -73,8 +73,11 @@ class SearchVC: UITableViewController{
     if indexPath.row == articles.count - 3{
       let numberOfPage = 5
       if currentPage <= numberOfPage{
-        NewsApiService.instance.getSearchArticles(topic: topic , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
-          for article in dataApi.articles{
+        NewsApiService.instance.getSearchArticles(topic: topic , page: currentPage, numberOfArticles: 15 ) { (articles) in
+          let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
+          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
+          
+          for article in alwaysHaveImageArticles{
             self.articles.append(article)
           }
           self.currentPage += 1
@@ -93,14 +96,13 @@ class SearchVC: UITableViewController{
     NotificationCenter.default.post(name: NSNotification.Name("searchVCToReadingVC"), object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
     self.dismiss(animated: true, completion: nil)
     
-    
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell") as! SmallArticleCell
-    
-    cell.configureCell(article: articles[indexPath.row])
-    
+    DispatchQueue.main.async {
+          cell.configureCell(article: self.articles[indexPath.row])
+    }
     return cell
   }
 }
@@ -116,13 +118,7 @@ extension SearchVC: PanModalPresentable{
   }
 }
 
-
 extension SearchVC: UISearchBarDelegate{
-  
-  
-  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    print("DID END")
-  }
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
@@ -133,9 +129,12 @@ extension SearchVC: UISearchBarDelegate{
     if searchBar.text == "" || searchBar.text == " "{
       searchBar.placeholder = "Type What You Need"
     } else {
-      NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 20) { (articles) in
-        self.articles = articles.articles
+      NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 15) { (articles) in
+       
         DispatchQueue.main.async {
+          let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
+          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
+           self.articles = alwaysHaveImageArticles
           UserDefaults.standard.set(searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", forKey: "searchTopic")
           UserDefaults.standard.synchronize()
           self.tableView.reloadData()

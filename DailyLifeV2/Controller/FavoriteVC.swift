@@ -25,13 +25,14 @@ class FavoriteVC: UIViewController {
       
       articlesCoreData = Array(repeating: Article(), count: favoriteArticlesCD.count)
       for i in 0..<favoriteArticlesCD.count{
-        articlesCoreData[i].title = favoriteArticlesCD[i].titleCD
-        articlesCoreData[i].author = favoriteArticlesCD[i].authorCD
-        articlesCoreData[i].content = favoriteArticlesCD[i].contentCD
-        articlesCoreData[i].description = favoriteArticlesCD[i].descriptionCD
-        articlesCoreData[i].publishedAt = favoriteArticlesCD[i].publishedAtCD
-        articlesCoreData[i].url = favoriteArticlesCD[i].urlCD
-        articlesCoreData[i].urlToImage = favoriteArticlesCD[i].urlToImageCD
+      
+        articlesCoreData[i].title = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].titleCD
+        articlesCoreData[i].author = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].authorCD
+        articlesCoreData[i].content = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].contentCD
+        articlesCoreData[i].description = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].descriptionCD
+        articlesCoreData[i].publishedAt = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].publishedAtCD
+        articlesCoreData[i].url = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlCD
+        articlesCoreData[i].urlToImage = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlToImageCD
       }
       self.myTableView.reloadData()
       if favoriteArticlesCD == []{
@@ -158,7 +159,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       
       CoreDataServices.instance.fetchCoreData(completion: { (coreDatas) in
         
-        self.removeItemAtIndexPathCoreData(atIndexPath: indexPath, element: coreDatas)
+        self.removeItemAtIndexPathCoreData(atIndexPath: indexPath, element: coreDatas.reversed())
         self.articlesCoreData.remove(at: indexPath.row)
         
         if self.articlesCoreData.isEmpty{
@@ -228,13 +229,13 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     for i in 0..<articlesCoreData.count{
       let coreData = FavoriteArtilce(context: managed)
       
-      coreData.titleCD = articlesCoreData[i].title
-      coreData.urlToImageCD = articlesCoreData[i].urlToImage
-      coreData.publishedAtCD = articlesCoreData[i].publishedAt
-      coreData.urlCD = articlesCoreData[i].url
-      coreData.contentCD = articlesCoreData[i].content
-      coreData.authorCD = articlesCoreData[i].author
-      coreData.descriptionCD = articlesCoreData[i].description
+      coreData.titleCD = articlesCoreData[articlesCoreData.count - 1 - i].title
+      coreData.urlToImageCD = articlesCoreData[articlesCoreData.count - 1 - i].urlToImage
+      coreData.publishedAtCD = articlesCoreData[articlesCoreData.count - 1 - i].publishedAt
+      coreData.urlCD = articlesCoreData[articlesCoreData.count - 1 - i].url
+      coreData.contentCD = articlesCoreData[articlesCoreData.count - 1 - i].content
+      coreData.authorCD = articlesCoreData[articlesCoreData.count - 1 - i].author
+      coreData.descriptionCD = articlesCoreData[articlesCoreData.count - 1 - i].description
       
       do{
         try managed.save()

@@ -23,11 +23,16 @@ class ForecastGPS: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
     tableView.dataSource = self
     tableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
     
+    backgroundTableViewChangeBasedHour()
     
+   
+    
+  }
+  
+  func backgroundTableViewChangeBasedHour(){
     let current = Date()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "H"
@@ -71,7 +76,6 @@ class ForecastGPS: UITableViewController {
     default:
       break
     }
-    
   }
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,7 +90,6 @@ class ForecastGPS: UITableViewController {
       return 8
     }
   }
-  
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.section {

@@ -28,7 +28,6 @@ struct ReversedGeoLocation {
     """
   }
   
-  // Handle optionals as needed
   init(with placemark: CLPlacemark) {
     self.name           = placemark.name ?? ""
     self.streetName     = placemark.thoroughfare ?? ""
