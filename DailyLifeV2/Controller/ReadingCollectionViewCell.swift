@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-protocol ReadingCollectionViewCellDelegate{
+protocol ReadingCollectionViewCellDelegate: class{
   func movoWebViewController(url: String?)
 }
 
@@ -17,7 +17,7 @@ class ReadingCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet var myTableView: UITableView!
   
-  var delegate: ReadingCollectionViewCellDelegate?
+  weak  var delegate: ReadingCollectionViewCellDelegate?
   
   
   var article: Article?
@@ -33,12 +33,9 @@ class ReadingCollectionViewCell: UICollectionViewCell {
   }
   
   func setupMyTableView(){
-    
+    myTableView.estimatedRowHeight = 1000
     myTableView.delegate = self
     myTableView.dataSource = self
-    myTableView.estimatedRowHeight = 1000
-    
-    myTableView.rowHeight = UITableView.automaticDimension
     myTableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
   }
 }
@@ -47,7 +44,6 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
   
   override  func prepareForReuse() {
     super.prepareForReuse()
-    
     myTableView.reloadData()
   }
   
@@ -78,25 +74,28 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! ContentCell
-      cell.configureContent(article: self.article ?? Article())
+      DispatchQueue.main.async {
+        cell.configureContent(article: self.article ?? Article())
+      }
       cell.delegate = self
       return cell
     } else if indexPath.section == 1{
       let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
-      
-      cell.configureCell(article: articlesOfConcern[indexPath.row])
+      DispatchQueue.main.async {
+        cell.configureCell(article: self.articlesOfConcern[indexPath.row])
+      }
       return cell
     }
     return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 1{
+    if indexPath.section == 0{
+      return UITableView.automaticDimension
+    } else if indexPath.section == 1{
       return 100
-    } else if indexPath.section == 0{
-      return  UITableView.automaticDimension
     }
-    return CGFloat()
+    return 0
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -105,7 +104,7 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
       return UIView()
     case 1:
       let section = tableView.dequeueReusableCell(withIdentifier: "section1") as! SearchForecast
-     section.headerConcernedArticle.text = "Another Articles"
+      section.headerConcernedArticle.text = "Another Articles"
       return section
     default:
       return UIView()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WordClockDidSelect{
+protocol WordClockDidSelect: class{
   func addWorldClock(timezone: String)
 }
 
@@ -20,7 +20,7 @@ struct Section {
 class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   
   var filterContents = [Section]()
-  var delegate: WordClockDidSelect?
+ weak var delegate: WordClockDidSelect?
   
   let searchController = UISearchController(searchResultsController: nil)
   

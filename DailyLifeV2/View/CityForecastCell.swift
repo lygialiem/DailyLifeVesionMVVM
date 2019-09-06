@@ -30,9 +30,9 @@ class CityForecastCell: UITableViewCell {
   
   func configureCell(forecast: ForecastApi?){
     guard let cityZone = forecast?.location?.name, let description = forecast?.current?.condition?.text, let temperature = forecast?.current?.temp_c,
-      let region = forecast?.location?.region,
-      let country = forecast?.location?.country,
-    let lastUpdated = forecast?.current?.last_updated
+        let region = forecast?.location?.region,
+        let country = forecast?.location?.country,
+        let lastUpdated = forecast?.location?.localtime
       else {return}
     if region == ""{
       self.regionCountry.text = "\(country)"
@@ -47,14 +47,12 @@ class CityForecastCell: UITableViewCell {
     
     self.temperature.text = "\(Int(round(temperature)))ºC"
     
+    self.currentDay.text = lastUpdated.changeFormatTime(from: "YYYY-MM-dd HH:mm", to: "MMMM dd, YYYY h:mma")
     
-    self.currentDay.text = lastUpdated.changeFormatTime(from: "YYYY-MM-dd HH:mm", to: "MMMM dd, YYYY hh:mma")
+  
+    let currentHour = Int(lastUpdated.changeFormatTime(from: "YYYY-MM-dd H:mm", to: "H")) ?? 0
     
-    let date = Date()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH"
-    let currentHour = Int(dateFormatter.string(from: date))
-    if currentHour! >= 5 && currentHour! < 17{
+    if currentHour >= 5 && currentHour < 19{
       DispatchQueue.main.async {
         self.sunMoonImage.image = UIImage(named: "day/Sun")
       }

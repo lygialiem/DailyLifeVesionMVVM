@@ -17,7 +17,7 @@ class SearchVC: UITableViewController{
   
   var searchText = ""
   var currentPage = 2
-  var delegate: SearchVCToReadingFavoriteVC?
+  weak  var delegate: SearchVCToReadingFavoriteVC?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,14 +29,14 @@ class SearchVC: UITableViewController{
     self.tableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
     
     let topic = self.getUserDefault()
-  
+    
     if topic != ""{
       NewsApiService.instance.getSearchArticles(topic: topic, page: 1, numberOfArticles: 15) { (articles) in
         
         DispatchQueue.main.async {
-          let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
-          self.articles = alwaysHaveImageArticles
+          let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+          let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
+          self.articles = uniqueArticles
           self.tableView.reloadData()
         }
       }
@@ -70,12 +70,12 @@ class SearchVC: UITableViewController{
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     let topic = self.getUserDefault()
-    if indexPath.row == articles.count - 3{
-      let numberOfPage = 5
+    if indexPath.row == articles.count - 5{
+      let numberOfPage = 9
       if currentPage <= numberOfPage{
         NewsApiService.instance.getSearchArticles(topic: topic , page: currentPage, numberOfArticles: 15 ) { (articles) in
           let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
+          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil || $0.urlToImage == ""})
           
           for article in alwaysHaveImageArticles{
             self.articles.append(article)
@@ -101,7 +101,7 @@ class SearchVC: UITableViewController{
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell") as! SmallArticleCell
     DispatchQueue.main.async {
-          cell.configureCell(article: self.articles[indexPath.row])
+      cell.configureCell(article: self.articles[indexPath.row])
     }
     return cell
   }
@@ -129,12 +129,12 @@ extension SearchVC: UISearchBarDelegate{
     if searchBar.text == "" || searchBar.text == " "{
       searchBar.placeholder = "Type What You Need"
     } else {
-      NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 15) { (articles) in
-       
+      NewsApiService.instance.getSearchArticles(topic: searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", page: 1, numberOfArticles: 10) { (articles) in
+        
         DispatchQueue.main.async {
           let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil})
-           self.articles = alwaysHaveImageArticles
+          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil || $0.urlToImage == ""})
+          self.articles = alwaysHaveImageArticles
           UserDefaults.standard.set(searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? "", forKey: "searchTopic")
           UserDefaults.standard.synchronize()
           self.tableView.reloadData()
@@ -145,6 +145,6 @@ extension SearchVC: UISearchBarDelegate{
   }
 }
 
-protocol SearchVCToReadingFavoriteVC {
+protocol SearchVCToReadingFavoriteVC: class {
   func searchVCToReadingFavoriteVC(articles: [Article], indexPathDidSelect: IndexPath)
 }

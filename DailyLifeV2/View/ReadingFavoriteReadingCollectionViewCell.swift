@@ -11,7 +11,7 @@ import UIKit
 import SDWebImage
 
 
-protocol ReadingFavoriteCollectionViewCellDelegate{
+protocol ReadingFavoriteCollectionViewCellDelegate: class{
   func moveToWebViewController(url: String)
 }
 
@@ -24,7 +24,7 @@ class ReadingFavoriteReadingCollectionViewCell: UICollectionViewCell {
   var article: FavoriteArtilce?
   var indexPathOfDidSelectedArticle: IndexPath?
   let seeMore = "See more"
-  var delegate: ReadingFavoriteCollectionViewCellDelegate?
+  weak var delegate: ReadingFavoriteCollectionViewCellDelegate?
   
   override func awakeFromNib() {
     super.awakeFromNib()

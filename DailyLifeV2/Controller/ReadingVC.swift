@@ -17,11 +17,7 @@ class ReadingVC: UIViewController{
   var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?
   var concernedTitle: String?
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -35,6 +31,10 @@ class ReadingVC: UIViewController{
     guard let indexPath = indexPathOfDidSelectedArticle else {return}
     readingCollectionView.scrollToItem(at: indexPath
       , at: .centeredHorizontally, animated: false)
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
   
   @objc func handleMoveToWebViewViewController(notification: Notification){
@@ -73,7 +73,9 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
     NewsApiService.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
       
       DispatchQueue.main.async {
-        readingCell.articlesOfConcern = data.articles
+        let uniqueData = data.articles.uniqueValues(value: {$0.title})
+        let mustHaveImageData = uniqueData.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+        readingCell.articlesOfConcern = mustHaveImageData
         readingCell.myTableView.reloadData()
       }
     }

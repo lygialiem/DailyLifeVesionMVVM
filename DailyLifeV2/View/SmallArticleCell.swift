@@ -35,9 +35,8 @@ class SmallArticleCell: UITableViewCell {
     let subString2 = subString.replacingOccurrences(of: "Z", with: "")
     let splitSubString = subString2.split(separator: " ")
   
-    
     let timePublish = timePublishedArticle.changeFormatTime(from: "yyyy-MM-dd", to: "MMMM dd, yyyy")
-    self.myPublish.text = "\(timePublish) \(splitSubString[1])"
+    self.myPublish.text = "\(timePublish) \(String(splitSubString[1]).changeFormatTime(from: "HH:mm:ss", to: "h:mma"))"
    
     self.myTitle.text = titleArticle.capitalized
   }

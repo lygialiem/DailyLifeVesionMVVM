@@ -14,6 +14,7 @@ struct ForecastApi: Decodable{
   var current: Current?
   var forecast: Forecast?
   var error: Error?
+  
 }
 
 struct Error: Decodable{
@@ -28,6 +29,7 @@ struct Location: Decodable{
   var lat: Double?
   var lon: Double?
   var localtime_epoch: Int?
+  var localtime: String?
 }
 
 struct Current: Decodable{
@@ -85,7 +87,7 @@ struct Day: Decodable{
   var condition: ConditionDay?
   var uv: Double?
   var avghumidity: Double?
-
+  
 }
 
 struct ConditionDay: Decodable{

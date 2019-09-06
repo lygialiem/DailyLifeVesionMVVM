@@ -24,7 +24,6 @@ class ForecastVC: UIViewController {
   @IBOutlet var snipper: UIActivityIndicatorView!
   @IBOutlet var imageBackground: UIImageView!
   
-  
   var indexPathDidSelect: IndexPath?
   var forecastData: ForecastApi?
   var hourlyData: HourlyDarkSkyApi?
@@ -33,13 +32,14 @@ class ForecastVC: UIViewController {
   var scrollable = true
   
   override func viewWillAppear(_ animated: Bool) {
+    
     scrollable = false
-    
-    self.navigationController?.navigationBar.isHidden = true
-    
-    snipper.startAnimating()
+  
+   
     self.addCityBtn.isHidden = true
     self.addCityLabel.isHidden = true
+    self.navigationController?.navigationBar.isHidden = true
+    snipper.startAnimating()
     
     CoreDataServices.instance.fetchCoreDateCountryName { (name) in
       if name.isEmpty{
@@ -55,7 +55,11 @@ class ForecastVC: UIViewController {
         }
       } else {
         WeatherApiService.instance.getCountryForecastApi(nameOfCountry: name.first?.nameCD ?? "", completion: {(data) in
+        
+          self.imageBackgroundChangeBasedHour(data: data)
+          
           DispatchQueue.main.async {
+            
             self.forecastData = data
             
             self.snipper.stopAnimating()
@@ -86,7 +90,7 @@ class ForecastVC: UIViewController {
     setupTableView()
     setupSearchCityView()
     setupTapToDimiss()
-    imageBackgroundChangeBasedHour()
+   
     
     self.searchTextfield.delegate = self
     self.navigationController?.navigationBar.isHidden = true
@@ -99,50 +103,55 @@ class ForecastVC: UIViewController {
     detailTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
   
-  func imageBackgroundChangeBasedHour(){
-    let current = Date()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "H"
-    let currentHour = dateFormatter.string(from: current)
-    guard let nowHour = Int(currentHour) else {return}
+  func imageBackgroundChangeBasedHour(data: Any?){
+    guard let data = data as? ForecastApi else {return}
     
-    switch nowHour {
-    case 0..<2:
-      self.imageBackground.image = UIImage(named: "Solar Gradients1")
-    case 2..<3:
-      self.imageBackground.image = UIImage(named: "Solar Gradients2")
-    case 3..<4:
-      self.imageBackground.image = UIImage(named: "Solar Gradients3")
-    case 4..<5:
-      self.imageBackground.image = UIImage(named: "Solar Gradients4")
-    case 5..<7:
-      self.imageBackground.image = UIImage(named: "Solar Gradients5")
-    case 7..<8:
-      self.imageBackground.image = UIImage(named: "Solar Gradients6")
-    case 8..<10:
-      self.imageBackground.image = UIImage(named: "Solar Gradients7")
-    case 10..<12:
-      self.imageBackground.image = UIImage(named: "Solar Gradients8")
-    case 12..<14:
-      self.imageBackground.image = UIImage(named: "Solar Gradients9")
-    case 14..<15:
-      self.imageBackground.image = UIImage(named: "Solar Gradients10")
-    case 15..<16:
-      self.imageBackground.image = UIImage(named: "Solar Gradients11")
-    case 16..<17:
-      self.imageBackground.image = UIImage(named: "Solar Gradients12")
-    case 17..<18:
-      self.imageBackground.image = UIImage(named: "Solar Gradients13")
-    case 18..<19:
-      self.imageBackground.image = UIImage(named: "Solar Gradients14")
-    case 19..<22:
-      self.imageBackground.image = UIImage(named: "Solar Gradients15")
-    case 22...23:
-      self.imageBackground.image = UIImage(named: "Solar Gradients16")
-      
-    default:
-      break
+    guard let StringCurrentHour = data.location?.localtime?.changeFormatTime(from: "YYYY-MM-dd HH:mm", to: "H") else {return}
+    
+    let currentHour = Int(StringCurrentHour) ?? 0
+    
+    DispatchQueue.main.async {
+      switch currentHour {
+      case 0..<2:
+        self.imageBackground.image = UIImage(named: "Solar Gradients1")
+      case 2..<3:
+        self.imageBackground.image = UIImage(named: "Solar Gradients2")
+      case 3..<4:
+        self.imageBackground.image = UIImage(named: "Solar Gradients3")
+      case 4..<5:
+        self.imageBackground.image = UIImage(named: "Solar Gradients4")
+      case 5..<7:
+        self.imageBackground.image = UIImage(named: "Solar Gradients5")
+      case 7..<8:
+        self.imageBackground.image = UIImage(named: "Solar Gradients6")
+      case 8..<10:
+        self.imageBackground.image = UIImage(named: "Solar Gradients7")
+      case 10..<12:
+        self.imageBackground.image = UIImage(named: "Solar Gradients8")
+      case 12..<14:
+        self.imageBackground.image = UIImage(named: "Solar Gradients9")
+      case 14..<15:
+        self.imageBackground.image = UIImage(named: "Solar Gradients10")
+      case 15..<16:
+        self.imageBackground.image = UIImage(named: "Solar Gradients11")
+      case 16..<17:
+        self.imageBackground.image = UIImage(named: "Solar Gradients12")
+      case 17..<18:
+        self.imageBackground.image = UIImage(named: "Solar Gradients13")
+      case 18..<19:
+        self.imageBackground.image = UIImage(named: "Solar Gradients14")
+      case 19..<22:
+        self.imageBackground.image = UIImage(named: "Solar Gradients15")
+      case 22...23:
+        self.imageBackground.image = UIImage(named: "Solar Gradients16")
+        
+      default:
+        break
+      }
     }
   }
   
@@ -210,7 +219,7 @@ class ForecastVC: UIViewController {
     viewToShow.alpha = 0
     searchTextfield.becomeFirstResponder()
     
-    UIView.animate(withDuration: 0.5) {
+    UIView.animate(withDuration: 0.15) {
       self.visualEffectView.effect = self.effect
       viewToShow.alpha = 1
       viewToShow.transform = CGAffineTransform.identity
@@ -218,7 +227,7 @@ class ForecastVC: UIViewController {
   }
   
   func animationOut(_ viewToShow: UIView){
-    UIView.animate(withDuration: 0.5, animations: {
+    UIView.animate(withDuration: 0.075, animations: {
       viewToShow.alpha = 0
       self.visualEffectView.effect = nil
       self.visualEffectView.isHidden = true
@@ -570,6 +579,8 @@ extension ForecastVC: UITextFieldDelegate{
         }
       } else {
         
+        self.imageBackgroundChangeBasedHour(data: data)
+        
         DispatchQueue.main.async {
           self.forecastData = data
           self.weatherTableView.dataSource = self
@@ -592,7 +603,6 @@ extension ForecastVC: UITextFieldDelegate{
           }
         })
       }
-      
     }
     self.feedback.notificationOccurred(.success)
     self.animationOut(self.searchView)

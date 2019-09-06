@@ -32,7 +32,6 @@ class WorldClockVC: UIViewController {
     }
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -42,12 +41,16 @@ class WorldClockVC: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc func handleMoveTabbar(){
     self.tabBarController?.selectedIndex = 0
   }
   
   override func setEditing(_ editing: Bool, animated: Bool) {
-    super.setEditing(!isEditing, animated: true)
+    super.setEditing(editing, animated: true)
 
     myTableView.setEditing(!myTableView.isEditing, animated: true)
 
@@ -63,7 +66,6 @@ class WorldClockVC: UIViewController {
     NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
   }
  
-  
   @objc func handleDeleteAllButton(){
     self.navigationItem.leftBarButtonItems = [menuButton]
     self.navigationItem.rightBarButtonItem = addButton
@@ -85,7 +87,6 @@ class WorldClockVC: UIViewController {
     return userDefault
   }
   
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "listCities"{
       guard let vc = segue.destination as? ListCityTableVC else {return}
@@ -93,8 +94,6 @@ class WorldClockVC: UIViewController {
     }
   }
 }
-
-
 
 extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol moveToWebVC {
+protocol moveToWebVC: class {
   func moveToWebVCFromWeatherVC(url: String)
 }
 
@@ -25,13 +25,14 @@ class SearchForecast: UITableViewCell {
   
   @IBOutlet var headerConcernedArticle: UILabel!
   
-  var delegate: moveToWebVC?
+ weak var delegate: moveToWebVC?
   
   override func awakeFromNib() {
     super.awakeFromNib()
     self.selectionStyle = .none
+    
   }
-  
+
   @IBAction func darkSkyBtnByPressed(_ sender: Any) {
 
       self.movoToWebViewController(linkToMove: "https://darksky.net/dev")

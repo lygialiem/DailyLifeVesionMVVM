@@ -50,7 +50,6 @@
 		E79A149623086D940004D62E /* ReadingFavoriteArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A149523086D940004D62E /* ReadingFavoriteArticle.swift */; };
 		E79A149823086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A149723086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift */; };
 		E79D708B22DC50F3001125F6 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D708A22DC50F3001125F6 /* PageCell.swift */; };
-		E7B58B51231B6B1F00D3D2A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B58B50231B6B1F00D3D2A4 /* StoreKit.framework */; };
 		E7B5F7842317844300BA1387 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F7832317844300BA1387 /* SearchVC.swift */; };
 		E7B5F7AA23179BB200BA1387 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F7A923179BB200BA1387 /* TabbarController.swift */; };
 		E7B5F7AC2317E3F900BA1387 /* ForecastGPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F7AB2317E3F900BA1387 /* ForecastGPS.swift */; };
@@ -112,7 +111,6 @@
 		E79A149523086D940004D62E /* ReadingFavoriteArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingFavoriteArticle.swift; sourceTree = "<group>"; };
 		E79A149723086E700004D62E /* ReadingFavoriteReadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingFavoriteReadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		E79D708A22DC50F3001125F6 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
-		E7B58B50231B6B1F00D3D2A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E7B5F7832317844300BA1387 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		E7B5F7A923179BB200BA1387 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabbarController.swift; path = ../View/TabbarController.swift; sourceTree = "<group>"; };
 		E7B5F7AB2317E3F900BA1387 /* ForecastGPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastGPS.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B58B51231B6B1F00D3D2A4 /* StoreKit.framework in Frameworks */,
 				E72E49A423100D4900E4FA8F /* WebKit.framework in Frameworks */,
 				9C5D29B314379FA27E193C68 /* Pods_DailyLifeV2.framework in Frameworks */,
 			);
@@ -152,7 +149,6 @@
 		5FBAB8AF67ACCEA7983682EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E7B58B50231B6B1F00D3D2A4 /* StoreKit.framework */,
 				E72E49A323100D4900E4FA8F /* WebKit.framework */,
 				9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */,
 			);
@@ -313,7 +309,7 @@
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -606,7 +602,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.LGL.DailyLifeV2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LGL.Daily-Life";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -628,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.LGL.DailyLifeV2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LGL.Daily-Life";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

@@ -23,17 +23,18 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   
   override func viewDidLoad() {
     super.viewDidLoad()
-   
+    
+   setupRefreshControl()
     configureCollectionView()
     self.navigationItem.backBarButtonItem?.title = ""
     self.tabBarController?.delegate = self
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
     
-    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 10) { (articles) in
-      
+    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (articles) in
       DispatchQueue.main.async {
-        self.articles = articles.articles
+        let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
+        self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
         self.newsFeedCV.reloadData()
       }
     }
@@ -63,31 +64,16 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   func configureCollectionView(){
     newsFeedCV.delegate = self
     newsFeedCV.dataSource = self
-    setupRefreshControl()
   }
-  // Use indexOfNewArticle to insert new Article to newFeeds:
-  var indexOfNewArticle = 0
+  
   @objc func handleRefreshControl(){
-    
-    if !self.articles.isEmpty {
-      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (dataApi) in
-        for index in 0..<dataApi.articles.count{
-          if dataApi.articles[index].title != self.articles[index].title{
-            self.articles.insert(dataApi.articles[index], at: self.indexOfNewArticle)
-            self.indexOfNewArticle += 1
-          }
-        }
+      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
+        self.articles = data.articles.filter({!($0.urlToImage == nil)})
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
           self.refreshControl.endRefreshing()
-        }
+        }       
       }
-    } else {
-      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 20) { (data) in
-        self.articles = data.articles
-        self.newsFeedCV.reloadData()
-      }
-    }
   }
   
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -105,7 +91,8 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfArticles", for: indexPath) as! PageCell
-    cell.confiureCell(articles: (articles[indexPath.row]))
+    
+        cell.confiureCell(articles: self.articles[indexPath.row])
     
     // check CoreData to show the state (liked - not like) of the Button Outlet:
     var flag = 0
@@ -159,11 +146,13 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     
-    if indexPath.row == articles.count - 5{
-      let numberOfPage = 5
+    if indexPath.row == articles.count - 2{
+      let numberOfPage = 9
       if currentPage <= numberOfPage{
-        NewsApiService.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 20 ) { (dataApi) in
-          for article in dataApi.articles{
+        NewsApiService.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 7 ) { (articles) in
+          let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+          let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
+          for article in uniqueArticles{
             self.articles.append(article)
           }
           self.currentPage += 1

@@ -44,6 +44,10 @@ class MainVC: ButtonBarPagerTabStripViewController {
     setUpCoreLocation()
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   override func viewDidLoad() {
     
     temperatureButton.isEnabled = false
@@ -100,10 +104,6 @@ class MainVC: ButtonBarPagerTabStripViewController {
     NotificationCenter.default.post(name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     self.navigationController?.pushViewController(readingVc, animated: true)
     
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
   }
   
   @objc func OpenSearchVC(){

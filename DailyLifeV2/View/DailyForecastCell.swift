@@ -26,16 +26,10 @@ class DailyForecastCell: UITableViewCell {
   
   func configureCell(forecastDay: Forecastday?){
     
-//    let date = NSDate(timeIntervalSince1970: forecastDay?.date_epoch ?? 0)
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "EEEE"
     let day = (forecastDay?.date_epoch ?? 0).formatEpochTime(dateFormatType: "EEEE")
-
-    
     self.day.text = day
     
     let codeIcon = forecastDay?.day?.condition?.code ?? 0
-    
     
     WeatherApiService.instance.getIconJson { (dataJson) in
       for i in 0..<dataJson.count{

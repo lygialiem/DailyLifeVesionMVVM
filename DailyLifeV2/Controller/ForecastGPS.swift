@@ -28,8 +28,6 @@ class ForecastGPS: UITableViewController {
     
     backgroundTableViewChangeBasedHour()
     
-   
-    
   }
   
   func backgroundTableViewChangeBasedHour(){
@@ -196,7 +194,6 @@ class ForecastGPS: UITableViewController {
       return 0
     }
   }
-  
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     switch section{

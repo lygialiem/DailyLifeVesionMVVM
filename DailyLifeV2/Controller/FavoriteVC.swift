@@ -54,6 +54,7 @@ class FavoriteVC: UIViewController {
     super.viewDidLoad()
     myTableView.delegate = self
     myTableView.dataSource = self
+    myTableView.estimatedRowHeight = 100
     
     self.swiftLabel.startBlink()
     myTableView.isHidden = false
@@ -64,9 +65,14 @@ class FavoriteVC: UIViewController {
     
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc func handleMoveTabbar(){
     self.tabBarController?.selectedIndex = 0
   }
+  
   
   func removeItemAtIndexPathCoreData(atIndexPath indexPath: IndexPath, element: [FavoriteArtilce]){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -141,7 +147,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 102
+    return 100
   }
   
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -201,19 +207,14 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+   
+    let itemToMove = articlesCoreData[sourceIndexPath.row]
+      articlesCoreData.remove(at: sourceIndexPath.row)
+    articlesCoreData.insert(itemToMove, at: destinationIndexPath.row )
+  
+    
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let managed = delegate.persistentContainer.viewContext
-    
-    let temp1 = articlesCoreData[sourceIndexPath.row]
-    let temp2 = articlesCoreData[destinationIndexPath.row]
-    
-    articlesCoreData[sourceIndexPath.row] = temp2
-    articlesCoreData[destinationIndexPath.row] = temp1
-    tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-    
-    for i in 0..<articlesCoreData.count{
-      print("ARTICLE MOVED",articlesCoreData[i].title ?? "")
-    }
     
     CoreDataServices.instance.fetchCoreData { (CoreDatas) in
       for i in 0..<CoreDatas.count{
@@ -222,7 +223,6 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       do {
         try managed.save()
       } catch {
-        print("Can't save")
       }
     }
     

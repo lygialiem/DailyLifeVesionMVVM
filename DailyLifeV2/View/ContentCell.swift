@@ -23,19 +23,19 @@ class ContentCell: UITableViewCell {
 
   }
   
-  func configureContent(article: Article?){
+  func configureContent(article: Article){
     
-    guard let urlToImage = article?.urlToImage else {return}
+    guard let urlToImage = article.urlToImage else {return}
     self.imageArticle.sd_setImage(with: URL(string: urlToImage), completed: nil)
-    self.titleArticle.text = article?.title?.capitalized
-    self.authorArticle.text = article?.author
+    self.titleArticle.text = article.title?.capitalized
+    self.authorArticle.text = article.author
     
     self.contentArticle.layer.cornerRadius = 7
     self.contentArticle.delegate = self
     
     let attributedOfString = [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 15)]
     
-    guard let content = article?.content else {return}
+    guard let content = article.content else {return}
     
     let stringContent = "\(content) - \(self.seeMore)"
     let completedConent = stringContent.replacingOccurrences(of: "[", with: "(", options: String.CompareOptions.literal, range: nil)
@@ -43,7 +43,7 @@ class ContentCell: UITableViewCell {
     let finalContent = completedConent1.replacingOccurrences(of: "]", with: ")", options: String.CompareOptions.literal, range: nil)
     let attributedString = NSMutableAttributedString(string: finalContent, attributes: attributedOfString as [NSAttributedString.Key : Any])
     
-    guard let url = article?.url else {return}
+    guard let url = article.url else {return}
     attributedString.setAsLink(textToFind: self.seeMore, urlString: url)
     
     self.contentArticle.attributedText = attributedString
