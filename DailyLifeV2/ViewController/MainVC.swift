@@ -126,7 +126,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
       manager.startUpdatingLocation()
       
       self.newestLocaton = { [weak self] (location) in
-        guard let wSelf = self, let location = location else { return }
+        guard let self = self, let location = location else { return }
         
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
@@ -138,23 +138,23 @@ class MainVC: ButtonBarPagerTabStripViewController {
             guard let placeMark = placeMarks?.first else {return}
             
             let reveresGeoCoder = ReversedGeoLocation(with: placeMark)
-            self?.detailGPS = reveresGeoCoder
+            self.detailGPS = reveresGeoCoder
           }
         })
         
         WeatherApiService.instance.getWeatherApi(latitude: latitude, longitude: longitude) { (dataResponse) in
-          wSelf.dataResponseWeather?(dataResponse)
+          self.dataResponseWeather?(dataResponse)
           
-          wSelf.forecastData = dataResponse
+          self.forecastData = dataResponse
           guard let temper = dataResponse.currently?.temperature else {
             return
           }
           DispatchQueue.main.async {
-            wSelf.temperatureButton.setTitle("\(round(temper * 10) / 10)°C", for: .normal)
-             wSelf.temperatureButton.isEnabled = true
+            self.temperatureButton.setTitle("\(round(temper * 10) / 10)°C", for: .normal)
+             self.temperatureButton.isEnabled = true
           }
          
-          wSelf.manager.stopUpdatingLocation()
+          self.manager.stopUpdatingLocation()
         }
       }
     }

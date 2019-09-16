@@ -24,18 +24,22 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   override func viewDidLoad() {
     super.viewDidLoad()
     
-   setupRefreshControl()
+    setupRefreshControl()
     configureCollectionView()
     self.navigationItem.backBarButtonItem?.title = ""
     self.tabBarController?.delegate = self
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
     
-    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (articles) in
-      DispatchQueue.main.async {
+    
+    DispatchQueue.global(qos: .userInitiated).async {
+      NewsApiService.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7) { (articles) in
+        
         let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
         self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
-        self.newsFeedCV.reloadData()
+        DispatchQueue.main.async {
+          self.newsFeedCV.reloadData()
+        }
       }
     }
   }
@@ -67,13 +71,13 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   }
   
   @objc func handleRefreshControl(){
-      NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
-        self.articles = data.articles.filter({!($0.urlToImage == nil)})
-        DispatchQueue.main.async {
-          self.newsFeedCV.reloadData()
-          self.refreshControl.endRefreshing()
-        }       
+    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
+      self.articles = data.articles.filter({!($0.urlToImage == nil)})
+      DispatchQueue.main.async {
+        self.newsFeedCV.reloadData()
+        self.refreshControl.endRefreshing()
       }
+    }
   }
   
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -92,8 +96,9 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfArticles", for: indexPath) as! PageCell
     
+    DispatchQueue.main.async {
         cell.confiureCell(articles: self.articles[indexPath.row])
-    
+    }
     // check CoreData to show the state (liked - not like) of the Button Outlet:
     var flag = 0
     CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
@@ -102,7 +107,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         cell.isLikedStateButton = false
       } else{
         for i in 0..<favoriteArticlesCD.count {
-          if articles[indexPath.row].title == favoriteArticlesCD[i].titleCD{
+          if self.articles[indexPath.row].title == favoriteArticlesCD[i].titleCD{
             cell.likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
             cell.isLikedStateButton = true
           }else {

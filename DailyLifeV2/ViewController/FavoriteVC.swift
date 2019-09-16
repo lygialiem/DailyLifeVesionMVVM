@@ -15,36 +15,40 @@ class FavoriteVC: UIViewController {
   @IBOutlet var swiftLabel: UILabel!
   @IBOutlet var menuButton: UIBarButtonItem!
   
+  var favoriteArticlesViewModel = FavoriteArticlesViewModel()
+  
   let feedback = UINotificationFeedbackGenerator()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
     self.swiftLabel.stopBlink()
     self.swiftLabel.startBlink()
+    
     CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
       
-      articlesCoreData = Array(repeating: Article(), count: favoriteArticlesCD.count)
+      self.articlesCoreData = Array(repeating: Article(), count: favoriteArticlesCD.count)
       for i in 0..<favoriteArticlesCD.count{
-      
-        articlesCoreData[i].title = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].titleCD
-        articlesCoreData[i].author = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].authorCD
-        articlesCoreData[i].content = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].contentCD
-        articlesCoreData[i].description = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].descriptionCD
-        articlesCoreData[i].publishedAt = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].publishedAtCD
-        articlesCoreData[i].url = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlCD
-        articlesCoreData[i].urlToImage = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlToImageCD
+        
+        self.articlesCoreData[i].title = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].titleCD
+        self.articlesCoreData[i].author = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].authorCD
+        self.articlesCoreData[i].content = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].contentCD
+        self.articlesCoreData[i].description = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].descriptionCD
+        self.articlesCoreData[i].publishedAt = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].publishedAtCD
+        self.articlesCoreData[i].url = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlCD
+        self.articlesCoreData[i].urlToImage = favoriteArticlesCD[favoriteArticlesCD.count - 1 - i].urlToImageCD
       }
       self.myTableView.reloadData()
       if favoriteArticlesCD == []{
         self.myTableView.isHidden = true
-        self.myTableView.setEditing(myTableView.isEditing, animated: true)
-        navigationItem.leftBarButtonItems = [menuButton]
+        self.myTableView.setEditing(self.myTableView.isEditing, animated: true)
+        self.navigationItem.leftBarButtonItems = [self.menuButton]
         self.myTableView.isEditing = false
         
       } else {
         self.myTableView.isHidden = false
-        self.navigationItem.leftBarButtonItems = [menuButton,editButtonItem]
-        myTableView.setEditing(isEditing, animated: true)
+        self.navigationItem.leftBarButtonItems = [self.menuButton, self.editButtonItem]
+        self.myTableView.setEditing(self.isEditing, animated: true)
       }
       self.myTableView.reloadData()
     }
@@ -88,7 +92,7 @@ class FavoriteVC: UIViewController {
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: true)
     myTableView.setEditing(!myTableView.isEditing, animated: true)
-  
+    
     if editing{
       let deleteAllButton = UIBarButtonItem(title: "Delete All", style: .plain, target: self, action: #selector(handleDeleteAllButton))
       navigationItem.rightBarButtonItems = [deleteAllButton]
@@ -103,7 +107,7 @@ class FavoriteVC: UIViewController {
     self.myTableView.isHidden = true
     self.navigationItem.leftBarButtonItems = [menuButton]
     self.navigationItem.rightBarButtonItem = nil
- 
+    
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
     let managedContext = appDelegate.persistentContainer.viewContext
     
@@ -137,7 +141,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+    
     let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
     
     cell.configureCell(article: articlesCoreData[indexPath.row])
@@ -170,8 +174,8 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
         
         if self.articlesCoreData.isEmpty{
           self.myTableView.isHidden = true
-           self.isEditing = false
-           self.navigationItem.leftBarButtonItems = [self.menuButton]
+          self.isEditing = false
+          self.navigationItem.leftBarButtonItems = [self.menuButton]
         } else {
           self.myTableView.isHidden = false
         }
@@ -207,11 +211,11 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-   
+    
     let itemToMove = articlesCoreData[sourceIndexPath.row]
-      articlesCoreData.remove(at: sourceIndexPath.row)
+    articlesCoreData.remove(at: sourceIndexPath.row)
     articlesCoreData.insert(itemToMove, at: destinationIndexPath.row )
-  
+    
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let managed = delegate.persistentContainer.viewContext

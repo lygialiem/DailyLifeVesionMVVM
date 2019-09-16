@@ -13,7 +13,7 @@ import CoreData
 class CoreDataServices{
   static let instance =  CoreDataServices()
   
-  func fetchCoreData(completion: ([FavoriteArtilce])-> Void){
+  func fetchCoreData(completion: @escaping ([FavoriteArtilce])-> Void){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
     let managedContext = appDelegate.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<FavoriteArtilce>(entityName: "FavoriteArtilce")

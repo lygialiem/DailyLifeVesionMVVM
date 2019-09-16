@@ -16,12 +16,12 @@ class WeatherApiService{
   let weatherTitles = ["time", "summary", "latitude", "longitude", "temperature", "humidity", "pressure","nearest Storm Distance", "precip Intensity", "precip Type", "precip Probability", "dew point", "wind Bearing", "ozone",  "cloud Cover", "visibility", "UV Index"]
   
   let DARKSKY_KEY = "060b23f6abfddd1f77ad14c3968b71db"
-  let BASE_URL = "https://api.darksky.net/forecast/"
+  let DARKSKY_API = "https://api.darksky.net/forecast/"
   
-  let APIXU_KEY = "c24ce9be9f664eb29a1141134192208"
+  let APIXU_KEY = "0aa988689a294ad988852842190809"
   
   func getWeatherApi(latitude: Double, longitude: Double, completion: @escaping (DarkSkyApi) -> Void){
-    let totalUrl = URL(string: "\(BASE_URL)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
+    let totalUrl = URL(string: "\(DARKSKY_API)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
     guard let url = totalUrl else {return}
     URLSession.shared.dataTask(with: url) { (data, response, error) in
       guard let data = data else {return}
@@ -52,7 +52,7 @@ class WeatherApiService{
   }
   
   func getHourlyDarkSkyApi(latitude: Double, longitude: Double, completion: @escaping (HourlyDarkSkyApi) -> Void){
-    guard let url = URL(string: "\(self.BASE_URL)\(self.DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=daily,currently,minutely,alerts,flags&units=si") else {return}
+    guard let url = URL(string: "\(self.DARKSKY_API)\(self.DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=daily,currently,minutely,alerts,flags&units=si") else {return}
     URLSession.shared.dataTask(with: url) { (data, response, error) in
       guard let data = data else {return}
       do{

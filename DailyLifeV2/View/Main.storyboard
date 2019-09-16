@@ -2451,7 +2451,7 @@
         <scene sceneID="yjg-TH-VEN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hCK-Qc-4HJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Forecast" image="weatherIcon" id="NUB-Xk-Ino">
+                    <tabBarItem key="tabBarItem" title="Forecast" image="umbrella" id="NUB-Xk-Ino">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="15" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -2520,7 +2520,7 @@
         <image name="refresh" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="shareButton" width="25" height="25"/>
-        <image name="weatherIcon" width="25" height="25"/>
+        <image name="umbrella" width="25" height="25"/>
         <image name="worldClock" width="25" height="25"/>
     </resources>
 </document>

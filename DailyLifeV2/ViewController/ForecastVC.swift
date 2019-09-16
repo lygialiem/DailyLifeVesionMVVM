@@ -55,9 +55,10 @@ class ForecastVC: UIViewController {
         }
       } else {
         WeatherApiService.instance.getCountryForecastApi(nameOfCountry: name.first?.nameCD ?? "", completion: {(data) in
+          
         
           self.imageBackgroundChangeBasedHour(data: data)
-          
+
           DispatchQueue.main.async {
             
             self.forecastData = data
@@ -66,7 +67,10 @@ class ForecastVC: UIViewController {
             self.snipper.isHidden = true
           }
           
-          guard let lat = data?.location?.lat, let lon = data?.location?.lon else {return}
+          guard let lat = data?.location?.lat, let lon = data?.location?.lon else {
+            print("ERROR")
+            return
+          }
           WeatherApiService.instance.getHourlyDarkSkyApi(latitude: lat, longitude: lon, completion: { (data) in
             DispatchQueue.main.async {
               self.hourlyData = data

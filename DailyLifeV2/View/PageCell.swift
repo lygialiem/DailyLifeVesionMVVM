@@ -58,7 +58,7 @@ class PageCell: UICollectionViewCell {
       //delete article in CoreData:
       CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
         for i in 0..<favoriteArticlesCD.count{
-          if favoriteArticlesCD[i].titleCD == articles?.title{
+          if favoriteArticlesCD[i].titleCD == self.articles?.title{
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
             let managedContext = appDelegate.persistentContainer.viewContext
             managedContext.delete(favoriteArticlesCD[i])
