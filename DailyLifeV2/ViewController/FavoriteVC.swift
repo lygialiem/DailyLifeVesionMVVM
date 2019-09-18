@@ -25,7 +25,8 @@ class FavoriteVC: UIViewController {
     self.swiftLabel.stopBlink()
     self.swiftLabel.startBlink()
     
-    CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
+    
+    LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
       
       self.articlesCoreData = Array(repeating: Article(), count: favoriteArticlesCD.count)
       for i in 0..<favoriteArticlesCD.count{
@@ -111,7 +112,7 @@ class FavoriteVC: UIViewController {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
     let managedContext = appDelegate.persistentContainer.viewContext
     
-    CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
+    LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
       for i in 0..<favoriteArticlesCD.count{
         managedContext.delete(favoriteArticlesCD[i])
       }
@@ -167,7 +168,8 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     
     let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {(rowAction, indexPath) in
       
-      CoreDataServices.instance.fetchCoreData(completion: { (coreDatas) in
+      
+      LibraryCoreData.instance.fetchCoreData(){ (coreDatas) in
         
         self.removeItemAtIndexPathCoreData(atIndexPath: indexPath, element: coreDatas.reversed())
         self.articlesCoreData.remove(at: indexPath.row)
@@ -179,7 +181,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
         } else {
           self.myTableView.isHidden = false
         }
-      })
+      }
       
       tableView.deleteRows(at: [indexPath], with: .bottom)
       self.feedback.notificationOccurred(.success)
@@ -220,7 +222,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let managed = delegate.persistentContainer.viewContext
     
-    CoreDataServices.instance.fetchCoreData { (CoreDatas) in
+    LibraryCoreData.instance.fetchCoreData { (CoreDatas) in
       for i in 0..<CoreDatas.count{
         managed.delete(CoreDatas[i])
       }

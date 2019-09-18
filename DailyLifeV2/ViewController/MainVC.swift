@@ -142,20 +142,20 @@ class MainVC: ButtonBarPagerTabStripViewController {
           }
         })
         
-        WeatherApiService.instance.getWeatherApi(latitude: latitude, longitude: longitude) { (dataResponse) in
-          self.dataResponseWeather?(dataResponse)
+        LibraryAPI.instance.getForecast(latitude: latitude, longitude: longitude, completion: { (dataResponse) in
           
+          self.dataResponseWeather?(dataResponse)
           self.forecastData = dataResponse
+          
           guard let temper = dataResponse.currently?.temperature else {
             return
           }
           DispatchQueue.main.async {
             self.temperatureButton.setTitle("\(round(temper * 10) / 10)°C", for: .normal)
-             self.temperatureButton.isEnabled = true
+            self.temperatureButton.isEnabled = true
           }
-         
           self.manager.stopUpdatingLocation()
-        }
+        })
       }
     }
   }

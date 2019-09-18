@@ -30,8 +30,8 @@ class DailyForecastCell: UITableViewCell {
     self.day.text = day
     
     let codeIcon = forecastDay?.day?.condition?.code ?? 0
-    
-    WeatherApiService.instance.getIconJson { (dataJson) in
+  
+    LibraryAPI.instance.getIcon { (dataJson) in
       for i in 0..<dataJson.count{
         if codeIcon == dataJson[i].code{
           

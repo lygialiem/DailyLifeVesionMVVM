@@ -11,7 +11,6 @@ import CoreData
 
 
 class CoreDataServices{
-  static let instance =  CoreDataServices()
   
   func fetchCoreData(completion: @escaping ([FavoriteArtilce])-> Void){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}

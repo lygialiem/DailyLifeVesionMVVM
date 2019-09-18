@@ -56,7 +56,8 @@ class PageCell: UICollectionViewCell {
       likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
       
       //delete article in CoreData:
-      CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
+      
+      LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
         for i in 0..<favoriteArticlesCD.count{
           if favoriteArticlesCD[i].titleCD == self.articles?.title{
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}

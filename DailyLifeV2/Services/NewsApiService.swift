@@ -13,11 +13,6 @@
 import Foundation
 
 class NewsApiService{
-  static let instance = NewsApiService()
-  
-  
-  
-//  &sources=ars-technica,ary-news,associated-press,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
   let BASE_URL_SearchNEWSAPI = "https://newsapi.org/v2/everything?qInTitle="

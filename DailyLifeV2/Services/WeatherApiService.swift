@@ -11,8 +11,6 @@ import CoreLocation
 
 class WeatherApiService{
   
-  static let instance = WeatherApiService()
-  
   let weatherTitles = ["time", "summary", "latitude", "longitude", "temperature", "humidity", "pressure","nearest Storm Distance", "precip Intensity", "precip Type", "precip Probability", "dew point", "wind Bearing", "ozone",  "cloud Cover", "visibility", "UV Index"]
   
   let DARKSKY_KEY = "060b23f6abfddd1f77ad14c3968b71db"
@@ -34,7 +32,7 @@ class WeatherApiService{
       }.resume()
   }
   
-  func getCountryForecastApi(nameOfCountry: String, completion: @escaping (ForecastApi?) -> Void){
+  func getCountryForecastApi(nameOfCountry: String, completion: @escaping (ForecastApi) -> Void){
     let url = "http://api.apixu.com/v1/forecast.json?key=\(APIXU_KEY)&q=\(nameOfCountry.replacingOccurrences(of: " ", with: "%20"))&days=7"
     guard let urlRequest = URL(string: url) else {return}
     

@@ -35,13 +35,11 @@ class ForecastVC: UIViewController {
     
     scrollable = false
   
-   
     self.addCityBtn.isHidden = true
     self.addCityLabel.isHidden = true
     self.navigationController?.navigationBar.isHidden = true
     snipper.startAnimating()
-    
-    CoreDataServices.instance.fetchCoreDateCountryName { (name) in
+    LibraryCoreData.instance.fetchCoreDataCountryName { (name) in
       if name.isEmpty{
         DispatchQueue.main.async {
           self.addCityBtn.isHidden = false
@@ -54,11 +52,9 @@ class ForecastVC: UIViewController {
           self.snipper.isHidden = true
         }
       } else {
-        WeatherApiService.instance.getCountryForecastApi(nameOfCountry: name.first?.nameCD ?? "", completion: {(data) in
-          
-        
+        LibraryAPI.instance.getCountryForecast(nameOfCountry: name.first?.nameCD ?? "" ){ (data) in
           self.imageBackgroundChangeBasedHour(data: data)
-
+          
           DispatchQueue.main.async {
             
             self.forecastData = data
@@ -67,11 +63,13 @@ class ForecastVC: UIViewController {
             self.snipper.isHidden = true
           }
           
-          guard let lat = data?.location?.lat, let lon = data?.location?.lon else {
+          guard let lat = data.location?.lat, let lon = data.location?.lon else {
             print("ERROR")
             return
           }
-          WeatherApiService.instance.getHourlyDarkSkyApi(latitude: lat, longitude: lon, completion: { (data) in
+          
+          LibraryAPI.instance.getHourlyForecast(latitude: lat, longitude: lon) { (data) in
+            
             DispatchQueue.main.async {
               self.hourlyData = data
               self.weatherTableView.dataSource = self
@@ -82,8 +80,8 @@ class ForecastVC: UIViewController {
               
               self.feedback.notificationOccurred(.success)
             }
-          })
-        })
+          }
+        }
       }
     }
   }
@@ -554,7 +552,8 @@ extension ForecastVC: UITextFieldDelegate{
     self.addCityLabel.isHidden = true
     self.weatherTableView.isHidden = true
     
-    CoreDataServices.instance.fetchCoreDateCountryName { (countryName) in
+    
+    LibraryCoreData.instance.fetchCoreDataCountryName { (countryName) in
       guard (countryName.first?.nameCD) != nil else {return}
       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
       let managedContext = appDelegate.persistentContainer.viewContext
@@ -566,8 +565,9 @@ extension ForecastVC: UITextFieldDelegate{
       }
     }
     
-    WeatherApiService.instance.getCountryForecastApi(nameOfCountry: textField.text ?? "") { (data) in
-      if data?.error != nil{
+    LibraryAPI.instance.getCountryForecast(nameOfCountry: textField.text ?? "") { (data) in
+      
+      if data.error != nil{
         DispatchQueue.main.async {
           
           self.weatherTableView.dataSource = self
@@ -576,7 +576,7 @@ extension ForecastVC: UITextFieldDelegate{
           
           self.addCityBtn.isHidden = false
           self.addCityLabel.isHidden = false
-          self.addCityLabel.text = data?.error?.message?.capitalized ?? ""
+          self.addCityLabel.text = data.error?.message?.capitalized ?? ""
           
           self.snipper.stopAnimating()
           self.snipper.isHidden = true
@@ -593,21 +593,22 @@ extension ForecastVC: UITextFieldDelegate{
           self.addCityLabel.isHidden = true
         }
         
-        guard let lat = data?.location?.lat, let lon = data?.location?.lon else {return}
-        WeatherApiService.instance.getHourlyDarkSkyApi(latitude: lat, longitude: lon, completion: { (data) in
-          
+        guard let lat = data.location?.lat, let lon = data.location?.lon else {return}
+        
+        LibraryAPI.instance.getHourlyForecast(latitude: lat, longitude: lon) { (data) in
           DispatchQueue.main.async {
             self.saveCountryNameToCoreDate(nameToSave: textField.text)
-            self.weatherTableView.isHidden = false 
+            self.weatherTableView.isHidden = false
             self.weatherTableView.dataSource = self
             self.weatherTableView.reloadData()
             self.hourlyData = data
             self.snipper.stopAnimating()
             self.snipper.isHidden = true
           }
-        })
+        }
       }
     }
+    
     self.feedback.notificationOccurred(.success)
     self.animationOut(self.searchView)
     textField.resignFirstResponder()

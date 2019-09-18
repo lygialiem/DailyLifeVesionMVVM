@@ -24,7 +24,8 @@ class FavoriteArticlesViewModel {
   }
   
   func setup(){
-    CoreDataServices.instance.fetchCoreData { (data) in
+    
+    LibraryCoreData.instance.fetchCoreData { (data) in
       self.data = Array(repeating: Article(), count: data.count)
       self.configureDataFromCoreDataToStructData(data: data)
     }

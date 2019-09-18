@@ -33,14 +33,14 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     
     
     DispatchQueue.global(qos: .userInitiated).async {
-      NewsApiService.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7) { (articles) in
-        
+      
+      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
         let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
         self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
         }
-      }
+      })
     }
   }
   
@@ -101,7 +101,8 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     // check CoreData to show the state (liked - not like) of the Button Outlet:
     var flag = 0
-    CoreDataServices.instance.fetchCoreData { (favoriteArticlesCD) in
+    
+    LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
       if favoriteArticlesCD == []{
         cell.likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
         cell.isLikedStateButton = false
