@@ -71,12 +71,13 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   }
   
   @objc func handleRefreshControl(){
-    NewsApiService.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
-      self.articles = data.articles.filter({!($0.urlToImage == nil)})
-      DispatchQueue.main.async {
-        self.newsFeedCV.reloadData()
-        self.refreshControl.endRefreshing()
-      }
+    
+    LibraryAPI.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
+         self.articles = data.articles.filter({!($0.urlToImage == nil)})
+             DispatchQueue.main.async {
+               self.newsFeedCV.reloadData()
+               self.refreshControl.endRefreshing()
+             }
     }
   }
   
@@ -155,7 +156,9 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     if indexPath.row == articles.count - 2{
       let numberOfPage = 9
       if currentPage <= numberOfPage{
-        NewsApiService.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 7 ) { (articles) in
+        
+        
+        LibraryAPI.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 7 ) { (articles) in
           let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
           let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
           for article in uniqueArticles{

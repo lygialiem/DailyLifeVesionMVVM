@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C5D29B314379FA27E193C68 /* Pods_DailyLifeV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */; };
+		BBCC31B2233367E300127CCB /* Memento.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC31B1233367E300127CCB /* Memento.swift */; };
 		E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70401EF2316370C00197209 /* DetailForecastCelll.swift */; };
 		E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70492AB23014FCC0023E468 /* SideMenuCell.swift */; };
 		E70D8102230EDD1D0059D289 /* ForecastApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70D8101230EDD1D0059D289 /* ForecastApi.swift */; };
@@ -69,6 +70,7 @@
 		71B047000680A13661F4848D /* Pods-DailyLifeV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.debug.xcconfig"; sourceTree = "<group>"; };
 		86EDA4EDD397EBA02FC6B968 /* Pods-DailyLifeV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.release.xcconfig"; sourceTree = "<group>"; };
 		9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyLifeV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBCC31B1233367E300127CCB /* Memento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memento.swift; sourceTree = "<group>"; };
 		E70401EF2316370C00197209 /* DetailForecastCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCelll.swift; sourceTree = "<group>"; };
 		E70492AB23014FCC0023E468 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		E70D8101230EDD1D0059D289 /* ForecastApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApi.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				E74B26442303D2E50057684B /* Extensions.swift */,
+				BBCC31B1233367E300127CCB /* Memento.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				E7406F0A2313E090005D1C84 /* WorldClockCell.swift in Sources */,
 				E79A149623086D940004D62E /* ReadingFavoriteArticle.swift in Sources */,
 				E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */,
+				BBCC31B2233367E300127CCB /* Memento.swift in Sources */,
 				E71B22232331C2A100D1FC40 /* LibraryAPI.swift in Sources */,
 				E7FFA5EA2318C6B700ABB379 /* SmallArticleCell.swift in Sources */,
 				E71B22252331DA8900D1FC40 /* LibraryCoreData.swift in Sources */,

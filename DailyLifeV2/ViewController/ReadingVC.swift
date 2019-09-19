@@ -70,7 +70,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "readingHorizoneCell", for: indexPath) as! ReadingCollectionViewCell
     
-    NewsApiService.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
+    LibraryAPI.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
       
       DispatchQueue.main.async {
         let uniqueData = data.articles.uniqueValues(value: {$0.title})

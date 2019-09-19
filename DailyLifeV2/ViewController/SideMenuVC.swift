@@ -80,14 +80,14 @@ class SideMenuVC: UIViewController {
 extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return NewsApiService.instance.TOPIC_NEWSAPI.count
+    return LibraryAPI.instance.TOPIC_NEWSAPI.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfSideMenu", for: indexPath) as! SideMenuCell
 
-      cell.imageName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
-      cell.topicName = NewsApiService.instance.TOPIC_NEWSAPI[indexPath.row]
+      cell.imageName = LibraryAPI.instance.TOPIC_NEWSAPI[indexPath.row]
+      cell.topicName = LibraryAPI.instance.TOPIC_NEWSAPI[indexPath.row]
       return cell
   }
   
@@ -132,16 +132,6 @@ extension SideMenuVC{
   
   @IBAction func AddNewTopicButton(_ sender: Any) {
     animateAddViewIn()
-  }
-  
-  @IBAction func addButton(_ sender: Any) {
-    animateAddViewOut()
-    guard let textFieldString = myTextField.text else {return}
-    NewsApiService.instance.TOPIC_NEWSAPI.append(textFieldString.capitalized)
-    let indexPath = IndexPath(row: NewsApiService.instance.TOPIC_NEWSAPI.count - 1
-      , section: 0)
-    menuCollectionView.insertItems(at: [indexPath])
-    NotificationCenter.default.post(name: NSNotification.Name("reloadMainVC"), object: nil)
   }
   
   @IBAction func cancleButton(_ sender: Any) {

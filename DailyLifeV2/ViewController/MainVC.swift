@@ -193,10 +193,10 @@ class MainVC: ButtonBarPagerTabStripViewController {
   }
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-    for i in 0..<NewsApiService.instance.TOPIC_NEWSAPI.count{
+    for i in 0..<LibraryAPI.instance.TOPIC_NEWSAPI.count{
       let pageVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
       
-      pageVC.menuBarTitle = NewsApiService.instance.TOPIC_NEWSAPI[i]  
+      pageVC.menuBarTitle = LibraryAPI.instance.TOPIC_NEWSAPI[i]  
       pageVCArray.append(pageVC)
     }
     return pageVCArray
