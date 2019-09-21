@@ -134,6 +134,7 @@ extension SideMenuVC{
     animateAddViewIn()
   }
   
+  
   @IBAction func cancleButton(_ sender: Any) {
     myTextField.resignFirstResponder()
     animateAddViewOut()

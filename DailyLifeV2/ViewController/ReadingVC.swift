@@ -70,8 +70,8 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "readingHorizoneCell", for: indexPath) as! ReadingCollectionViewCell
     
+    
     LibraryAPI.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
-      
       DispatchQueue.main.async {
         let uniqueData = data.articles.uniqueValues(value: {$0.title})
         let mustHaveImageData = uniqueData.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
@@ -79,6 +79,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
         readingCell.myTableView.reloadData()
       }
     }
+    
     readingCell.delegate = self
     readingCell.article = articles[indexPath.row]
     

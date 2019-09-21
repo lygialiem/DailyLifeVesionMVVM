@@ -20,6 +20,8 @@ class ReadingFavoriteReadingCollectionViewCell: UICollectionViewCell {
   @IBOutlet var titleArticle: UILabel!
   @IBOutlet var contentArticle: UITextView!
   @IBOutlet var authorArticle: UILabel!
+    
+    var moveToWebView: ((String) -> Void)?
   
   var article: FavoriteArtilce?
   var indexPathOfDidSelectedArticle: IndexPath?
@@ -59,6 +61,8 @@ class ReadingFavoriteReadingCollectionViewCell: UICollectionViewCell {
 
 extension ReadingFavoriteReadingCollectionViewCell:  UITextViewDelegate{
   func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    
+    self.moveToWebView?(URL.absoluteString)
     
     delegate?.moveToWebViewController(url: URL.absoluteString)
     

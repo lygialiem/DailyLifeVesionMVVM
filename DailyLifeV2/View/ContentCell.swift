@@ -17,9 +17,8 @@ class ContentCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
 
-    
-    
     selectionStyle = UITableViewCell.SelectionStyle.none
+    contentArticle.delegate = self
 
   }
   

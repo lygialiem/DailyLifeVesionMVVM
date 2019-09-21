@@ -13,6 +13,8 @@ import SDWebImage
 class ReadingFavoriteArticle: UIViewController {
   
   @IBOutlet var myCollectionView: UICollectionView!
+    
+    let readingFavoriteCollectionViewCell = ReadingCollectionViewCell()
   
   var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?

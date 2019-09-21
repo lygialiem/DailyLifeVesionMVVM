@@ -15,10 +15,11 @@ protocol ReadingCollectionViewCellDelegate: class{
 
 class ReadingCollectionViewCell: UICollectionViewCell {
   
+  let contentCell = ContentCell()
+  
   @IBOutlet var myTableView: UITableView!
   
-  weak  var delegate: ReadingCollectionViewCellDelegate?
-  
+  weak var delegate: ReadingCollectionViewCellDelegate?
   
   var article: Article?
   var articlesOfConcern = [Article]()
@@ -29,7 +30,6 @@ class ReadingCollectionViewCell: UICollectionViewCell {
     super.awakeFromNib()
     
     setupMyTableView()
-    
   }
   
   func setupMyTableView(){
@@ -120,7 +120,6 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
 
 extension ReadingCollectionViewCell: ReadingCellDelegate{
   func didPressSeeMore(url: String) {
-    
     let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     NotificationCenter.default.post(name: NSNotification.Name("NavigateToWebViewVCFromFirstCell"), object: nil, userInfo: ["data": webViewViewController])

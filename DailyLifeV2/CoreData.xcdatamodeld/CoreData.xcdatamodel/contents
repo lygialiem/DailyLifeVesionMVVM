@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G87" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CountrySearching" representedClassName="CountrySearching" syncable="YES" codeGenerationType="class">
         <attribute name="nameCD" optional="YES" attributeType="String" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="CountrySearching"/>
+        </fetchedProperty>
     </entity>
     <entity name="FavoriteArtilce" representedClassName="FavoriteArtilce" syncable="YES" codeGenerationType="class">
         <attribute name="authorCD" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,7 +16,7 @@
         <attribute name="urlToImageCD" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CountrySearching" positionX="-63" positionY="36" width="128" height="60"/>
+        <element name="CountrySearching" positionX="-63" positionY="36" width="128" height="89"/>
         <element name="FavoriteArtilce" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

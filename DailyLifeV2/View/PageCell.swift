@@ -46,6 +46,11 @@ class PageCell: UICollectionViewCell {
     self.timePublishedArticle.text = "\(timePublish) \(String(splitSubString[1]).changeFormatTime(from: "HH:mm:ss", to: "h:mma"))"
   }
   
+  func checkLikedButtonState(article: Article){
+    
+    
+  }
+  
   @IBAction func shareButtonByPressed(_ sender: Any) {
     NotificationCenter.default.post(name: NSNotification.Name("shareAction"), object: nil, userInfo: ["data": self.articles!.url!])
   }
@@ -57,28 +62,33 @@ class PageCell: UICollectionViewCell {
       
       //delete article in CoreData:
       
-      LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
-        for i in 0..<favoriteArticlesCD.count{
-          if favoriteArticlesCD[i].titleCD == self.articles?.title{
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-            let managedContext = appDelegate.persistentContainer.viewContext
-            managedContext.delete(favoriteArticlesCD[i])
-            do{
-              try managedContext.save()
-            } catch {
-              print("Cannot Delete CoreData")
-              return
-            }
-          }
-        }
-        self.isLikedStateButton = false
+      let predicate = NSPredicate(format: "title CONTAINS[c] $letter")
+      let letter = articles?.title ?? ""
+      let favoriteArticleToDelete = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self).filter(predicate.withSubstitutionVariables(["letter" : "\(letter)"]))
+      
+      try! LibraryRealm.instance.realm.write {
+        LibraryRealm.instance.realm.delete(favoriteArticleToDelete)
       }
+      isLikedStateButton = !(isLikedStateButton)
     } else {
       likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
       
       //save new article in CoreData:
-      saveArticeToCoreData()
-      self.isLikedStateButton = true
+
+      try! LibraryRealm.instance.realm.write {
+        let favoriteAtticleToSave = FavoriteArticleRealmModel()
+        favoriteAtticleToSave.author = articles?.author ?? ""
+        favoriteAtticleToSave.content = articles?.content ?? ""
+        favoriteAtticleToSave.descriptions = articles?.description ?? ""
+        favoriteAtticleToSave.title = articles?.title ?? ""
+        favoriteAtticleToSave.url = articles?.url ?? ""
+        favoriteAtticleToSave.urlToImage = articles?.urlToImage ?? ""
+        favoriteAtticleToSave.publishedAt = articles?.publishedAt ?? ""
+        
+        LibraryRealm.instance.realm.add(favoriteAtticleToSave)
+      }
+      
+      isLikedStateButton = !(isLikedStateButton)
     }
   }
   

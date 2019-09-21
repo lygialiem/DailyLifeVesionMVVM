@@ -23,7 +23,7 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    print(LibraryRealm.instance.realm.configuration.fileURL!)
     setupRefreshControl()
     configureCollectionView()
     self.navigationItem.backBarButtonItem?.title = ""
@@ -35,8 +35,10 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     DispatchQueue.global(qos: .userInitiated).async {
       
       LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
+        
         let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
         self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+        
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
         }
@@ -73,11 +75,12 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   @objc func handleRefreshControl(){
     
     LibraryAPI.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
-         self.articles = data.articles.filter({!($0.urlToImage == nil)})
-             DispatchQueue.main.async {
-               self.newsFeedCV.reloadData()
-               self.refreshControl.endRefreshing()
-             }
+      
+      self.articles = data.articles.filter({!($0.urlToImage == nil)})
+      DispatchQueue.main.async {
+        self.newsFeedCV.reloadData()
+        self.refreshControl.endRefreshing()
+      }
     }
   }
   
@@ -98,30 +101,20 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfArticles", for: indexPath) as! PageCell
     
     DispatchQueue.main.async {
-        cell.confiureCell(articles: self.articles[indexPath.row])
+      cell.confiureCell(articles: self.articles[indexPath.row])
     }
-    // check CoreData to show the state (liked - not like) of the Button Outlet:
-    var flag = 0
+  
+    cell.likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
+    cell.isLikedStateButton = false
     
-    LibraryCoreData.instance.fetchCoreData { (favoriteArticlesCD) in
-      if favoriteArticlesCD == []{
-        cell.likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
-        cell.isLikedStateButton = false
-      } else{
-        for i in 0..<favoriteArticlesCD.count {
-          if self.articles[indexPath.row].title == favoriteArticlesCD[i].titleCD{
-            cell.likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
-            cell.isLikedStateButton = true
-          }else {
-            flag += 1
-          }
-          if flag > favoriteArticlesCD.count - 1{
-            cell.likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
-            cell.isLikedStateButton = false
-          }
+    let favoriteArticles = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
+      favoriteArticles.forEach { (article) in
+        if article.title == self.articles[indexPath.row].title{
+          cell.likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
+          cell.isLikedStateButton = true
         }
       }
-    }
+    
     return cell
   }
   
@@ -138,7 +131,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     guard let storyboard = self.storyboard else { return }
     let readingVC = storyboard.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
-   
+    
     readingVC.articles = self.articles
     readingVC.indexPathOfDidSelectedArticle = indexPath
     readingVC.concernedTitle = menuBarTitle
@@ -157,8 +150,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
       let numberOfPage = 9
       if currentPage <= numberOfPage{
         
-        
-        LibraryAPI.instance.getArticles(topic: menuBarTitle , page: currentPage, numberOfArticles: 7 ) { (articles) in
+        LibraryAPI.instance.getArticles(topic: menuBarTitle, page: currentPage, numberOfArticles: 7) { (articles) in
           let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
           let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
           for article in uniqueArticles{

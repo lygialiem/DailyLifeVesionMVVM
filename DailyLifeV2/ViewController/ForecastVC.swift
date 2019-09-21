@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import MMDB_Swift
 
 class ForecastVC: UIViewController {
   
@@ -292,7 +291,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
       }
     }
   }
-  
+   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if tableView.tag == 0{
@@ -321,6 +320,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         
       case 4:
         let detailForecastCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+        
         switch indexPath.row{
         case 0:
           

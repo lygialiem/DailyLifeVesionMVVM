@@ -13,7 +13,7 @@ target 'DailyLifeV2' do
   pod 'SDWebImage', '~> 5.0'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'MMDB-Swift'
   pod 'PanModal'
+  pod 'RealmSwift'
 
 end
