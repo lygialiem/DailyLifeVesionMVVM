@@ -268,10 +268,10 @@
 			isa = PBXGroup;
 			children = (
 				E71B22222331C2A100D1FC40 /* LibraryAPI.swift */,
-				E71B22242331DA8900D1FC40 /* LibraryCoreData.swift */,
 				E70821822335C9ED00E75AEB /* LibraryRealm.swift */,
-				E7C8E37122C3BC5E00235DA5 /* NewsApiService.swift */,
+				E71B22242331DA8900D1FC40 /* LibraryCoreData.swift */,
 				E79A148D23080E3E0004D62E /* CoreDataService.swift */,
+				E7C8E37122C3BC5E00235DA5 /* NewsApiService.swift */,
 				E76A604C230BDBB000B3E4A3 /* WeatherApiService.swift */,
 			);
 			path = Services;

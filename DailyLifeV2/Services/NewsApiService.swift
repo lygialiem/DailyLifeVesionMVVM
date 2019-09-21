@@ -11,8 +11,11 @@
 //Long: 2173e6f5b41e4cb7b3892eb3ace459c5
 //Liem: c3aa57a429a6432a9485160edf25e526
 import Foundation
+import Alamofire
 
 class NewsApiService{
+  
+  static var instance = NewsApiService()
   
   let BASE_URL_NEWSAPI = "https://newsapi.org/v2/everything?q="
   let BASE_URL_SearchNEWSAPI = "https://newsapi.org/v2/everything?qInTitle="
@@ -21,24 +24,41 @@ class NewsApiService{
   var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
   func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
-    
     let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&sources=ars-technica,ary-news,time,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge"
     
-    guard let url = URL(string: totalUrl) else {return}
-    URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
-      guard let data = dataApi else {return}
-      do{
-        let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
-        completion(dataDecode)
-      } catch let jsonError{
-        debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)
+    Alamofire.request(totalUrl).validate().responseJSON { (response) in
+      if response.result.error == nil{
+        guard let data = response.data else {return}
+        do {
+          let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
+          completion(dataDecode)
+        }catch let jsonDecodeError{
+          debugPrint(jsonDecodeError.localizedDescription)
+        }
+      } else {
+        debugPrint(response.result.error?.localizedDescription ?? "")
       }
-      }.resume()
+    }
   }
-  
+ 
   func getSearchArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
     let totalUrl =  "\(BASE_URL_SearchNEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)"
+    
+    Alamofire.request(totalUrl).validate().responseJSON { (response) in
+      if response.result.error == nil{
+        guard let data = response.data else { return }
+        do{
+          let jsonDecode = try JSONDecoder().decode(NewsApi.self, from: data)
+          completion(jsonDecode)
+        }catch let jsonError{
+          debugPrint(jsonError.localizedDescription)
+        }
+      }else{
+        debugPrint(response.result.error?.localizedDescription ?? "Error")
+      }
+    }
+    
     guard let url = URL(string: totalUrl) else {return}
     URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
       guard let data = dataApi else {return}
@@ -52,3 +72,20 @@ class NewsApiService{
       }.resume()
   }
 }
+
+
+//  func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
+//
+//    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&sources=ars-technica,ary-news,time,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge"
+//
+//    guard let url = URL(string: totalUrl) else {return}
+//    URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
+//      guard let data = dataApi else {return}
+//      do{
+//        let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
+//        completion(dataDecode)
+//      } catch let jsonError{
+//        debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)
+//      }
+//      }.resume()
+//  }

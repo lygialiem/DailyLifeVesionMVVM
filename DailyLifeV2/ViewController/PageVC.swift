@@ -35,7 +35,6 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     DispatchQueue.global(qos: .userInitiated).async {
       
       LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
-        
         let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
         self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
         
@@ -43,6 +42,16 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
           self.newsFeedCV.reloadData()
         }
       })
+      
+//      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
+//
+//        let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
+//        self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+//
+//        DispatchQueue.main.async {
+//          self.newsFeedCV.reloadData()
+//        }
+//      })
     }
   }
   
