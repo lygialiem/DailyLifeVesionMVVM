@@ -107,19 +107,18 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfArticles", for: indexPath) as! PageCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellOfArticles, for: indexPath) as! PageCell
     
     DispatchQueue.main.async {
       cell.confiureCell(articles: self.articles[indexPath.row])
     }
-  
-    cell.likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
+    cell.likeButton.setImage(R.image.greenLikeButton(), for: .normal)
     cell.isLikedStateButton = false
     
     let favoriteArticles = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
       favoriteArticles.forEach { (article) in
         if article.title == self.articles[indexPath.row].title{
-          cell.likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
+            cell.likeButton.setImage(R.image.redLikeButton(), for: .normal)
           cell.isLikedStateButton = true
         }
       }
@@ -164,11 +163,9 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
           let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
           for article in uniqueArticles{
             self.articles.append(article)
+            collectionView.insertItems(at: [IndexPath(row: self.articles.count - 1, section: indexPath.section)])
           }
           self.currentPage += 1
-          DispatchQueue.main.async {
-            self.newsFeedCV.reloadData()
-          }
         }
       }
     }

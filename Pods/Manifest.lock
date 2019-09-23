@@ -1,6 +1,9 @@
 PODS:
   - Alamofire (4.8.2)
   - PanModal (1.2.4)
+  - R.swift (5.0.3):
+    - R.swift.Library (~> 5.0.0)
+  - R.swift.Library (5.0.1)
   - Realm (3.17.3):
     - Realm/Headers (= 3.17.3)
   - Realm/Headers (3.17.3)
@@ -21,6 +24,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - PanModal
+  - R.swift
   - RealmSwift
   - RxCocoa
   - RxSwift
@@ -32,6 +36,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - PanModal
+    - R.swift
+    - R.swift.Library
     - Realm
     - RealmSwift
     - RxCocoa
@@ -44,6 +50,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   PanModal: 275f6d4d07565ddf4ed16d7be5d9cd275682d80d
+  R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
+  R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
   Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
   RealmSwift: b7fdc2d18616621c31df5c7a398a45a2163f8eb0
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
@@ -53,6 +61,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: a0fa450f1e50774466a57beadb82a2a228696221
+PODFILE CHECKSUM: cf29c9b5c91c779bcea464ccb8c31c28f42c7c17
 
 COCOAPODS: 1.5.2

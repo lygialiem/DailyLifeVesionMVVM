@@ -100,8 +100,8 @@ class ForecastVC: UIViewController {
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
     
-    weatherTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
-    detailTableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
+    weatherTableView.register(R.nib.detailForecastCell)
+    detailTableView.register(R.nib.detailForecastCell)
   }
   
   deinit {
@@ -118,37 +118,37 @@ class ForecastVC: UIViewController {
     DispatchQueue.main.async {
       switch currentHour {
       case 0..<2:
-        self.imageBackground.image = UIImage(named: "Solar Gradients1")
+        self.imageBackground.image = R.image.solarGradients1()
       case 2..<3:
-        self.imageBackground.image = UIImage(named: "Solar Gradients2")
+        self.imageBackground.image = R.image.solarGradients2()
       case 3..<4:
-        self.imageBackground.image = UIImage(named: "Solar Gradients3")
+        self.imageBackground.image = R.image.solarGradients3()
       case 4..<5:
-        self.imageBackground.image = UIImage(named: "Solar Gradients4")
+        self.imageBackground.image = R.image.solarGradients4()
       case 5..<7:
-        self.imageBackground.image = UIImage(named: "Solar Gradients5")
+        self.imageBackground.image = R.image.solarGradients5()
       case 7..<8:
-        self.imageBackground.image = UIImage(named: "Solar Gradients6")
+       self.imageBackground.image = R.image.solarGradients6()
       case 8..<10:
-        self.imageBackground.image = UIImage(named: "Solar Gradients7")
+        self.imageBackground.image = R.image.solarGradients7()
       case 10..<12:
-        self.imageBackground.image = UIImage(named: "Solar Gradients8")
+       self.imageBackground.image = R.image.solarGradients8()
       case 12..<14:
-        self.imageBackground.image = UIImage(named: "Solar Gradients9")
+        self.imageBackground.image = R.image.solarGradients9()
       case 14..<15:
-        self.imageBackground.image = UIImage(named: "Solar Gradients10")
+        self.imageBackground.image = R.image.solarGradients10()
       case 15..<16:
-        self.imageBackground.image = UIImage(named: "Solar Gradients11")
+        self.imageBackground.image = R.image.solarGradients11()
       case 16..<17:
-        self.imageBackground.image = UIImage(named: "Solar Gradients12")
+        self.imageBackground.image = R.image.solarGradients12()
       case 17..<18:
-        self.imageBackground.image = UIImage(named: "Solar Gradients13")
+        self.imageBackground.image = R.image.solarGradients13()
       case 18..<19:
-        self.imageBackground.image = UIImage(named: "Solar Gradients14")
+        self.imageBackground.image = R.image.solarGradients14()
       case 19..<22:
-        self.imageBackground.image = UIImage(named: "Solar Gradients15")
+        self.imageBackground.image = R.image.solarGradients15()
       case 22...23:
-        self.imageBackground.image = UIImage(named: "Solar Gradients16")
+        self.imageBackground.image = R.image.solarGradients16()
         
       default:
         break
@@ -297,12 +297,11 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
     if tableView.tag == 0{
       switch indexPath.section{
       case 0:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! CityForecastCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cell0, for: indexPath)!
         cell.configureCell(forecast: self.forecastData)
         return cell
       case 1:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! ForecastHourTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cell1, for: indexPath)!
         cell.hourlyData = self.hourlyData
         cell.forecastHourlyCollectionView.dataSource = cell
         DispatchQueue.main.async {
@@ -310,16 +309,16 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         }
         return cell
       case 2:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! DailyForecastCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:R.reuseIdentifier.cell2, for: indexPath)!
         cell.configureCell(forecastDay: self.forecastData?.forecast?.forecastday?[indexPath.row])
         return cell
       case 3:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! SummaryForecastCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:R.reuseIdentifier.cell3, for: indexPath)!
         cell.summary.text = "Today: \(forecastData?.current?.condition?.text ?? "") currently. The high temperature will be \((forecastData?.forecast?.forecastday?[0].day?.maxtemp_c ?? 0).roundInt())ºC. Cloudy tonight with a low temperature of \(String(describing: (forecastData?.forecast?.forecastday?[0].day?.mintemp_c ?? 0).roundInt()))ºC"
         return cell
         
       case 4:
-        let detailForecastCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+        let detailForecastCell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.detailForecastCell, for: indexPath)!
         
         switch indexPath.row{
         case 0:
@@ -373,16 +372,17 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
       }
     } else if tableView.tag == 1  {
-      let detailDailyForecasrCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+        let detailDailyForecasrCell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
       guard let indexPathDidSelected = indexPathDidSelect else {return UITableViewCell()}
       switch indexPath.row{
       case 0:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell") as! DetailForecastCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.dateCell, for: indexPath)!
         guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
         cell.dateForecast.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].date ?? "").changeFormatTime(from: "YYYY-MM-dd", to: "MMMM dd, YYYY"))"
         return cell
+        
       case 1:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! DetailForecastCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.summaryCell, for: indexPath)!
         guard let indexPath = indexPathDidSelect else {return UITableViewCell()}
         cell.summary.text = "\((forecastData?.forecast?.forecastday?[indexPath.row].day?.condition?.text ?? "").capitalized)"
         return cell
@@ -440,6 +440,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
     if tableView.tag == 0{
       switch section {
       case 0:
+        
         let header = tableView.dequeueReusableCell(withIdentifier: "header0")
         return header
       case 1:
@@ -455,8 +456,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
         header.summaryTitleHeader.text = "Summary"
         return header
       case 4:
-        let header = tableView.dequeueReusableCell(withIdentifier: "header4") as!
-        SearchForecast
+        let header = tableView.dequeueReusableCell(withIdentifier: "header4") as! SearchForecast
         header.detailTitleHeader.text = "Detail"
         return header
       case 5:

@@ -84,7 +84,7 @@ extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellOfSideMenu", for: indexPath) as! SideMenuCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellOfSideMenu, for: indexPath)!
 
       cell.imageName = LibraryAPI.instance.TOPIC_NEWSAPI[indexPath.row]
       cell.topicName = LibraryAPI.instance.TOPIC_NEWSAPI[indexPath.row]

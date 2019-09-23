@@ -88,9 +88,9 @@ class WorldClockVC: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "listCities"{
-      guard let vc = segue.destination as? ListCityTableVC else {return}
-      vc.delegate = self
+    if let typeInfo = R.segue.worldClockVC.listCities(segue: segue){
+       let vc = typeInfo.destination
+        vc.delegate = self
     }
   }
 }
@@ -110,7 +110,7 @@ extension WorldClockVC: UITableViewDelegate, UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell") as! WorldClockCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cityCell, for: indexPath)!
     switch indexPath.section{
     case 0:
       cell.idTimezone = "GMT"

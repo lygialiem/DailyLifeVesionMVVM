@@ -31,7 +31,7 @@ class TabbarController: UITabBar {
   func setupMiddleButton() {
     middleButton.frame.size = CGSize(width: 60, height: 60)
     middleButton.backgroundColor = #colorLiteral(red: 0.1568430364, green: 0.1568765342, blue: 0.1568385959, alpha: 1)
-    middleButton.setImage(UIImage(named: "search"), for: .normal)
+    middleButton.setImage(R.image.search(), for: .normal)
     middleButton.layer.cornerRadius = middleButton.frame.width / 2
     middleButton.layer.masksToBounds = true
     middleButton.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 0)

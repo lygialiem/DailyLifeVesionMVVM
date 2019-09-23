@@ -66,7 +66,7 @@ class FavoriteVC: UIViewController {
     navigationController?.title = "Liked Contents"
     
     NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
-    myTableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
+    myTableView.register(R.nib.smallArticleCell)
     
   }
   
@@ -136,7 +136,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
     DispatchQueue.main.async {
       cell.configureCell(article: self.articlesCoreData[indexPath.row])
     }

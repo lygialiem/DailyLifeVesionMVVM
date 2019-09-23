@@ -15,5 +15,6 @@ target 'DailyLifeV2' do
   pod 'RxCocoa'
   pod 'PanModal'
   pod 'RealmSwift'
+  pod 'R.swift'
 
 end

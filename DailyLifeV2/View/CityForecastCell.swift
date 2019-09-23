@@ -54,11 +54,11 @@ class CityForecastCell: UITableViewCell {
     
     if currentHour >= 5 && currentHour < 19{
       DispatchQueue.main.async {
-        self.sunMoonImage.image = UIImage(named: "day/Sun")
+        self.sunMoonImage.image = R.image.day.sun()
       }
     }else {
       DispatchQueue.main.async {
-        self.sunMoonImage.image = UIImage(named: "night/moon")
+         self.sunMoonImage.image = R.image.night.moon()
       }
     }
   }

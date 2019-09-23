@@ -39,37 +39,37 @@ class ForecastGPS: UITableViewController {
     
     switch nowHour {
     case 0..<2:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients1"))
+        tableView.backgroundView = UIImageView(image: R.image.solarGradients1(compatibleWith: nil))
     case 2..<3:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients2"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients2(compatibleWith: nil))
     case 3..<4:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients3"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients3(compatibleWith: nil))
     case 4..<5:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients4"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients4(compatibleWith: nil))
     case 5..<7:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients5"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients5(compatibleWith: nil))
     case 7..<8:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients6"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients6(compatibleWith: nil))
     case 8..<10:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients7"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients7(compatibleWith: nil))
     case 10..<12:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients8"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients8(compatibleWith: nil))
     case 12..<14:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients9"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients9(compatibleWith: nil))
     case 14..<15:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients10"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients10(compatibleWith: nil))
     case 15..<16:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients11"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients11(compatibleWith: nil))
     case 16..<17:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients12"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients12(compatibleWith: nil))
     case 17..<18:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients13"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients13(compatibleWith: nil))
     case 18..<19:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients14"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients14(compatibleWith: nil))
     case 19..<22:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients15"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients15(compatibleWith: nil))
     case 22...23:
-      tableView.backgroundView = UIImageView(image: UIImage(named: "Solar Gradients16"))
+      tableView.backgroundView = UIImageView(image: R.image.solarGradients16(compatibleWith: nil))
       
     default:
       break
@@ -92,14 +92,13 @@ class ForecastGPS: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.section {
     case 0:
-      
       switch indexPath.row{
       case 0:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell") as! Title_Sumary_Daily_Forecast
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.titleCell, for: indexPath)!
         cell.titleCell.text = "GPS Forecast Weather"
         return cell
       case 1:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "sumaryCell") as! Title_Sumary_Daily_Forecast
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.sumaryCell, for: indexPath)!
         
         DispatchQueue.main.async {
           cell.tempSumary.text = "\((self.dataForecast?.currently?.temperature ?? 0).roundInt())ºC"
@@ -108,7 +107,7 @@ class ForecastGPS: UITableViewController {
         }
         return cell
       case 2:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dailyForecast") as! DailyForecaseSearch
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.dailyForecast, for: indexPath)!
         cell.dailyForecast = dataForecast?.daily
         cell.myCollectionView.reloadData()
         return cell
@@ -116,7 +115,7 @@ class ForecastGPS: UITableViewController {
       }
       
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "DetailForecastCell") as! DetailForecastCelll
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.detailForecastCell, for: indexPath)!
       switch indexPath.row{
       case 0:
         cell.title1.text = "Latitude"

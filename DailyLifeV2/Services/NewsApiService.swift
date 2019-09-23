@@ -72,20 +72,3 @@ class NewsApiService{
       }.resume()
   }
 }
-
-
-//  func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
-//
-//    let totalUrl =  "\(BASE_URL_NEWSAPI)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(API_KEY_NEWSAPI)&sortBy=publishedAt&page=\(page)&sources=ars-technica,ary-news,time,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge"
-//
-//    guard let url = URL(string: totalUrl) else {return}
-//    URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
-//      guard let data = dataApi else {return}
-//      do{
-//        let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
-//        completion(dataDecode)
-//      } catch let jsonError{
-//        debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)
-//      }
-//      }.resume()
-//  }
