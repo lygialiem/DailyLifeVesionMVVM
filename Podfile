@@ -16,5 +16,6 @@ target 'DailyLifeV2' do
   pod 'PanModal'
   pod 'RealmSwift'
   pod 'R.swift'
+pod 'GoogleAnalytics'
 
 end

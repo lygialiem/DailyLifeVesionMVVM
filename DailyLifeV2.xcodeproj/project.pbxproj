@@ -186,6 +186,7 @@
 		E71F710B22C267D60050B506 /* DailyLifeV2 */ = {
 			isa = PBXGroup;
 			children = (
+				E71F710C22C267D60050B506 /* AppDelegate.swift */,
 				E74B26432303D2BB0057684B /* Helper */,
 				E71F712122C26B300050B506 /* Services */,
 				E71F712022C26B240050B506 /* Model */,
@@ -194,7 +195,6 @@
 				E71F711F22C26B1E0050B506 /* View */,
 				E71F711322C267D80050B506 /* Assets.xcassets */,
 				E71F711822C267D80050B506 /* Info.plist */,
-				E71F710C22C267D60050B506 /* AppDelegate.swift */,
 				E79A148A23080A9C0004D62E /* CoreData.xcdatamodeld */,
 			);
 			path = DailyLifeV2;

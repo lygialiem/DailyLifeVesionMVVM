@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## GoogleAnalytics
+
+Copyright 2016 Google
+
 ## PanModal
 
 Copyright © 2018 Tiny Speck, Inc.

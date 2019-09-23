@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - GoogleAnalytics (3.17.0)
   - PanModal (1.2.4)
   - R.swift (5.0.3):
     - R.swift.Library (~> 5.0.0)
@@ -23,6 +24,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - GoogleAnalytics
   - PanModal
   - R.swift
   - RealmSwift
@@ -35,6 +37,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - GoogleAnalytics
     - PanModal
     - R.swift
     - R.swift.Library
@@ -49,6 +52,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   PanModal: 275f6d4d07565ddf4ed16d7be5d9cd275682d80d
   R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
   R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
@@ -61,6 +65,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: cf29c9b5c91c779bcea464ccb8c31c28f42c7c17
+PODFILE CHECKSUM: aa5bac171ed35446d4c035bb5566b4e75f37cf33
 
 COCOAPODS: 1.5.2

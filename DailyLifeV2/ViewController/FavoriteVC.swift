@@ -37,7 +37,6 @@ class FavoriteVC: UIViewController {
       self.navigationItem.leftBarButtonItems = [self.menuButton]
       self.myTableView.isEditing = false
     } else {
-      
       self.articlesCoreData = Array(repeating: Article(), count: favoriteArticles.count)
       for i in 0..<favoriteArticles.count{
         
@@ -54,7 +53,12 @@ class FavoriteVC: UIViewController {
       self.navigationItem.leftBarButtonItems = [self.menuButton, self.editButtonItem]
       self.myTableView.setEditing(self.isEditing, animated: true)
     }
+    
+    DispatchQueue.main.async {
+        self.myTableView.reloadData()
+    }
   }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     myTableView.delegate = self
@@ -149,9 +153,16 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    
     return true
   }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.navigationItem.leftBarButtonItems = [menuButton]
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        self.navigationItem.leftBarButtonItems = [menuButton, editButtonItem]
+    }
 
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     return .delete
@@ -224,7 +235,7 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
     
     let itemToMove = articlesCoreData[sourceIndexPath.row]
     articlesCoreData.remove(at: sourceIndexPath.row)
-    articlesCoreData.insert(itemToMove, at: destinationIndexPath.row )
+    articlesCoreData.insert(itemToMove, at: destinationIndexPath.row)
     
     let favorArticles = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
     try! LibraryRealm.instance.realm.write {

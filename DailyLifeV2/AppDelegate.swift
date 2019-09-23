@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     location.requestWhenInUseAuthorization()
-//
+
 //    locationService.newestLocaton = {(location) in
 //      guard let location = location else {return}
 //      print("Location is: ", location)
