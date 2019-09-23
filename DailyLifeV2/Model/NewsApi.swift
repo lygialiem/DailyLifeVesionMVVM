@@ -25,16 +25,6 @@ struct Article: Decodable, Hashable{
   var urlToImage: String?
   var publishedAt: String?
   var content: String?
-//  
-//  init(author: String, title: String, content: String, publishedAt: String, description: String, url: String, urlToImage: String){
-//    self.author = author
-//    self.title = title
-//    self.content = content
-//    self.publishedAt = publishedAt
-//    self.description = description
-//    self.urlToImage = urlToImage
-//    self.url = url
-//  }
 }
 
 struct Source: Decodable, Hashable{
