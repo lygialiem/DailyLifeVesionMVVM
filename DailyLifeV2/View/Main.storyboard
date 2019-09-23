@@ -132,9 +132,9 @@
                         <viewLayoutGuide key="safeArea" id="HBb-Gy-SuJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Menu" id="nYH-OM-9b5">
-                        <barButtonItem key="rightBarButtonItem" style="done" id="s5X-3b-cxk">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MO0-cl-gLJ">
-                                <rect key="frame" x="309" y="0.0" width="50" height="44"/>
+                        <barButtonItem key="rightBarButtonItem" image="moveright" style="done" id="s5X-3b-cxk">
+                            <button key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="MO0-cl-gLJ">
+                                <rect key="frame" x="309" y="0.0" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="moveright"/>
                                 <connections>
@@ -291,10 +291,15 @@
                         <viewLayoutGuide key="safeArea" id="oJs-i4-0K8"/>
                     </view>
                     <navigationItem key="navigationItem" title="Daily Life" id="IpA-JW-NgR">
-                        <barButtonItem key="leftBarButtonItem" image="move" id="3WX-IN-f8K">
-                            <connections>
-                                <action selector="openMenuPressed:" destination="uiX-c5-hpz" id="FKR-Zw-Uzb"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="4hx-1N-4xr">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VEn-JM-7K7">
+                                <rect key="frame" x="16" y="0.0" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="move"/>
+                                <connections>
+                                    <action selector="openMenuPressed:" destination="uiX-c5-hpz" eventType="touchUpInside" id="G1N-ut-kh0"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" width="50" style="done" id="O3z-N0-sUK">
                             <view key="customView" contentMode="scaleToFill" id="KGp-J2-cyF">
@@ -1831,9 +1836,9 @@
                         <viewLayoutGuide key="safeArea" id="CYR-DZ-Afe"/>
                     </view>
                     <navigationItem key="navigationItem" title="World Clock" id="EPb-BJ-tML">
-                        <barButtonItem key="leftBarButtonItem" image="move" id="qRE-cR-Od5">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U2Q-as-edR">
-                                <rect key="frame" x="16" y="0.0" width="50" height="44"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="qRE-cR-Od5">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U2Q-as-edR">
+                                <rect key="frame" x="16" y="0.0" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="move"/>
                                 <connections>
@@ -2064,8 +2069,8 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Liked Contents" id="2cB-wk-QBv">
                         <barButtonItem key="leftBarButtonItem" image="move" id="irK-A8-fih">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NNC-KF-LJX">
-                                <rect key="frame" x="16" y="0.0" width="50" height="44"/>
+                            <button key="customView" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NNC-KF-LJX">
+                                <rect key="frame" x="16" y="0.0" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="move"/>
                                 <connections>
