@@ -20,7 +20,7 @@ struct Section {
 class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   
   var filterContents = [Section]()
- weak var delegate: WordClockDidSelect?
+weak var delegate: WordClockDidSelect?
   
   let searchController = UISearchController(searchResultsController: nil)
   
@@ -90,7 +90,7 @@ class ListCityTableVC: UITableViewController, UISearchResultsUpdating{
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! listCityNameCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cityListCell, for: indexPath)!
     
     if isFiltering(){
       cell.nameTItle.text = filterContents[indexPath.section].names[indexPath.row].replacingOccurrences(of: "_", with: " ")

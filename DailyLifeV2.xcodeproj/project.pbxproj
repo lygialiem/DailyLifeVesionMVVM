@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C5D29B314379FA27E193C68 /* Pods_DailyLifeV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */; };
+		BB30249623385F1B00E4D2F7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30249523385F1B00E4D2F7 /* R.generated.swift */; };
 		E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70401EF2316370C00197209 /* DetailForecastCelll.swift */; };
 		E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70492AB23014FCC0023E468 /* SideMenuCell.swift */; };
 		E70821832335C9ED00E75AEB /* LibraryRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70821822335C9ED00E75AEB /* LibraryRealm.swift */; };
@@ -71,6 +72,7 @@
 		71B047000680A13661F4848D /* Pods-DailyLifeV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.debug.xcconfig"; sourceTree = "<group>"; };
 		86EDA4EDD397EBA02FC6B968 /* Pods-DailyLifeV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.release.xcconfig"; sourceTree = "<group>"; };
 		9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyLifeV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB30249523385F1B00E4D2F7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		E70401EF2316370C00197209 /* DetailForecastCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCelll.swift; sourceTree = "<group>"; };
 		E70492AB23014FCC0023E468 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		E70821822335C9ED00E75AEB /* LibraryRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRealm.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		E71F710B22C267D60050B506 /* DailyLifeV2 */ = {
 			isa = PBXGroup;
 			children = (
+				E71F710C22C267D60050B506 /* AppDelegate.swift */,
 				E74B26432303D2BB0057684B /* Helper */,
 				E71F712122C26B300050B506 /* Services */,
 				E71F712022C26B240050B506 /* Model */,
@@ -192,7 +195,6 @@
 				E71F711F22C26B1E0050B506 /* View */,
 				E71F711322C267D80050B506 /* Assets.xcassets */,
 				E71F711822C267D80050B506 /* Info.plist */,
-				E71F710C22C267D60050B506 /* AppDelegate.swift */,
 				E79A148A23080A9C0004D62E /* CoreData.xcdatamodeld */,
 			);
 			path = DailyLifeV2;
@@ -281,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				E74B26442303D2E50057684B /* Extensions.swift */,
+				BB30249523385F1B00E4D2F7 /* R.generated.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildConfigurationList = E71F711B22C267D80050B506 /* Build configuration list for PBXNativeTarget "DailyLifeV2" */;
 			buildPhases = (
 				C2D77A7D30A77A68A1D34997 /* [CP] Check Pods Manifest.lock */,
+				BB30249423385E1F00E4D2F7 /* ShellScript */,
 				E71F710522C267D60050B506 /* Sources */,
 				E71F710622C267D60050B506 /* Frameworks */,
 				E71F710722C267D60050B506 /* Resources */,
@@ -379,6 +383,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -392,6 +397,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanModal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -405,6 +411,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BB30249423385E1F00E4D2F7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
 		C2D77A7D30A77A68A1D34997 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -439,6 +464,7 @@
 				E79A148E23080E3E0004D62E /* CoreDataService.swift in Sources */,
 				E714E6F323180ABA00A0B5CE /* DailyForecaseSearch.swift in Sources */,
 				E77487402312D9290096C1D8 /* DetailForecastCell.swift in Sources */,
+				BB30249623385F1B00E4D2F7 /* R.generated.swift in Sources */,
 				E79A149423085F390004D62E /* FavoriteVC.swift in Sources */,
 				E778DF732307A73100B1C532 /* ContentCell.swift in Sources */,
 				E71F712722C284630050B506 /* PageVC.swift in Sources */,

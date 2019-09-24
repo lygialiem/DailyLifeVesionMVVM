@@ -26,7 +26,7 @@ class SearchVC: UITableViewController{
     self.mySearchBar.backgroundColor = .black
     self.mySearchBar.barStyle = .black
     self.mySearchBar.placeholder = self.getUserDefault().replacingOccurrences(of: "%20", with: " ")
-    self.tableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
+    self.tableView.register(R.nib.smallArticleCell)
     
     let topic = self.getUserDefault()
     
@@ -100,7 +100,7 @@ class SearchVC: UITableViewController{
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell") as! SmallArticleCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
     
     DispatchQueue.main.async {
       cell.configureCell(article: self.articles[indexPath.row])
@@ -109,7 +109,6 @@ class SearchVC: UITableViewController{
     return cell
   }
 }
-
 
 extension SearchVC: PanModalPresentable{
   var panScrollable: UIScrollView?{

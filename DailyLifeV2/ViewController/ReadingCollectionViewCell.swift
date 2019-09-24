@@ -36,7 +36,7 @@ class ReadingCollectionViewCell: UICollectionViewCell {
     myTableView.estimatedRowHeight = 1000
     myTableView.delegate = self
     myTableView.dataSource = self
-    myTableView.register(UINib.init(nibName: "SmallArticleCell", bundle: nil), forCellReuseIdentifier: "SmallArticleCell")
+    myTableView.register(R.nib.smallArticleCell)
   }
 }
 
@@ -73,14 +73,14 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath) as! ContentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.firstCell, for: indexPath)!
       DispatchQueue.main.async {
         cell.configureContent(article: self.article ?? Article())
       }
       cell.delegate = self
       return cell
     } else if indexPath.section == 1{
-      let cell = tableView.dequeueReusableCell(withIdentifier: "SmallArticleCell", for: indexPath) as! SmallArticleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
       DispatchQueue.main.async {
         cell.configureCell(article: self.articlesOfConcern[indexPath.row])
       }

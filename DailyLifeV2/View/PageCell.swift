@@ -58,7 +58,7 @@ class PageCell: UICollectionViewCell {
   @IBAction func likeButtonByPress(_ sender: Any) {
     effectTap.notificationOccurred(.success)
     if isLikedStateButton{
-      likeButton.setImage(UIImage(named: "greenLikeButton"), for: .normal)
+        likeButton.setImage(R.image.greenLikeButton(), for: .normal)
       
       //delete article in CoreData:
       
@@ -71,7 +71,7 @@ class PageCell: UICollectionViewCell {
       }
       isLikedStateButton = !(isLikedStateButton)
     } else {
-      likeButton.setImage(UIImage(named: "redLikeButton"), for: .normal)
+        likeButton.setImage(R.image.redLikeButton(), for: .normal)
       
       //save new article in CoreData:
 

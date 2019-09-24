@@ -49,7 +49,7 @@ extension ReadingFavoriteArticle: UICollectionViewDelegateFlowLayout, UICollecti
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ReadingFavoriteReadingCollectionViewCell
+    let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.readingFavortiteCell, for: indexPath)!
     
     readingCell.delegate = self
     readingCell.configureContent(article: articles[indexPath.row])
