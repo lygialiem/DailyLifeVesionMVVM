@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Firebase
+
 
 class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegate {
   
@@ -21,6 +23,18 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   var articlesOfConcern = [Article]()
   let refreshControl = UIRefreshControl()
   
+    override func viewWillAppear(_ animated: Bool) {
+        
+        Analytics.logEvent("\(menuBarTitle.uppercased())", parameters: nil)
+//
+//        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+//        tracker.set("Topic", value: "\(menuBarTitle)")
+//
+//        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
+//        tracker.send(builder.build() as [NSObject : AnyObject])
+//
+    }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     print(LibraryRealm.instance.realm.configuration.fileURL!)
@@ -34,24 +48,14 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     
     DispatchQueue.global(qos: .userInitiated).async {
       
-      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
+      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7){ (articles) in
         let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
         self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
         
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
         }
-      })
-      
-//      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7, completion: { (articles) in
-//
-//        let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-//        self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
-//
-//        DispatchQueue.main.async {
-//          self.newsFeedCV.reloadData()
-//        }
-//      })
+      }
     }
   }
   
