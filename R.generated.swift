@@ -16,10 +16,18 @@ struct R: Rswift.Validatable {
     try intern.validate()
   }
   
-  /// This `R.file` struct is generated, and contains static references to 1 files.
+  /// This `R.file` struct is generated, and contains static references to 2 files.
   struct file {
+    /// Resource file `GoogleService-Info.plist`.
+    static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
     /// Resource file `daily.jpg`.
     static let dailyJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "daily", pathExtension: "jpg")
+    
+    /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
+    static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.googleServiceInfoPlist
+      return fileResource.bundle.url(forResource: fileResource)
+    }
     
     /// `bundle.url(forResource: "daily", withExtension: "jpg")`
     static func dailyJpg(_: Void = ()) -> Foundation.URL? {
@@ -651,19 +659,10 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This struct is generated for `MainVC`, and contains static references to 2 segues.
+    /// This struct is generated for `MainVC`, and contains static references to 1 segues.
     struct mainVC {
-      /// Segue identifier `GPSForecast`.
-      static let gpsForecast: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, MainVC, ForecastGPS> = Rswift.StoryboardSegueIdentifier(identifier: "GPSForecast")
       /// Segue identifier `ToPageVC`.
       static let toPageVC: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, MainVC, PageVC> = Rswift.StoryboardSegueIdentifier(identifier: "ToPageVC")
-      
-      /// Optionally returns a typed version of segue `GPSForecast`.
-      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
-      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
-      static func gpsForecast(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, MainVC, ForecastGPS>? {
-        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.mainVC.gpsForecast, segue: segue)
-      }
       
       /// Optionally returns a typed version of segue `ToPageVC`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.

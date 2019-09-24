@@ -8,9 +8,9 @@
 
 import UIKit
 import XLPagerTabStrip
+import Firebase
 
 class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegate {
-  
   
   @IBOutlet var outOfDateApi: UILabel!
   @IBOutlet var newsFeedCV: UICollectionView!
@@ -21,6 +21,18 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
   var articlesOfConcern = [Article]()
   let refreshControl = UIRefreshControl()
   
+    override func viewWillAppear(_ animated: Bool) {
+        
+        Analytics.logEvent("\(menuBarTitle.uppercased())", parameters: nil)
+//
+//        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+//        tracker.set("Topic", value: "\(menuBarTitle)")
+//
+//        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
+//        tracker.send(builder.build() as [NSObject : AnyObject])
+//
+    }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     print(LibraryRealm.instance.realm.configuration.fileURL!)
@@ -30,7 +42,6 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     self.tabBarController?.delegate = self
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
-    
     
     DispatchQueue.global(qos: .userInitiated).async {
       
@@ -97,7 +108,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellOfArticles, for: indexPath) as! PageCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellOfArticles, for: indexPath)!
     
     DispatchQueue.main.async {
       cell.confiureCell(articles: self.articles[indexPath.row])

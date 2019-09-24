@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9C5D29B314379FA27E193C68 /* Pods_DailyLifeV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */; };
+		BB2E88A32339CBEA0010FF16 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2E88A22339CBEA0010FF16 /* AdSupport.framework */; };
 		BB30249623385F1B00E4D2F7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30249523385F1B00E4D2F7 /* R.generated.swift */; };
+		BB7108D9233A2D0A0038A62C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB7108D8233A2D090038A62C /* GoogleService-Info.plist */; };
 		E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70401EF2316370C00197209 /* DetailForecastCelll.swift */; };
 		E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70492AB23014FCC0023E468 /* SideMenuCell.swift */; };
 		E70821832335C9ED00E75AEB /* LibraryRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70821822335C9ED00E75AEB /* LibraryRealm.swift */; };
@@ -72,7 +74,11 @@
 		71B047000680A13661F4848D /* Pods-DailyLifeV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.debug.xcconfig"; sourceTree = "<group>"; };
 		86EDA4EDD397EBA02FC6B968 /* Pods-DailyLifeV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyLifeV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2.release.xcconfig"; sourceTree = "<group>"; };
 		9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyLifeV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2E889F2339C0CD0010FF16 /* DailyLifeV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyLifeV2.entitlements; sourceTree = "<group>"; };
+		BB2E88A22339CBEA0010FF16 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		BB2E88A62339D1A10010FF16 /* DailyLifeV2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DailyLifeV2-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB30249523385F1B00E4D2F7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		BB7108D8233A2D090038A62C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E70401EF2316370C00197209 /* DetailForecastCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCelll.swift; sourceTree = "<group>"; };
 		E70492AB23014FCC0023E468 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		E70821822335C9ED00E75AEB /* LibraryRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRealm.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 			files = (
 				E72E49A423100D4900E4FA8F /* WebKit.framework in Frameworks */,
 				9C5D29B314379FA27E193C68 /* Pods_DailyLifeV2.framework in Frameworks */,
+				BB2E88A32339CBEA0010FF16 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +166,7 @@
 		5FBAB8AF67ACCEA7983682EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB2E88A22339CBEA0010FF16 /* AdSupport.framework */,
 				E72E49A323100D4900E4FA8F /* WebKit.framework */,
 				9E16A3F239C02545B482EB3F /* Pods_DailyLifeV2.framework */,
 			);
@@ -187,6 +195,11 @@
 			isa = PBXGroup;
 			children = (
 				E71F710C22C267D60050B506 /* AppDelegate.swift */,
+				BB2E88A62339D1A10010FF16 /* DailyLifeV2-Bridging-Header.h */,
+				BB2E889F2339C0CD0010FF16 /* DailyLifeV2.entitlements */,
+				E79A148A23080A9C0004D62E /* CoreData.xcdatamodeld */,
+				BB7108D8233A2D090038A62C /* GoogleService-Info.plist */,
+				E71F711822C267D80050B506 /* Info.plist */,
 				E74B26432303D2BB0057684B /* Helper */,
 				E71F712122C26B300050B506 /* Services */,
 				E71F712022C26B240050B506 /* Model */,
@@ -194,8 +207,6 @@
 				E71F711E22C26B170050B506 /* ViewController */,
 				E71F711F22C26B1E0050B506 /* View */,
 				E71F711322C267D80050B506 /* Assets.xcassets */,
-				E71F711822C267D80050B506 /* Info.plist */,
-				E79A148A23080A9C0004D62E /* CoreData.xcdatamodeld */,
 			);
 			path = DailyLifeV2;
 			sourceTree = "<group>";
@@ -368,6 +379,7 @@
 				E780E5B22301938000869885 /* Main.storyboard in Resources */,
 				E71F711422C267D80050B506 /* Assets.xcassets in Resources */,
 				E7E3CA722311128000DD87B6 /* DetailForecastCell.xib in Resources */,
+				BB7108D9233A2D0A0038A62C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +394,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DailyLifeV2/Pods-DailyLifeV2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -392,10 +405,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanModal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -406,6 +421,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -417,12 +433,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$TEMP_DIR/rswift-lastrun",
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 				$SRCROOT/R.generated.swift,
@@ -581,6 +593,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "DailyLifeV2/DailyLifeV2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -635,6 +648,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "DailyLifeV2/DailyLifeV2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -645,6 +659,7 @@
 			baseConfigurationReference = 71B047000680A13661F4848D /* Pods-DailyLifeV2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DailyLifeV2/DailyLifeV2.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56G8LHHBBK;
@@ -667,6 +682,7 @@
 			baseConfigurationReference = 86EDA4EDD397EBA02FC6B968 /* Pods-DailyLifeV2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DailyLifeV2/DailyLifeV2.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56G8LHHBBK;

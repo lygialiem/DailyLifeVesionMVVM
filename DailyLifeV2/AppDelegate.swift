@@ -9,17 +9,34 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   var location = CLLocationManager()
-
   let locationServices = MainVC()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // MARK: - Firebase Configure:
+    FirebaseApp.configure()
+    
+    //MARK: - Google Analytics Configure:
+    guard let gai = GAI.sharedInstance() else {
+      assert(false, "Google Analytics not configured correctly")
+    }
+    gai.tracker(withTrackingId: "UA-21085985-6")
+    // Optional: automatically report uncaught exceptions.
+    gai.trackUncaughtExceptions = true
 
+    // Optional: set Logger to VERBOSE for debug information.
+    // Remove before app release.
+    gai.logger.logLevel = .verbose;
+    
+    
+    //MARK: -Location Configure:
     
     location.requestWhenInUseAuthorization()
 
@@ -47,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    default:
 //      locationService.getPermission()
 //    }
+    
+    
     return true
   }
   

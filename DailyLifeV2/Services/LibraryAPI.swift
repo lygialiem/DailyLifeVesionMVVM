@@ -15,7 +15,7 @@ class LibraryAPI{
   let newsApiService = NewsApiService()
   let weatherApiService = WeatherApiService()
   
-  var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
+  var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business", "World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
   
   private init(){}
