@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.8.2)
+  - AlamofireObjectMapper (5.2.1):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
   - Firebase/Analytics (6.8.1):
     - Firebase/Core
   - Firebase/Core (6.8.1):
@@ -65,6 +68,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - ObjectMapper (3.5.1)
   - PanModal (1.2.4)
   - R.swift (5.0.3):
     - R.swift.Library (~> 5.0.0)
@@ -88,9 +92,11 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AlamofireObjectMapper
   - Firebase/Analytics
   - Firebase/Core
   - GoogleAnalytics
+  - ObjectMapper
   - PanModal
   - R.swift
   - RealmSwift
@@ -103,6 +109,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireObjectMapper
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -115,6 +122,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - nanopb
+    - ObjectMapper
     - PanModal
     - R.swift
     - R.swift.Library
@@ -129,6 +137,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
   Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
   FirebaseAnalytics: 843c7f64a8f9c79f0d03281197ebe7bb1d58d477
   FirebaseCore: e9d9bd1dae61c1e82bc1e0e617a9d832392086a0
@@ -141,6 +150,7 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   PanModal: 275f6d4d07565ddf4ed16d7be5d9cd275682d80d
   R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
   R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
@@ -153,6 +163,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 3066cd6050733ca3680c6d55e83b4fdc6e5f7bba
+PODFILE CHECKSUM: 279a547f251538811780d2da13d64e08e4711990
 
 COCOAPODS: 1.5.2

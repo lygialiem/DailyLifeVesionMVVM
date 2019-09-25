@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let locationServices = MainVC()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
     // MARK: - Firebase Configure:
     FirebaseApp.configure()
     

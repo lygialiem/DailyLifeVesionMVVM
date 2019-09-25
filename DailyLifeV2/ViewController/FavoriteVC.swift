@@ -37,7 +37,7 @@ class FavoriteVC: UIViewController {
       self.navigationItem.leftBarButtonItems = [self.menuButton]
       self.myTableView.isEditing = false
     } else {
-      self.articlesCoreData = Array(repeating: Article(), count: favoriteArticles.count)
+        self.articlesCoreData = Array(repeating: Article(), count: favoriteArticles.count)
       for i in 0..<favoriteArticles.count{
         
         self.articlesCoreData[i].title = favoriteArticles[favoriteArticles.count - 1 - i].title

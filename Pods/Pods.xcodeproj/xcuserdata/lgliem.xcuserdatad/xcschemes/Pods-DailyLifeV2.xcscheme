@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8579E73B311BC58F0A0A7315BF8BE2B8"
+               BlueprintIdentifier = "A7081CFEA38390B0F56E3594D26D6760"
                BuildableName = "Pods_DailyLifeV2.framework"
                BlueprintName = "Pods-DailyLifeV2"
                ReferencedContainer = "container:Pods.xcodeproj">

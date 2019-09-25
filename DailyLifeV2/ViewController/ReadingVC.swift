@@ -73,7 +73,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
     
     LibraryAPI.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
       DispatchQueue.main.async {
-        let uniqueData = data.articles.uniqueValues(value: {$0.title})
+        let uniqueData = (data.articles?.uniqueValues(value: {$0.title})) ?? []
         let mustHaveImageData = uniqueData.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
         readingCell.articlesOfConcern = mustHaveImageData
         readingCell.myTableView.reloadData()

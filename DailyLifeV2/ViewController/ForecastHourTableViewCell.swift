@@ -31,14 +31,14 @@ extension ForecastHourTableViewCell: UICollectionViewDelegateFlowLayout, UIColle
     indexPath: IndexPath) -> UICollectionViewCell {
     
     
-     let chanceOfRain = Int((hourlyData?.hourly?.data?[indexPath.row]?.precipProbability ?? 0) * 100)
-    let icon = hourlyData?.hourly?.data?[indexPath.row]?.icon ?? ""
-    let time = Int((hourlyData?.hourly?.data?[indexPath.row]?.time ?? 0).formatEpochTime(dateFormatType: "HH"))
+     let chanceOfRain = Int((hourlyData?.hourly?.data?[indexPath.row].precipProbability ?? 0) * 100)
+    let icon = hourlyData?.hourly?.data?[indexPath.row].icon ?? ""
+    let time = Int((hourlyData?.hourly?.data?[indexPath.row].time ?? 0).formatEpochTime(dateFormatType: "HH"))
     
     if indexPath.row == 0{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellNow, for: indexPath)!
       cell.hourNow.text = "Now"
-      cell.tempNow.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row]?.temperature ?? 0)))º"
+      cell.tempNow.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row].temperature ?? 0)))º"
       
        cell.chaneOfRainNow.text = chanceOfRain == 0 ? "" : "\(chanceOfRain)%"
       
@@ -56,8 +56,8 @@ extension ForecastHourTableViewCell: UICollectionViewDelegateFlowLayout, UIColle
       
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellNext, for: indexPath)!
       
-      cell.hour.text = hourlyData?.hourly?.data?[indexPath.row]?.time?.formatEpochTime(dateFormatType: "haa")
-      cell.temp.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row]?.temperature ?? 0)))º"
+      cell.hour.text = hourlyData?.hourly?.data?[indexPath.row].time?.formatEpochTime(dateFormatType: "haa")
+      cell.temp.text = "\(Int(round(hourlyData?.hourly?.data?[indexPath.row].temperature ?? 0)))º"
 
       cell.chanceOfRain.text = chanceOfRain == 0 ? "" : "\(chanceOfRain)%"
       if time ?? 0 > 5 && time ?? 0 <= 17{

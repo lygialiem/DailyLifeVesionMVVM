@@ -17,7 +17,6 @@ class LibraryAPI{
   
   var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business", "World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
   
-  
   private init(){}
 }
 

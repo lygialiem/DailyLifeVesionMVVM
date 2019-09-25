@@ -33,8 +33,8 @@ class SearchVC: UITableViewController{
     if topic != ""{
       
       LibraryAPI.instance.getSearchArticle(topic: topic, page: 1, numberOfArticles: 15) { (articles) in
-        let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
-        let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
+        let musHaveImageArticle = articles.articles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+        let uniqueArticles = (musHaveImageArticle?.uniqueValues(value: {$0.title})) ?? [Article]()
         self.articles = uniqueArticles
         
         DispatchQueue.main.async {
@@ -76,8 +76,8 @@ class SearchVC: UITableViewController{
         
         LibraryAPI.instance.getSearchArticle(topic: topic, page: currentPage, numberOfArticles: 15) { (articles) in
           
-          let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-          let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil || $0.urlToImage == ""})
+          let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
+          let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage == ""})) ?? []
           
           for article in alwaysHaveImageArticles{
             self.articles.append(article)
@@ -134,8 +134,8 @@ extension SearchVC: UISearchBarDelegate{
       let topic = searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? ""
       LibraryAPI.instance.getSearchArticle(topic: topic , page: 1, numberOfArticles: 10) { (articles) in
         
-        let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-        let alwaysHaveImageArticles = uniqueArticles.filter({$0.urlToImage != nil || $0.urlToImage == ""})
+        let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
+        let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage == ""})) ?? []
         self.articles = alwaysHaveImageArticles
         
         DispatchQueue.main.async {

@@ -19,5 +19,7 @@ target 'DailyLifeV2' do
   pod 'GoogleAnalytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
+  pod 'ObjectMapper'
+pod 'AlamofireObjectMapper'
 
 end

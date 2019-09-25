@@ -30,7 +30,8 @@ extension DailyForecaseSearch: UICollectionViewDataSource, UICollectionViewDeleg
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.collectionCell, for: indexPath)!
-    cell.configureCell(data: dailyForecast?.data?[indexPath.row] ?? Data())
+    
+    cell.configureCell(data: (dailyForecast?.data?[indexPath.row])!)
     return cell
   }
   

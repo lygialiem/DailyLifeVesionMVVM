@@ -46,8 +46,8 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     DispatchQueue.global(qos: .userInitiated).async {
       
       LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7){ (articles) in
-        let uniqueArticles = articles.articles.uniqueValues(value: {$0.title})
-        self.articles = uniqueArticles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+        let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
+        self.articles = (uniqueArticles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})) ?? [Article]()
         
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
@@ -86,7 +86,7 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     
     LibraryAPI.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
       
-      self.articles = data.articles.filter({!($0.urlToImage == nil)})
+      self.articles = (data.articles?.filter({!($0.urlToImage == nil)})) ?? [Article]()
       DispatchQueue.main.async {
         self.newsFeedCV.reloadData()
         self.refreshControl.endRefreshing()
@@ -160,7 +160,7 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
       if currentPage <= numberOfPage{
         
         LibraryAPI.instance.getArticles(topic: menuBarTitle, page: currentPage, numberOfArticles: 7) { (articles) in
-          let musHaveImageArticle = articles.articles.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+          let musHaveImageArticle = (articles.articles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})) ?? []
           let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
           for article in uniqueArticles{
             self.articles.append(article)

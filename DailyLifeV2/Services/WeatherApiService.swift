@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreLocation
+import AlamofireObjectMapper
+import Alamofire
 
 class WeatherApiService{
   
@@ -21,50 +23,64 @@ class WeatherApiService{
   func getWeatherApi(latitude: Double, longitude: Double, completion: @escaping (DarkSkyApi) -> Void){
     let totalUrl = URL(string: "\(DARKSKY_API)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
     guard let url = totalUrl else {return}
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
-      guard let data = data else {return}
-      do{
-        let dataDecode = try JSONDecoder().decode(DarkSkyApi.self, from: data)
-        completion(dataDecode)
-      }catch let jsonError{
-        debugPrint(jsonError)
-      }
-      }.resume()
-  }
-  
-  func getCountryForecastApi(nameOfCountry: String, completion: @escaping (ForecastApi) -> Void){
-    let url = "http://api.apixu.com/v1/forecast.json?key=\(APIXU_KEY)&q=\(nameOfCountry.replacingOccurrences(of: " ", with: "%20"))&days=7"
-    guard let urlRequest = URL(string: url) else {return}
     
-    URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
-      if error == nil {
-        guard let data = data else {return}
-        do {
-          let dataDecoded = try JSONDecoder().decode(ForecastApi.self, from: data)
-          completion(dataDecoded)
-        }catch let jsonError{
-          debugPrint("JSON ERROR: ",jsonError,"Error: ", error ?? Error())
-        }
-      }
-      }.resume()
+    Alamofire.request(url).validate().responseObject { (response: DataResponse<DarkSkyApi>) in
+        if response.result.error == nil{
+                guard let weatherResponse = response.result.value else {return}
+                completion(weatherResponse)
+        } else {
+            debugPrint(response.result.error!.localizedDescription)
+        }    
+    }
   }
-  
+
   func getHourlyDarkSkyApi(latitude: Double, longitude: Double, completion: @escaping (HourlyDarkSkyApi) -> Void){
     guard let url = URL(string: "\(self.DARKSKY_API)\(self.DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=daily,currently,minutely,alerts,flags&units=si") else {return}
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
-      guard let data = data else {return}
-      do{
-        let jsonData = try JSONDecoder().decode(HourlyDarkSkyApi.self, from: data)
-        completion(jsonData)
-      }catch let jsonError{
-        debugPrint("JSON ERROR: ",jsonError,"Error: ", error!)
-      }
-      }.resume()
+    
+    Alamofire.request(url).validate().responseObject {(response: DataResponse<HourlyDarkSkyApi>) in
+        if response.result.error == nil{
+            guard let hourlyData = response.result.value else {return}
+            print("=========", hourlyData)
+            completion(hourlyData)
+        } else {
+            debugPrint(response.result.error!.localizedDescription)
+        }
+    }
+//
+//    URLSession.shared.dataTask(with: url) { (data, response, error) in
+//      guard let data = data else {return}
+//      do{
+//        let jsonData = try JSONDecoder().decode(HourlyDarkSkyApi.self, from: data)
+//        completion(jsonData)
+//      }catch let jsonError{
+//        debugPrint("JSON ERROR: ",jsonError,"Error: ", error!)
+//      }
+//      }.resume()
   }
+    
+    
+    func getCountryForecastApi(nameOfCountry: String, completion: @escaping (ForecastApi) -> Void){
+      let url = "http://api.apixu.com/v1/forecast.json?key=\(APIXU_KEY)&q=\(nameOfCountry.replacingOccurrences(of: " ", with: "%20"))&days=7"
+      guard let urlRequest = URL(string: url) else {return}
+      
+      URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
+        if error == nil {
+          guard let data = data else {return}
+          do {
+            let dataDecoded = try JSONDecoder().decode(ForecastApi.self, from: data)
+            completion(dataDecoded)
+          }catch let jsonError{
+            debugPrint("JSON ERROR: ",jsonError,"Error: ", error ?? Error())
+          }
+        }
+        }.resume()
+    }
   
   func getIconJson(completion: @escaping ([IconApi]) -> Void){
     let urlRequest = URL(string: "http://www.apixu.com/doc/Apixu_weather_conditions.json")
+    
     guard let url = urlRequest else {return}
+    
     URLSession.shared.dataTask(with: url) { (data, response, error) in
       guard let data = data else {return}
       do {
