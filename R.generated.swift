@@ -590,6 +590,8 @@ struct R: Rswift.Validatable {
     static let readingFavortiteCell: Rswift.ReuseIdentifier<ReadingFavoriteReadingCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "ReadingFavortiteCell")
     /// Reuse identifier `SmallArticleCell`.
     static let smallArticleCell: Rswift.ReuseIdentifier<SmallArticleCell> = Rswift.ReuseIdentifier(identifier: "SmallArticleCell")
+    /// Reuse identifier `alphabeltHeader`.
+    static let alphabeltHeader: Rswift.ReuseIdentifier<AlphabeltHeaderTableViewCell> = Rswift.ReuseIdentifier(identifier: "alphabeltHeader")
     /// Reuse identifier `cell0`.
     static let cell0: Rswift.ReuseIdentifier<CityForecastCell> = Rswift.ReuseIdentifier(identifier: "cell0")
     /// Reuse identifier `cell1`.
@@ -626,8 +628,6 @@ struct R: Rswift.Validatable {
     static let header4: Rswift.ReuseIdentifier<SearchForecast> = Rswift.ReuseIdentifier(identifier: "header4")
     /// Reuse identifier `header5`.
     static let header5: Rswift.ReuseIdentifier<SearchForecast> = Rswift.ReuseIdentifier(identifier: "header5")
-    /// Reuse identifier `header`.
-    static let header: Rswift.ReuseIdentifier<listCityNameCell> = Rswift.ReuseIdentifier(identifier: "header")
     /// Reuse identifier `readingHorizoneCell`.
     static let readingHorizoneCell: Rswift.ReuseIdentifier<ReadingCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "readingHorizoneCell")
     /// Reuse identifier `section1`.

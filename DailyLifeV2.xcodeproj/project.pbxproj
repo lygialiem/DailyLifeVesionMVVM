@@ -11,6 +11,7 @@
 		BB2E88A32339CBEA0010FF16 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2E88A22339CBEA0010FF16 /* AdSupport.framework */; };
 		BB30249623385F1B00E4D2F7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30249523385F1B00E4D2F7 /* R.generated.swift */; };
 		BB7108D9233A2D0A0038A62C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB7108D8233A2D090038A62C /* GoogleService-Info.plist */; };
+		BBCF28B4233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF28B3233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift */; };
 		E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70401EF2316370C00197209 /* DetailForecastCelll.swift */; };
 		E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70492AB23014FCC0023E468 /* SideMenuCell.swift */; };
 		E70821832335C9ED00E75AEB /* LibraryRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70821822335C9ED00E75AEB /* LibraryRealm.swift */; };
@@ -79,6 +80,7 @@
 		BB2E88A62339D1A10010FF16 /* DailyLifeV2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DailyLifeV2-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB30249523385F1B00E4D2F7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		BB7108D8233A2D090038A62C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BBCF28B3233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeltHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		E70401EF2316370C00197209 /* DetailForecastCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCelll.swift; sourceTree = "<group>"; };
 		E70492AB23014FCC0023E468 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		E70821822335C9ED00E75AEB /* LibraryRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRealm.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				E714E6F02318050100A0B5CE /* Title-Sumary-Daily ForecastCell.swift */,
 				E714E6F62318406C00A0B5CE /* dailyForecastByGPSCell.swift */,
 				E7FFA5E82318C6B700ABB379 /* SmallArticleCell.swift */,
+				BBCF28B3233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -441,7 +444,7 @@
 				"$TEMP_DIR/rswift-lastrun",
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -522,6 +525,7 @@
 				E70F3A6E230E8C9B0051F46C /* SearchForecastCell.swift in Sources */,
 				E70D8106230EF7B70059D289 /* HourlyDarkSkyApi.swift in Sources */,
 				E7B5F7AA23179BB200BA1387 /* TabbarController.swift in Sources */,
+				BBCF28B4233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift in Sources */,
 				E76A604B230BD93500B3E4A3 /* DarkSkyApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

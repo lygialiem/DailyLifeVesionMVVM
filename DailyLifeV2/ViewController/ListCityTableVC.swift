@@ -72,7 +72,6 @@ weak var delegate: WordClockDidSelect?
     self.tableView.dataSource = self
   }
   
-  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if isFiltering(){
       return filterContents[section].names.count
@@ -88,6 +87,16 @@ weak var delegate: WordClockDidSelect?
     return sections.count
   }
   
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableCell(withIdentifier: "alphabeltHeader") as! AlphabeltHeaderTableViewCell
+        
+        if isFiltering(){
+            header.alphabeltHeader.text = "\(filterContents[section].letter)"
+        }
+        header.alphabeltHeader.text = "\(sections[section].letter)"
+        return header
+    }
+    
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cityListCell, for: indexPath)!
@@ -102,22 +111,14 @@ weak var delegate: WordClockDidSelect?
     cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     return cell
   }
-  
-  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if isFiltering(){
-      return filterContents[section].letter
-    }else {
-    return sections[section].letter
-    }
-  }
-  
+    
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 35
   }
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 20
-  }
+    }
   
   override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
     
@@ -165,8 +166,7 @@ weak var delegate: WordClockDidSelect?
   
   func filterContentForSearch(_ searchText: String, scope: String = "All"){
     self.filterContents = sections.filterBy(keyword: searchText.replacingOccurrences(of: " ", with: "_"))
-    
-    print(filterContents)
+
   }
   
   func isFiltering() -> Bool {
