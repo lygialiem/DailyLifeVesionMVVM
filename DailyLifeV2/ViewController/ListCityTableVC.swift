@@ -92,11 +92,13 @@ weak var delegate: WordClockDidSelect?
         
         if isFiltering(){
             header.alphabeltHeader.text = "\(filterContents[section].letter)"
-        }
+          return header
+        } else {
         header.alphabeltHeader.text = "\(sections[section].letter)"
         return header
     }
-    
+  }
+  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.cityListCell, for: indexPath)!
