@@ -42,11 +42,11 @@ class DailyForecastCell: UITableViewCell {
           
           if currentDate! > 5 && currentDate! <= 17{
             DispatchQueue.main.async {
-              self.icon.image = UIImage(named: "day/\(dataJson[i].icon)")
+                self.icon.image = UIImage(named: "day/\(dataJson[i].icon ?? 0)")
             }
           } else{
             DispatchQueue.main.async {
-              self.icon.image = UIImage(named: "night/\(dataJson[i].icon)")
+                self.icon.image = UIImage(named: "night/\(dataJson[i].icon ?? 0)")
             }
           }
         }

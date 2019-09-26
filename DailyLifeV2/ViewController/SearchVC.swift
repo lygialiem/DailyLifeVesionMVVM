@@ -78,14 +78,20 @@ class SearchVC: UITableViewController{
           
           let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
           let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage == ""})) ?? []
+            DispatchQueue.main.async {
+                for article in alwaysHaveImageArticles{
+                  self.articles.append(article)
+                  self.tableView.insertRows(at: [IndexPath(row: self.articles.count - 1, section: indexPath.section)], with: .automatic)
+                }
+            }
           
-          for article in alwaysHaveImageArticles{
-            self.articles.append(article)
-          }
           self.currentPage += 1
-          DispatchQueue.main.async {
-            self.tableView.reloadData()
-          }
+        
+            
+            
+//          DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//          }
         }
       }
     }
