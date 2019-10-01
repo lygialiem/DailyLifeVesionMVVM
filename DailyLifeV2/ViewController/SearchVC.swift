@@ -101,7 +101,7 @@ class SearchVC: UITableViewController{
     
     let topic = self.getUserDefault()
     
-    NotificationCenter.default.post(name: NSNotification.Name("searchVCToReadingVC"), object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
+    NotificationCenter.default.post(name: .searchVCToReadingVC, object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
     self.dismiss(animated: true, completion: nil)
   }
   

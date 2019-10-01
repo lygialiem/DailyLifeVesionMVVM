@@ -102,16 +102,16 @@ extension SideMenuVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-      NotificationCenter.default.post(name: NSNotification.Name("MoveToTopic"), object: nil, userInfo: ["data": indexPath])
-      NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
-      NotificationCenter.default.post(name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+    NotificationCenter.default.post(name: .MoveToTopic, object: nil, userInfo: ["data": indexPath])
+    NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
+    NotificationCenter.default.post(name: .MoveToTabbarIndex0, object: nil)
   }
 }
 
 // @objc function:
 extension SideMenuVC{
   @objc func handleEdgePan(gesture: UIScreenEdgePanGestureRecognizer){
-    NotificationCenter.default.post(name: NSNotification.Name("CloseSideMenyByEdgePan"), object: nil, userInfo: ["data": gesture])
+    NotificationCenter.default.post(name: .CloseSideMenyByEdgePan, object: nil, userInfo: ["data": gesture])
     
   }
   
@@ -126,7 +126,7 @@ extension SideMenuVC{
 extension SideMenuVC{
   
   @IBAction func CloseMenuByPressed(_ sender: Any) {
-    NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
+    NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
   }
   
   

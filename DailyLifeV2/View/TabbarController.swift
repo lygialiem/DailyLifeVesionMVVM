@@ -40,6 +40,6 @@ class TabbarController: UITabBar {
   }
   
   @objc func test() {
-    NotificationCenter.default.post(name: Notification.Name("OpenSearchVC"), object: nil)
+    NotificationCenter.default.post(name: .OpenSearchVC, object: nil)
   }
 }

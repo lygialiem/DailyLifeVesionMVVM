@@ -26,7 +26,7 @@ class ReadingVC: UIViewController{
     self.view.layoutIfNeeded()
     self.readingCollectionView.reloadData()
     
-    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveToWebViewViewController(notification:)) , name: NSNotification.Name("NavigateToWebViewVCFromFirstCell"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveToWebViewViewController(notification:)) , name: .NavigateToWebViewVCFromFirstCell, object: nil)
     
     guard let indexPath = indexPathOfDidSelectedArticle else {return}
     readingCollectionView.scrollToItem(at: indexPath
@@ -99,7 +99,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
 extension ReadingVC: ReadingCollectionViewCellDelegate{
   func movoWebViewController(url: String?) {
     
-    let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
+    let webViewViewController = storyboard?.instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     self.navigationController?.pushViewController(webViewViewController, animated: true)
     

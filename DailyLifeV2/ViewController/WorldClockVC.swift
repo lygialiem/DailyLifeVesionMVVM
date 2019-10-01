@@ -40,7 +40,7 @@ class WorldClockVC: UIViewController {
         myTableView.dataSource = self
         myTableView.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: .MoveToTabbarIndex0, object: nil)
     }
     
     deinit {
@@ -65,7 +65,7 @@ class WorldClockVC: UIViewController {
     }
     
     @IBAction func menuButtonByPressed(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
+        NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
     }
     
     @objc func handleDeleteAllButton(){

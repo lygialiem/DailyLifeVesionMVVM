@@ -14,31 +14,32 @@ import PanModal
 
 class MainVC: ButtonBarPagerTabStripViewController {
     
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
+    //MARK: - IBOutlets:
     @IBOutlet var temperatureButton: UIButton!
     @IBOutlet var visualEffectView: UIVisualEffectView!
     @IBOutlet var snipper: UIActivityIndicatorView!
     @IBOutlet var btnBarView: UIView!
     @IBOutlet var apiOutOfDate: UILabel!
     
+    //MARK: - Properties:
     var isWeatherOpen = false
     var pageVCArray = [PageVC]()
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var effect: UIVisualEffect!
     var forecastData: DarkSkyApi?
     var detailGPS: ReversedGeoLocation?
-    
     var newestLocaton: ((CLLocation?) -> Void)?
     var statusUpdated: ((CLAuthorizationStatus?) -> Void)?
     var status: CLAuthorizationStatus{
         return CLLocationManager.authorizationStatus()
     }
-    
     let manager = CLLocationManager()
     
-    
+    // MARK: - LifeCycle:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(moveToTopic(notification:)), name: NSNotification.Name("MoveToTopic"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveToTopic(notification:)), name: .MoveToTopic, object: nil)
         
         setUpCoreLocation()
     }
@@ -48,36 +49,29 @@ class MainVC: ButtonBarPagerTabStripViewController {
     }
     
     override func viewDidLoad() {
-        
         temperatureButton.isEnabled = false
-        
         configureButtonBar()
         super.viewDidLoad()
         
-        
-        //    snipper.startAnimating()
         snipper.isHidden = true
         
         effect = visualEffectView.effect
         visualEffectView.isHidden = true
         visualEffectView.effect = nil
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: NSNotification.Name("OpenSearchVC"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSearchVCToReadingVC(notify:)), name: NSNotification.Name("searchVCToReadingVC"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTabbarIndex0(notify:)), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+        setupNotificationAddObsrver()
         
         btnBarView.clipsToBounds = true
         btnBarView.layer.cornerRadius = 12
         btnBarView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         btnBarView.layer.borderWidth = 2
         btnBarView.frame(forAlignmentRect: CGRect(x: 250, y: 30, width: 300, height: 30))
-        
         temperatureButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
         temperatureButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         
     }
     
+    //MARK: - @objc Functions:
     @objc func handleTabbarIndex0(notify:  Notification){
         tabBarController?.selectedIndex = 0
     }
@@ -100,7 +94,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
         readingVc.view.layoutIfNeeded()
         readingVc.readingCollectionView.reloadData()
         
-        NotificationCenter.default.post(name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+        NotificationCenter.default.post(name: .MoveToTabbarIndex0, object: nil)
         self.navigationController?.pushViewController(readingVc, animated: true)
         
     }
@@ -117,6 +111,15 @@ class MainVC: ButtonBarPagerTabStripViewController {
         self.moveToViewController(at: indexPath.row, animated: false)
         
     }
+    
+    //MARK: - Functions:
+    
+    func setupNotificationAddObsrver(){
+           
+           NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: .OpenSearchVC, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(handleSearchVCToReadingVC(notify:)), name: .searchVCToReadingVC, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(handleTabbarIndex0(notify:)), name: .MoveToTabbarIndex0, object: nil)
+       }
     
     func setUpCoreLocation(){
         if CLLocationManager.locationServicesEnabled(){
@@ -158,15 +161,6 @@ class MainVC: ButtonBarPagerTabStripViewController {
         }
     }
     
-    
-    @IBAction func searchButtonAction(_ sender: Any) {
-        let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
-        searchVc.delegate = self
-        
-        presentPanModal(searchVc)
-        
-    }
-    
     func configureButtonBar() {
         settings.style.selectedBarHeight = 4
         settings.style.selectedBarBackgroundColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
@@ -190,44 +184,58 @@ class MainVC: ButtonBarPagerTabStripViewController {
         }
     }
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        for i in 0..<LibraryAPI.instance.TOPIC_NEWSAPI.count{
-            let pageVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
-            
-            pageVC.menuBarTitle = LibraryAPI.instance.TOPIC_NEWSAPI[i]
-            pageVCArray.append(pageVC)
-        }
-        return pageVCArray
-    }
+
+     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+         for i in 0..<LibraryAPI.instance.TOPIC_NEWSAPI.count{
+             let pageVC = storyboard?.instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
+             
+             pageVC.menuBarTitle = LibraryAPI.instance.TOPIC_NEWSAPI[i]
+             pageVCArray.append(pageVC)
+         }
+         return pageVCArray
+     }
+     
+     
     
+     
+     func animateVisualEffectOUT(){
+         self.visualEffectView.effect = nil
+         self.visualEffectView.isHidden = true
+     }
+     
+     func animateVisualEffectIN(){
+         self.visualEffectView.effect = self.effect
+         self.visualEffectView.isHidden = false
+     }
+    
+    //MARK: - @IBAction:
+    
+    @IBAction func searchButtonAction(_ sender: Any) {
+        let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+        searchVc.delegate = self
+        
+        presentPanModal(searchVc)
+        
+    }
     
     @IBAction func openMenuPressed(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
-    }
-    
-    @IBAction func weatherButtonByPressed(_ sender: Any) {
+           NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
+       }
+       
+       @IBAction func weatherButtonByPressed(_ sender: Any) {
+           
+           let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastGPS
+           forecastLocationVC.dataForecast = self.forecastData
+           forecastLocationVC.detailGPS = self.detailGPS
+           DispatchQueue.main.async {
+               forecastLocationVC.tableView.reloadData()
+           }
+           self.presentPanModal(forecastLocationVC)
         
-        let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastGPS
-        forecastLocationVC.dataForecast = self.forecastData
-        forecastLocationVC.detailGPS = self.detailGPS
-        DispatchQueue.main.async {
-            forecastLocationVC.tableView.reloadData()
-        }
-        self.presentPanModal(forecastLocationVC)
-        
-    }
-    
-    func animateVisualEffectOUT(){
-        self.visualEffectView.effect = nil
-        self.visualEffectView.isHidden = true
-    }
-    
-    func animateVisualEffectIN(){
-        self.visualEffectView.effect = self.effect
-        self.visualEffectView.isHidden = false
-    }
+       }
 }
 
+//MARK: - Extensions:
 
 extension MainVC: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

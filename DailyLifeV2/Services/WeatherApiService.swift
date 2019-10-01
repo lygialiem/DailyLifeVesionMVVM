@@ -14,14 +14,9 @@ import Alamofire
 class WeatherApiService{
   
   let weatherTitles = ["time", "summary", "latitude", "longitude", "temperature", "humidity", "pressure","nearest Storm Distance", "precip Intensity", "precip Type", "precip Probability", "dew point", "wind Bearing", "ozone",  "cloud Cover", "visibility", "UV Index"]
-  
-  let DARKSKY_KEY = "060b23f6abfddd1f77ad14c3968b71db"
-  let DARKSKY_API = "https://api.darksky.net/forecast/"
-  
-  let APIXU_KEY = "0aa988689a294ad988852842190809"
-  
+
   func getWeatherApi(latitude: Double, longitude: Double, completion: @escaping (DarkSkyApi) -> Void){
-    let totalUrl = URL(string: "\(DARKSKY_API)\(DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
+    let totalUrl = URL(string: "\(URL_API.DarkSkyAPI.keyAndPath.path)\(URL_API.DarkSkyAPI.keyAndPath.key)/\(latitude),\(longitude)/?exclude=hourly,minutely,alerts,flags&units=ca")
     guard let url = totalUrl else {return}
     
     Alamofire.request(url).validate().responseObject { (response: DataResponse<DarkSkyApi>) in
@@ -35,32 +30,21 @@ class WeatherApiService{
   }
 
   func getHourlyDarkSkyApi(latitude: Double, longitude: Double, completion: @escaping (HourlyDarkSkyApi) -> Void){
-    guard let url = URL(string: "\(self.DARKSKY_API)\(self.DARKSKY_KEY)/\(latitude),\(longitude)/?exclude=daily,currently,minutely,alerts,flags&units=si") else {return}
+    guard let url = URL(string: "\(URL_API.DarkSkyAPI.keyAndPath.path)\(URL_API.DarkSkyAPI.keyAndPath.key)/\(latitude),\(longitude)/?exclude=daily,currently,minutely,alerts,flags&units=si") else {return}
     
     Alamofire.request(url).validate().responseObject {(response: DataResponse<HourlyDarkSkyApi>) in
         if response.result.error == nil{
             guard let hourlyData = response.result.value else {return}
-            print("=========", hourlyData)
             completion(hourlyData)
         } else {
             debugPrint(response.result.error!.localizedDescription)
         }
     }
-//
-//    URLSession.shared.dataTask(with: url) { (data, response, error) in
-//      guard let data = data else {return}
-//      do{
-//        let jsonData = try JSONDecoder().decode(HourlyDarkSkyApi.self, from: data)
-//        completion(jsonData)
-//      }catch let jsonError{
-//        debugPrint("JSON ERROR: ",jsonError,"Error: ", error!)
-//      }
-//      }.resume()
   }
     
     
     func getCountryForecastApi(nameOfCountry: String, completion: @escaping (ForecastApi) -> Void){
-      let url = "http://api.apixu.com/v1/forecast.json?key=\(APIXU_KEY)&q=\(nameOfCountry.replacingOccurrences(of: " ", with: "%20"))&days=7"
+        let url = "\(URL_API.ApixuAPI.keyAndPath.path).json?key=\(URL_API.ApixuAPI.keyAndPath.key)&q=\(nameOfCountry.replacingOccurrences(of: " ", with: "%20"))&days=7"
       guard let urlRequest = URL(string: url) else {return}
       
       URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
@@ -88,7 +72,8 @@ class WeatherApiService{
         completion(dataDecoded)
         
       }catch{
-        debugPrint("ErrorCallAPi: \(String(describing: error))")      }
+        debugPrint("ErrorCallAPi: \(String(describing: error))")
+        }
       }.resume()
   }
 }

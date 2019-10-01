@@ -69,6 +69,8 @@
 		E7FA5614230FA96000B580B2 /* HourlyForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FA5613230FA96000B580B2 /* HourlyForecastCell.swift */; };
 		E7FFA5EA2318C6B700ABB379 /* SmallArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFA5E82318C6B700ABB379 /* SmallArticleCell.swift */; };
 		E7FFA5EB2318C6B700ABB379 /* SmallArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FFA5E92318C6B700ABB379 /* SmallArticleCell.xib */; };
+		E7FFAA1A234398C20054216E /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFAA19234398C20054216E /* NotificationNameExtension.swift */; };
+		E7FFAA1C2343A55C0054216E /* BaseURLEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFAA1B2343A55C0054216E /* BaseURLEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +142,8 @@
 		E7FA5613230FA96000B580B2 /* HourlyForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCell.swift; sourceTree = "<group>"; };
 		E7FFA5E82318C6B700ABB379 /* SmallArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallArticleCell.swift; sourceTree = "<group>"; };
 		E7FFA5E92318C6B700ABB379 /* SmallArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallArticleCell.xib; sourceTree = "<group>"; };
+		E7FFAA19234398C20054216E /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		E7FFAA1B2343A55C0054216E /* BaseURLEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +302,8 @@
 			children = (
 				E74B26442303D2E50057684B /* Extensions.swift */,
 				BB30249523385F1B00E4D2F7 /* R.generated.swift */,
+				E7FFAA19234398C20054216E /* NotificationNameExtension.swift */,
+				E7FFAA1B2343A55C0054216E /* BaseURLEnum.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -444,7 +450,7 @@
 				"$TEMP_DIR/rswift-lastrun",
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -512,6 +518,7 @@
 				E79D708B22DC50F3001125F6 /* PageCell.swift in Sources */,
 				E778DF712307A4E700B1C532 /* ReadingVC.swift in Sources */,
 				E7FA5614230FA96000B580B2 /* HourlyForecastCell.swift in Sources */,
+				E7FFAA1C2343A55C0054216E /* BaseURLEnum.swift in Sources */,
 				E7F30CAD2305AF4500305C69 /* ReadingCollectionViewCell.swift in Sources */,
 				E74B26452303D2E50057684B /* Extensions.swift in Sources */,
 				E714E6F523182D0B00A0B5CE /* ReversedGeoLocation.swift in Sources */,
@@ -521,6 +528,7 @@
 				E774873C2312C9830096C1D8 /* CityForecastCell.swift in Sources */,
 				E7BDA79623046AE500174257 /* WebViewController.swift in Sources */,
 				E7C8E37822C3C4E300235DA5 /* NewsApi.swift in Sources */,
+				E7FFAA1A234398C20054216E /* NotificationNameExtension.swift in Sources */,
 				E70D8102230EDD1D0059D289 /* ForecastApi.swift in Sources */,
 				E70F3A6E230E8C9B0051F46C /* SearchForecastCell.swift in Sources */,
 				E70D8106230EF7B70059D289 /* HourlyDarkSkyApi.swift in Sources */,
@@ -603,6 +611,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "DailyLifeV2/DailyLifeV2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -658,6 +667,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "DailyLifeV2/DailyLifeV2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

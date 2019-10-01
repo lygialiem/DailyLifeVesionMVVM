@@ -16,7 +16,7 @@ class FavoriteVC: UIViewController {
   @IBOutlet var menuButton: UIBarButtonItem!
   
   var favoriteArticlesViewModel = FavoriteArticlesViewModel()
-  var articlesCoreData = [Article]()
+  var articlesInRealm = [Article]()
   lazy var favoriteArticleRealmModel: Results<FavoriteArticleRealmModel> = {
     LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
   }()
@@ -37,17 +37,18 @@ class FavoriteVC: UIViewController {
       self.navigationItem.leftBarButtonItems = [self.menuButton]
       self.myTableView.isEditing = false
     } else {
-        self.articlesCoreData = Array(repeating: Article(), count: favoriteArticles.count)
+        self.articlesInRealm = Array(repeating: Article(), count: favoriteArticles.count)
       for i in 0..<favoriteArticles.count{
         
-        self.articlesCoreData[i].title = favoriteArticles[favoriteArticles.count - 1 - i].title
-        self.articlesCoreData[i].author = favoriteArticles[favoriteArticles.count - 1 - i].author
-        self.articlesCoreData[i].content = favoriteArticles[favoriteArticles.count - 1 - i].content
-        self.articlesCoreData[i].description = favoriteArticles[favoriteArticles.count - 1 - i].descriptions
-        self.articlesCoreData[i].publishedAt = favoriteArticles[favoriteArticles.count - 1 - i].publishedAt
-        self.articlesCoreData[i].url = favoriteArticles[favoriteArticles.count - 1 - i].url
-        self.articlesCoreData[i].urlToImage = favoriteArticles[favoriteArticles.count - 1 - i].urlToImage
+        self.articlesInRealm[i].title = favoriteArticles[favoriteArticles.count - 1 - i].title
+        self.articlesInRealm[i].author = favoriteArticles[favoriteArticles.count - 1 - i].author
+        self.articlesInRealm[i].content = favoriteArticles[favoriteArticles.count - 1 - i].content
+        self.articlesInRealm[i].description = favoriteArticles[favoriteArticles.count - 1 - i].descriptions
+        self.articlesInRealm[i].publishedAt = favoriteArticles[favoriteArticles.count - 1 - i].publishedAt
+        self.articlesInRealm[i].url = favoriteArticles[favoriteArticles.count - 1 - i].url
+        self.articlesInRealm[i].urlToImage = favoriteArticles[favoriteArticles.count - 1 - i].urlToImage
       }
+        
       self.myTableView.isHidden = false
       self.myTableView.reloadData()
       self.navigationItem.leftBarButtonItems = [self.menuButton, self.editButtonItem]
@@ -69,7 +70,7 @@ class FavoriteVC: UIViewController {
     myTableView.isHidden = false
     navigationController?.title = "Liked Contents"
     
-    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: .MoveToTabbarIndex0, object: nil)
     myTableView.register(R.nib.smallArticleCell)
     
   }
@@ -117,7 +118,7 @@ class FavoriteVC: UIViewController {
       do{
         try managedContext.save()
         self.myTableView.reloadData()
-        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+        NotificationCenter.default.post(name: .reload, object: nil)
       } catch {
         print("Cannot Save")
       }
@@ -127,7 +128,7 @@ class FavoriteVC: UIViewController {
   
   @IBAction func menuButtonPressed(_ sender: Any) {
     
-    NotificationCenter.default.post(name: NSNotification.Name("OpenOrCloseSideMenu"), object: nil)
+    NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
   }
 }
 
@@ -135,14 +136,14 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return articlesCoreData.count
+    return articlesInRealm.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
     DispatchQueue.main.async {
-      cell.configureCell(article: self.articlesCoreData[indexPath.row])
+      cell.configureCell(article: self.articlesInRealm[indexPath.row])
     }
     
     return cell
@@ -177,25 +178,25 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       try! LibraryRealm.instance.realm.write {
         
         LibraryRealm.instance.realm.delete(favoriteArticles)
-        self.articlesCoreData.remove(at: indexPath.row)
+        self.articlesInRealm.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .bottom)
         
-        for i in 0..<self.articlesCoreData.count{
+        for i in 0..<self.articlesInRealm.count{
           let favorArticle = FavoriteArticleRealmModel()
           
-          favorArticle.title = self.articlesCoreData[self.articlesCoreData.count - 1 - i].title ?? ""
-          favorArticle.urlToImage = self.articlesCoreData[self.articlesCoreData.count - 1 - i].urlToImage ?? ""
-          favorArticle.publishedAt = self.articlesCoreData[self.articlesCoreData.count - 1 - i].publishedAt ?? ""
-          favorArticle.url = self.articlesCoreData[self.articlesCoreData.count - 1 - i].url ?? ""
-          favorArticle.content = self.articlesCoreData[self.articlesCoreData.count - 1 - i].content ?? ""
-          favorArticle.author = self.articlesCoreData[self.articlesCoreData.count - 1 - i].author ?? ""
-          favorArticle.descriptions = self.articlesCoreData[self.articlesCoreData.count - 1 - i].description ?? ""
+          favorArticle.title = self.articlesInRealm[self.articlesInRealm.count - 1 - i].title ?? ""
+          favorArticle.urlToImage = self.articlesInRealm[self.articlesInRealm.count - 1 - i].urlToImage ?? ""
+          favorArticle.publishedAt = self.articlesInRealm[self.articlesInRealm.count - 1 - i].publishedAt ?? ""
+          favorArticle.url = self.articlesInRealm[self.articlesInRealm.count - 1 - i].url ?? ""
+          favorArticle.content = self.articlesInRealm[self.articlesInRealm.count - 1 - i].content ?? ""
+          favorArticle.author = self.articlesInRealm[self.articlesInRealm.count - 1 - i].author ?? ""
+          favorArticle.descriptions = self.articlesInRealm[self.articlesInRealm.count - 1 - i].description ?? ""
           
           LibraryRealm.instance.realm.add(favorArticle)
         }
       }
       
-      if self.articlesCoreData.isEmpty{
+      if self.articlesInRealm.isEmpty{
         self.myTableView.isHidden = true
         self.isEditing = false
         self.navigationItem.leftBarButtonItems = [self.menuButton]
@@ -204,11 +205,11 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
       }
       
       self.feedback.notificationOccurred(.success)
-      NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+        NotificationCenter.default.post(name: .reload, object: nil)
     }
     
     let shareAction = UITableViewRowAction(style: .default, title: "Share") { (rowAction, indexPath) in
-      let share = UIActivityViewController(activityItems: [self.articlesCoreData[indexPath.row].url ?? ""], applicationActivities: nil)
+      let share = UIActivityViewController(activityItems: [self.articlesInRealm[indexPath.row].url ?? ""], applicationActivities: nil)
       self.present(share, animated: true, completion: nil)
     }
     shareAction.backgroundColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
@@ -217,9 +218,10 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let readingFavoriteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle
     
-    readingFavoriteVC.articles = articlesCoreData
+    let readingFavoriteVC = storyboard?.instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle
+    
+    readingFavoriteVC.articles = articlesInRealm
     readingFavoriteVC.indexPathOfDidSelectedArticle = indexPath
     readingFavoriteVC.view.layoutIfNeeded()
     readingFavoriteVC.myCollectionView.reloadData()
@@ -233,23 +235,23 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     
-    let itemToMove = articlesCoreData[sourceIndexPath.row]
-    articlesCoreData.remove(at: sourceIndexPath.row)
-    articlesCoreData.insert(itemToMove, at: destinationIndexPath.row)
+    let itemToMove = articlesInRealm[sourceIndexPath.row]
+    articlesInRealm.remove(at: sourceIndexPath.row)
+    articlesInRealm.insert(itemToMove, at: destinationIndexPath.row)
     
     let favorArticles = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
     try! LibraryRealm.instance.realm.write {
       LibraryRealm.instance.realm.delete(favorArticles)
-      for i in 0..<articlesCoreData.count{
+      for i in 0..<articlesInRealm.count{
         let favorArticle = FavoriteArticleRealmModel()
         
-        favorArticle.title = articlesCoreData[articlesCoreData.count - 1 - i].title ?? ""
-        favorArticle.urlToImage = articlesCoreData[articlesCoreData.count - 1 - i].urlToImage ?? ""
-        favorArticle.publishedAt = articlesCoreData[articlesCoreData.count - 1 - i].publishedAt ?? ""
-        favorArticle.url = articlesCoreData[articlesCoreData.count - 1 - i].url ?? ""
-        favorArticle.content = articlesCoreData[articlesCoreData.count - 1 - i].content ?? ""
-        favorArticle.author = articlesCoreData[articlesCoreData.count - 1 - i].author ?? ""
-        favorArticle.descriptions = articlesCoreData[articlesCoreData.count - 1 - i].description ?? ""
+        favorArticle.title = articlesInRealm[articlesInRealm.count - 1 - i].title ?? ""
+        favorArticle.urlToImage = articlesInRealm[articlesInRealm.count - 1 - i].urlToImage ?? ""
+        favorArticle.publishedAt = articlesInRealm[articlesInRealm.count - 1 - i].publishedAt ?? ""
+        favorArticle.url = articlesInRealm[articlesInRealm.count - 1 - i].url ?? ""
+        favorArticle.content = articlesInRealm[articlesInRealm.count - 1 - i].content ?? ""
+        favorArticle.author = articlesInRealm[articlesInRealm.count - 1 - i].author ?? ""
+        favorArticle.descriptions = articlesInRealm[articlesInRealm.count - 1 - i].description ?? ""
         
         LibraryRealm.instance.realm.add(favorArticle)
       }

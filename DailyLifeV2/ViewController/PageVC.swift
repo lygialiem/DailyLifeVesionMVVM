@@ -40,8 +40,8 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     configureCollectionView()
     self.navigationItem.backBarButtonItem?.title = ""
     self.tabBarController?.delegate = self
-    NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name("reload"), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: NSNotification.Name("shareAction"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: .reload, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: .shareAction, object: nil)
     
     DispatchQueue.global(qos: .userInitiated).async {
       

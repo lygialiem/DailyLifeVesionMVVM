@@ -122,6 +122,6 @@ extension ReadingCollectionViewCell: ReadingCellDelegate{
   func didPressSeeMore(url: String) {
     let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
-    NotificationCenter.default.post(name: NSNotification.Name("NavigateToWebViewVCFromFirstCell"), object: nil, userInfo: ["data": webViewViewController])
+    NotificationCenter.default.post(name: .NavigateToWebViewVCFromFirstCell, object: nil, userInfo: ["data": webViewViewController])
   }
 }

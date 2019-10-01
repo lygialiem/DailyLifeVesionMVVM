@@ -20,6 +20,7 @@ class LibraryAPI{
   private init(){}
 }
 
+//MARK: - Articles Library API:
 extension LibraryAPI{
   func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
     
@@ -33,6 +34,7 @@ extension LibraryAPI{
   }
 }
 
+//MARK: - Weather Forecast Library API:
 extension LibraryAPI{
   func getForecast(latitude: Double, longitude: Double, completion: @escaping (DarkSkyApi) -> Void){
     

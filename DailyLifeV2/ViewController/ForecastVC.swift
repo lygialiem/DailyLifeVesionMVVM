@@ -98,7 +98,7 @@ class ForecastVC: UIViewController {
     self.tabBarController?.delegate = self
     self.tabBarController?.tabBar.backgroundColor = .clear
     
-    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: NSNotification.Name("MoveToTabbarIndex0"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleMoveTabbar), name: .MoveToTabbarIndex0, object: nil)
     
     weatherTableView.register(R.nib.detailForecastCell)
     detailTableView.register(R.nib.detailForecastCell)
@@ -537,7 +537,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource{
 
 extension ForecastVC: moveToWebVC{
   func moveToWebVCFromWeatherVC(url: String) {
-    let webVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController 
+    let webVC = storyboard?.instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController 
     webVC.urlOfContent = url
     self.navigationController?.navigationBar.isHidden = false
     self.navigationController?.pushViewController(webVC, animated: true)

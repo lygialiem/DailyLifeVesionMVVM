@@ -18,6 +18,7 @@ struct DarkSkyApi: Decodable, Mappable{
     init?(map: Map) {
          
      }
+    
      mutating func mapping(map: Map) {
          currently <- map["currently"]
          latitude <- map["latitude"]

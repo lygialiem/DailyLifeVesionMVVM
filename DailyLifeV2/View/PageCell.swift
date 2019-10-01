@@ -52,7 +52,7 @@ class PageCell: UICollectionViewCell {
   }
   
   @IBAction func shareButtonByPressed(_ sender: Any) {
-    NotificationCenter.default.post(name: NSNotification.Name("shareAction"), object: nil, userInfo: ["data": self.articles!.url!])
+    NotificationCenter.default.post(name: .shareAction, object: nil, userInfo: ["data": self.articles!.url!])
   }
   
   @IBAction func likeButtonByPress(_ sender: Any) {
