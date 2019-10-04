@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kNv-vb-cCv">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--HomeVC-->
+        <scene sceneID="X2e-2w-fHC">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="kNv-vb-cCv" customClass="HomeVC" customModule="DailyLifeV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PUl-bO-HQ6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h27-mk-05n" userLabel="Side">
+                                <rect key="frame" x="-375" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="Jxj-Ks-poU" kind="embed" id="X7g-xJ-3j5"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V30-eO-g6H" userLabel="Main">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="2ig-XW-XnB" kind="embed" id="Wk4-Ae-Od0"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1569153368" green="0.15693783759999999" blue="0.156902343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="V30-eO-g6H" firstAttribute="leading" secondItem="h27-mk-05n" secondAttribute="trailing" id="1X5-qf-zlp"/>
+                            <constraint firstItem="h27-mk-05n" firstAttribute="leading" secondItem="abp-e8-3pI" secondAttribute="leading" constant="-375" id="Iaq-oA-OLg"/>
+                            <constraint firstItem="h27-mk-05n" firstAttribute="top" secondItem="PUl-bO-HQ6" secondAttribute="top" id="QhV-8N-DRd"/>
+                            <constraint firstItem="V30-eO-g6H" firstAttribute="leading" secondItem="h27-mk-05n" secondAttribute="trailing" id="RbP-zn-Cie"/>
+                            <constraint firstItem="h27-mk-05n" firstAttribute="width" secondItem="PUl-bO-HQ6" secondAttribute="width" id="iCs-vQ-poR"/>
+                            <constraint firstItem="V30-eO-g6H" firstAttribute="width" secondItem="PUl-bO-HQ6" secondAttribute="width" id="l1A-IJ-qvy"/>
+                            <constraint firstAttribute="bottom" secondItem="h27-mk-05n" secondAttribute="bottom" id="liV-Ox-1e2"/>
+                            <constraint firstAttribute="bottom" secondItem="V30-eO-g6H" secondAttribute="bottom" id="vgt-Eu-zBu"/>
+                            <constraint firstItem="V30-eO-g6H" firstAttribute="top" secondItem="PUl-bO-HQ6" secondAttribute="top" id="yV0-I4-GEc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="abp-e8-3pI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tHx-QV-66X"/>
+                    <connections>
+                        <outlet property="mainContainer" destination="V30-eO-g6H" id="gYS-Dm-oF2"/>
+                        <outlet property="sideContainer" destination="h27-mk-05n" id="bFM-mN-8ob"/>
+                        <outlet property="sideLeadingConstraint" destination="Iaq-oA-OLg" id="tMV-hi-2Mc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6D-hH-AAM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="42" y="-331"/>
+        </scene>
+        <!--UINavigationController-CXL-36-vwf-->
+        <scene sceneID="0VE-ZZ-dW3">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="UINavigationController-CXL-36-vwf" storyboardName="SideMenuViewController" referencedIdentifier="UINavigationController-CXL-36-vwf" id="Jxj-Ks-poU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfo-bK-joT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-205" y="155"/>
+        </scene>
+        <!--UITabBarController-0ru-N7-r4l-->
+        <scene sceneID="3c3-mu-0dc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TabBarController" referencedIdentifier="UITabBarController-0ru-N7-r4l" id="2ig-XW-XnB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSb-hu-6Fd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="155"/>
+        </scene>
+    </scenes>
+</document>

@@ -69,7 +69,8 @@ extension ReadingFavoriteArticle: UICollectionViewDelegateFlowLayout, UICollecti
 
 extension ReadingFavoriteArticle: ReadingFavoriteCollectionViewCellDelegate{
   func moveToWebViewController(url: String) {
-    let webViewViewController = storyboard?.instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
+
+    let webViewViewController = UIStoryboard(name: "WebViewController", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     self.navigationController?.pushViewController(webViewViewController, animated: true)
   }

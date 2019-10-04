@@ -86,7 +86,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
             self.navigationController?.viewControllers = filteredViewcontroller
         }
         
-        let readingVc = storyboard?.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
+        let readingVc = UIStoryboard(name: "ReadingViewController", bundle: nil).instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
         
         readingVc.articles = article
         readingVc.indexPathOfDidSelectedArticle = indexPathDidSelect
@@ -100,10 +100,9 @@ class MainVC: ButtonBarPagerTabStripViewController {
     }
     
     @objc func OpenSearchVC(){
-        guard let storyboard  = storyboard else {return}
-        let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+       
+        let searchVC = UIStoryboard(name: "SearchViewController", bundle: nil).instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
         self.presentPanModal(searchVC)
-        
     }
     
     @objc func moveToTopic(notification: Notification){

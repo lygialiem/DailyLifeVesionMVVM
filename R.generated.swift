@@ -722,21 +722,119 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 16 storyboards.
   struct storyboard {
+    /// Storyboard `FavoriteViewController`.
+    static let favoriteViewController = _R.storyboard.favoriteViewController()
+    /// Storyboard `ForecastViewController`.
+    static let forecastViewController = _R.storyboard.forecastViewController()
+    /// Storyboard `GPSForecastViewController`.
+    static let gpsForecastViewController = _R.storyboard.gpsForecastViewController()
+    /// Storyboard `HomeViewController`.
+    static let homeViewController = _R.storyboard.homeViewController()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `ListCityViewController`.
+    static let listCityViewController = _R.storyboard.listCityViewController()
+    /// Storyboard `MainViewController`.
+    static let mainViewController = _R.storyboard.mainViewController()
     /// Storyboard `Main`.
     static let main = _R.storyboard.main()
+    /// Storyboard `PageViewController`.
+    static let pageViewController = _R.storyboard.pageViewController()
+    /// Storyboard `ReadingFavoriteViewController`.
+    static let readingFavoriteViewController = _R.storyboard.readingFavoriteViewController()
+    /// Storyboard `ReadingViewController`.
+    static let readingViewController = _R.storyboard.readingViewController()
+    /// Storyboard `SearchViewController`.
+    static let searchViewController = _R.storyboard.searchViewController()
+    /// Storyboard `SideMenuViewController`.
+    static let sideMenuViewController = _R.storyboard.sideMenuViewController()
+    /// Storyboard `TabBarController`.
+    static let tabBarController = _R.storyboard.tabBarController()
+    /// Storyboard `WebViewController`.
+    static let webViewController = _R.storyboard.webViewController()
+    /// Storyboard `WorldClockViewController`.
+    static let worldClockViewController = _R.storyboard.worldClockViewController()
+    
+    /// `UIStoryboard(name: "FavoriteViewController", bundle: ...)`
+    static func favoriteViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.favoriteViewController)
+    }
+    
+    /// `UIStoryboard(name: "ForecastViewController", bundle: ...)`
+    static func forecastViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.forecastViewController)
+    }
+    
+    /// `UIStoryboard(name: "GPSForecastViewController", bundle: ...)`
+    static func gpsForecastViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.gpsForecastViewController)
+    }
+    
+    /// `UIStoryboard(name: "HomeViewController", bundle: ...)`
+    static func homeViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.homeViewController)
+    }
     
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
     }
     
+    /// `UIStoryboard(name: "ListCityViewController", bundle: ...)`
+    static func listCityViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.listCityViewController)
+    }
+    
     /// `UIStoryboard(name: "Main", bundle: ...)`
     static func main(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.main)
+    }
+    
+    /// `UIStoryboard(name: "MainViewController", bundle: ...)`
+    static func mainViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.mainViewController)
+    }
+    
+    /// `UIStoryboard(name: "PageViewController", bundle: ...)`
+    static func pageViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.pageViewController)
+    }
+    
+    /// `UIStoryboard(name: "ReadingFavoriteViewController", bundle: ...)`
+    static func readingFavoriteViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.readingFavoriteViewController)
+    }
+    
+    /// `UIStoryboard(name: "ReadingViewController", bundle: ...)`
+    static func readingViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.readingViewController)
+    }
+    
+    /// `UIStoryboard(name: "SearchViewController", bundle: ...)`
+    static func searchViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.searchViewController)
+    }
+    
+    /// `UIStoryboard(name: "SideMenuViewController", bundle: ...)`
+    static func sideMenuViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.sideMenuViewController)
+    }
+    
+    /// `UIStoryboard(name: "TabBarController", bundle: ...)`
+    static func tabBarController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.tabBarController)
+    }
+    
+    /// `UIStoryboard(name: "WebViewController", bundle: ...)`
+    static func webViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.webViewController)
+    }
+    
+    /// `UIStoryboard(name: "WorldClockViewController", bundle: ...)`
+    static func worldClockViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.worldClockViewController)
     }
     
     fileprivate init() {}
@@ -805,8 +903,119 @@ struct _R: Rswift.Validatable {
   
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
+      try favoriteViewController.validate()
+      try forecastViewController.validate()
+      try gpsForecastViewController.validate()
+      try homeViewController.validate()
       try launchScreen.validate()
+      try listCityViewController.validate()
       try main.validate()
+      try mainViewController.validate()
+      try pageViewController.validate()
+      try readingFavoriteViewController.validate()
+      try readingViewController.validate()
+      try searchViewController.validate()
+      try sideMenuViewController.validate()
+      try tabBarController.validate()
+      try webViewController.validate()
+      try worldClockViewController.validate()
+    }
+    
+    struct favoriteViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+      
+      let bundle = R.hostingBundle
+      let name = "FavoriteViewController"
+      let uiNavigationControllerRLJ0NW4p = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "UINavigationController-rLJ-0N-w4p")
+      
+      func uiNavigationControllerRLJ0NW4p(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiNavigationControllerRLJ0NW4p)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "heartSketch", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'heartSketch' is used in storyboard 'FavoriteViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "move", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'move' is used in storyboard 'FavoriteViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.favoriteViewController().uiNavigationControllerRLJ0NW4p() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiNavigationControllerRLJ0NW4p' could not be loaded from storyboard 'FavoriteViewController' as 'UIKit.UINavigationController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct forecastViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+      
+      let bundle = R.hostingBundle
+      let name = "ForecastViewController"
+      let uiNavigationControllerHCKQc4HJ = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "UINavigationController-hCK-Qc-4HJ")
+      let weatherVC = StoryboardViewControllerResource<ForecastVC>(identifier: "WeatherVC")
+      
+      func uiNavigationControllerHCKQc4HJ(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiNavigationControllerHCKQc4HJ)
+      }
+      
+      func weatherVC(_: Void = ()) -> ForecastVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: weatherVC)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Solar Gradients1", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Solar Gradients1' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "apixuLogo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'apixuLogo' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "darkSkyLogo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'darkSkyLogo' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "greenPlus", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'greenPlus' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "hourlyDay/rain", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'hourlyDay/rain' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "search", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'search' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "umbrella", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'umbrella' is used in storyboard 'ForecastViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.forecastViewController().uiNavigationControllerHCKQc4HJ() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiNavigationControllerHCKQc4HJ' could not be loaded from storyboard 'ForecastViewController' as 'UIKit.UINavigationController'.") }
+        if _R.storyboard.forecastViewController().weatherVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'weatherVC' could not be loaded from storyboard 'ForecastViewController' as 'ForecastVC'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct gpsForecastViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ForecastGPS
+      
+      let bundle = R.hostingBundle
+      let forecastLocationTableVC = StoryboardViewControllerResource<ForecastGPS>(identifier: "ForecastLocationTableVC")
+      let name = "GPSForecastViewController"
+      
+      func forecastLocationTableVC(_: Void = ()) -> ForecastGPS? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: forecastLocationTableVC)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "10", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named '10' is used in storyboard 'GPSForecastViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "day/176", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'day/176' is used in storyboard 'GPSForecastViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.gpsForecastViewController().forecastLocationTableVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'forecastLocationTableVC' could not be loaded from storyboard 'GPSForecastViewController' as 'ForecastGPS'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct homeViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = HomeVC
+      
+      let bundle = R.hostingBundle
+      let homeViewController = StoryboardViewControllerResource<HomeVC>(identifier: "HomeViewController")
+      let name = "HomeViewController"
+      
+      func homeViewController(_: Void = ()) -> HomeVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: homeViewController)
+      }
+      
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.homeViewController().homeViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'homeViewController' could not be loaded from storyboard 'HomeViewController' as 'HomeVC'.") }
+      }
+      
+      fileprivate init() {}
     }
     
     struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -824,82 +1033,229 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = HomeVC
+    struct listCityViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ListCityTableVC
       
       let bundle = R.hostingBundle
-      let forecastLocationTableVC = StoryboardViewControllerResource<ForecastGPS>(identifier: "ForecastLocationTableVC")
       let listCityTableVC = StoryboardViewControllerResource<ListCityTableVC>(identifier: "ListCityTableVC")
-      let name = "Main"
-      let pageControllerID = StoryboardViewControllerResource<PageVC>(identifier: "PageControllerID")
-      let readingFavoriteArticle = StoryboardViewControllerResource<ReadingFavoriteArticle>(identifier: "ReadingFavoriteArticle")
-      let readingVC = StoryboardViewControllerResource<ReadingVC>(identifier: "ReadingVC")
-      let searchVC = StoryboardViewControllerResource<SearchVC>(identifier: "SearchVC")
-      let weatherVC = StoryboardViewControllerResource<ForecastVC>(identifier: "WeatherVC")
-      let webViewVC = StoryboardViewControllerResource<WebViewController>(identifier: "WebViewVC")
-      
-      func forecastLocationTableVC(_: Void = ()) -> ForecastGPS? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: forecastLocationTableVC)
-      }
+      let name = "ListCityViewController"
       
       func listCityTableVC(_: Void = ()) -> ListCityTableVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: listCityTableVC)
       }
       
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.listCityViewController().listCityTableVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'listCityTableVC' could not be loaded from storyboard 'ListCityViewController' as 'ListCityTableVC'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct main: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Main"
+      
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct mainViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+      
+      let bundle = R.hostingBundle
+      let name = "MainViewController"
+      let uiNavigationControllerXPQZQXdM = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "UINavigationController-xPQ-zQ-XdM")
+      
+      func uiNavigationControllerXPQZQXdM(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiNavigationControllerXPQZQXdM)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "homeSketch", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'homeSketch' is used in storyboard 'MainViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "move", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'move' is used in storyboard 'MainViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.mainViewController().uiNavigationControllerXPQZQXdM() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiNavigationControllerXPQZQXdM' could not be loaded from storyboard 'MainViewController' as 'UIKit.UINavigationController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct pageViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = PageVC
+      
+      let bundle = R.hostingBundle
+      let name = "PageViewController"
+      let pageControllerID = StoryboardViewControllerResource<PageVC>(identifier: "PageControllerID")
+      
       func pageControllerID(_: Void = ()) -> PageVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: pageControllerID)
       }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "noImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'noImage' is used in storyboard 'PageViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "redLikeButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'redLikeButton' is used in storyboard 'PageViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "shareButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'shareButton' is used in storyboard 'PageViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.pageViewController().pageControllerID() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'pageControllerID' could not be loaded from storyboard 'PageViewController' as 'PageVC'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct readingFavoriteViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ReadingFavoriteArticle
+      
+      let bundle = R.hostingBundle
+      let name = "ReadingFavoriteViewController"
+      let readingFavoriteArticle = StoryboardViewControllerResource<ReadingFavoriteArticle>(identifier: "ReadingFavoriteArticle")
       
       func readingFavoriteArticle(_: Void = ()) -> ReadingFavoriteArticle? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: readingFavoriteArticle)
       }
       
+      static func validate() throws {
+        if UIKit.UIImage(named: "noImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'noImage' is used in storyboard 'ReadingFavoriteViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "shareButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'shareButton' is used in storyboard 'ReadingFavoriteViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.readingFavoriteViewController().readingFavoriteArticle() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'readingFavoriteArticle' could not be loaded from storyboard 'ReadingFavoriteViewController' as 'ReadingFavoriteArticle'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct readingViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ReadingVC
+      
+      let bundle = R.hostingBundle
+      let name = "ReadingViewController"
+      let readingVC = StoryboardViewControllerResource<ReadingVC>(identifier: "ReadingVC")
+      
       func readingVC(_: Void = ()) -> ReadingVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: readingVC)
       }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "noImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'noImage' is used in storyboard 'ReadingViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "shareButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'shareButton' is used in storyboard 'ReadingViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.readingViewController().readingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'readingVC' could not be loaded from storyboard 'ReadingViewController' as 'ReadingVC'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct searchViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = SearchVC
+      
+      let bundle = R.hostingBundle
+      let name = "SearchViewController"
+      let searchVC = StoryboardViewControllerResource<SearchVC>(identifier: "SearchVC")
       
       func searchVC(_: Void = ()) -> SearchVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: searchVC)
       }
       
-      func weatherVC(_: Void = ()) -> ForecastVC? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: weatherVC)
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.searchViewController().searchVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchVC' could not be loaded from storyboard 'SearchViewController' as 'SearchVC'.") }
       }
+      
+      fileprivate init() {}
+    }
+    
+    struct sideMenuViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+      
+      let bundle = R.hostingBundle
+      let name = "SideMenuViewController"
+      let uiNavigationControllerCXL36Vwf = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "UINavigationController-CXL-36-vwf")
+      
+      func uiNavigationControllerCXL36Vwf(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiNavigationControllerCXL36Vwf)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Travel", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Travel' is used in storyboard 'SideMenuViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "moveright", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'moveright' is used in storyboard 'SideMenuViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.sideMenuViewController().uiNavigationControllerCXL36Vwf() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiNavigationControllerCXL36Vwf' could not be loaded from storyboard 'SideMenuViewController' as 'UIKit.UINavigationController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct tabBarController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UITabBarController
+      
+      let bundle = R.hostingBundle
+      let name = "TabBarController"
+      let uiTabBarController0ruN7R4l = StoryboardViewControllerResource<UIKit.UITabBarController>(identifier: "UITabBarController-0ru-N7-r4l")
+      
+      func uiTabBarController0ruN7R4l(_: Void = ()) -> UIKit.UITabBarController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiTabBarController0ruN7R4l)
+      }
+      
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.tabBarController().uiTabBarController0ruN7R4l() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiTabBarController0ruN7R4l' could not be loaded from storyboard 'TabBarController' as 'UIKit.UITabBarController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct webViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = WebViewController
+      
+      let bundle = R.hostingBundle
+      let name = "WebViewController"
+      let webViewVC = StoryboardViewControllerResource<WebViewController>(identifier: "WebViewVC")
       
       func webViewVC(_: Void = ()) -> WebViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: webViewVC)
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "10", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named '10' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "Solar Gradients1", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Solar Gradients1' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "Travel", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Travel' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "apixuLogo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'apixuLogo' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "darkSkyLogo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'darkSkyLogo' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "day/176", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'day/176' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "greenPlus", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'greenPlus' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "heartSketch", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'heartSketch' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "homeSketch", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'homeSketch' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "hourlyDay/rain", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'hourlyDay/rain' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "move", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'move' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "moveright", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'moveright' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "noImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'noImage' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "redLikeButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'redLikeButton' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "refresh", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'refresh' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "search", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'search' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "shareButton", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'shareButton' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "umbrella", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'umbrella' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "worldClock", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'worldClock' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "move", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'move' is used in storyboard 'WebViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "moveright", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'moveright' is used in storyboard 'WebViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "refresh", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'refresh' is used in storyboard 'WebViewController', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
-        if _R.storyboard.main().forecastLocationTableVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'forecastLocationTableVC' could not be loaded from storyboard 'Main' as 'ForecastGPS'.") }
-        if _R.storyboard.main().listCityTableVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'listCityTableVC' could not be loaded from storyboard 'Main' as 'ListCityTableVC'.") }
-        if _R.storyboard.main().pageControllerID() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'pageControllerID' could not be loaded from storyboard 'Main' as 'PageVC'.") }
-        if _R.storyboard.main().readingFavoriteArticle() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'readingFavoriteArticle' could not be loaded from storyboard 'Main' as 'ReadingFavoriteArticle'.") }
-        if _R.storyboard.main().readingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'readingVC' could not be loaded from storyboard 'Main' as 'ReadingVC'.") }
-        if _R.storyboard.main().searchVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchVC' could not be loaded from storyboard 'Main' as 'SearchVC'.") }
-        if _R.storyboard.main().weatherVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'weatherVC' could not be loaded from storyboard 'Main' as 'ForecastVC'.") }
-        if _R.storyboard.main().webViewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'webViewVC' could not be loaded from storyboard 'Main' as 'WebViewController'.") }
+        if _R.storyboard.webViewController().webViewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'webViewVC' could not be loaded from storyboard 'WebViewController' as 'WebViewController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct worldClockViewController: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+      
+      let bundle = R.hostingBundle
+      let name = "WorldClockViewController"
+      let uiNavigationControllerDtzAVHWW = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "UINavigationController-dtz-aV-hWW")
+      
+      func uiNavigationControllerDtzAVHWW(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: uiNavigationControllerDtzAVHWW)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "move", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'move' is used in storyboard 'WorldClockViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "worldClock", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'worldClock' is used in storyboard 'WorldClockViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.worldClockViewController().uiNavigationControllerDtzAVHWW() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'uiNavigationControllerDtzAVHWW' could not be loaded from storyboard 'WorldClockViewController' as 'UIKit.UINavigationController'.") }
       }
       
       fileprivate init() {}

@@ -69,8 +69,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier:  R.reuseIdentifier.readingHorizoneCell, for: indexPath)!
-    
-    
+   print("INDEX PATH: ",indexPath)
     LibraryAPI.instance.getArticles(topic: self.concernedTitle ?? "", page: 4, numberOfArticles: 15) { (data) in
       DispatchQueue.main.async {
         let uniqueData = (data.articles?.uniqueValues(value: {$0.title})) ?? []
@@ -99,7 +98,7 @@ extension ReadingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegat
 extension ReadingVC: ReadingCollectionViewCellDelegate{
   func movoWebViewController(url: String?) {
     
-    let webViewViewController = storyboard?.instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
+    let webViewViewController = UIStoryboard(name: "WebViewController", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     self.navigationController?.pushViewController(webViewViewController, animated: true)
     
