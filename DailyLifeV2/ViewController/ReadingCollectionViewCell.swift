@@ -78,6 +78,7 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
         cell.configureContent(article: self.article ?? Article())
       }
       cell.delegate = self
+        
       return cell
     } else if indexPath.section == 1{
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
@@ -120,7 +121,7 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
 
 extension ReadingCollectionViewCell: ReadingCellDelegate{
   func didPressSeeMore(url: String) {
-    let webViewViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
+    let webViewViewController = UIStoryboard.init(name: "WebViewController", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url
     NotificationCenter.default.post(name: .NavigateToWebViewVCFromFirstCell, object: nil, userInfo: ["data": webViewViewController])
   }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0ru-N7-r4l">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="foo-Mz-sBJ">
+            <objects>
+                <tabBarController storyboardIdentifier="UITabBarController-0ru-N7-r4l" id="0ru-N7-r4l" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="JpO-NQ-hcc" customClass="TabbarController" customModule="DailyLifeV2" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.15686461330000001" green="0.15686029200000001" blue="0.15686112639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="hfc-mz-fx5" kind="relationship" relationship="viewControllers" id="6Y1-eB-xWj"/>
+                        <segue destination="hwD-8g-1Ak" kind="relationship" relationship="viewControllers" id="zUQ-4v-ZoG"/>
+                        <segue destination="JPD-2B-R3V" kind="relationship" relationship="viewControllers" id="ZfU-gk-vbx"/>
+                        <segue destination="N0h-u6-u6W" kind="relationship" relationship="viewControllers" id="EeT-Lv-n5v"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVn-FY-VNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="895" y="519"/>
+        </scene>
+        <!--UINavigationController-xPQ-zQ-XdM-->
+        <scene sceneID="Xr7-4i-mFo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MainViewController" referencedIdentifier="UINavigationController-xPQ-zQ-XdM" id="hfc-mz-fx5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0yp-At-Or5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="1028"/>
+        </scene>
+        <!--UINavigationController-rLJ-0N-w4p-->
+        <scene sceneID="35i-nv-BJw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FavoriteViewController" referencedIdentifier="UINavigationController-rLJ-0N-w4p" id="hwD-8g-1Ak" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N9q-FT-fkv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="659" y="1028"/>
+        </scene>
+        <!--UINavigationController-hCK-Qc-4HJ-->
+        <scene sceneID="IlY-9Z-Bs5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ForecastViewController" referencedIdentifier="UINavigationController-hCK-Qc-4HJ" id="JPD-2B-R3V" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKz-kO-w6T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1125" y="1028"/>
+        </scene>
+        <!--UINavigationController-dtz-aV-hWW-->
+        <scene sceneID="0he-h8-6dY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WorldClockViewController" referencedIdentifier="UINavigationController-dtz-aV-hWW" id="N0h-u6-u6W" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDv-r7-7GP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1560" y="1028"/>
+        </scene>
+    </scenes>
+</document>

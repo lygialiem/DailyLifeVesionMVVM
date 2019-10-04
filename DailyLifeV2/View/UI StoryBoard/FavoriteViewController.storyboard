@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rLJ-0N-w4p">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Liked Contents-->
+        <scene sceneID="lcG-F1-xT8">
+            <objects>
+                <viewController id="FqJ-5I-fWq" customClass="FavoriteVC" customModule="DailyLifeV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Ag-kj-LoG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4z-O9-wef">
+                                <rect key="frame" x="104" y="343" width="206" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="122" id="XUs-av-CVD"/>
+                                    <constraint firstAttribute="width" constant="206" id="jHV-Mi-fey"/>
+                                </constraints>
+                                <string key="text">              __,
+            (           o  /) _/_
+          `.  , , , ,  //  /
+        (___)(_(_/_(_ //_ (__
+                     /)
+                    (/</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nk7-yT-NoC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="nk7-yT-NoC" firstAttribute="leading" secondItem="Ioh-BI-oxn" secondAttribute="leading" id="FoW-3q-lF7"/>
+                            <constraint firstItem="g4z-O9-wef" firstAttribute="centerX" secondItem="Ioh-BI-oxn" secondAttribute="centerX" id="Wwl-8j-3Kp"/>
+                            <constraint firstItem="nk7-yT-NoC" firstAttribute="top" secondItem="Ioh-BI-oxn" secondAttribute="top" id="YDC-Ry-qtt"/>
+                            <constraint firstItem="g4z-O9-wef" firstAttribute="centerY" secondItem="7Ag-kj-LoG" secondAttribute="centerY" id="Zfr-FA-5k9"/>
+                            <constraint firstItem="Ioh-BI-oxn" firstAttribute="trailing" secondItem="nk7-yT-NoC" secondAttribute="trailing" id="oOn-YP-XK9"/>
+                            <constraint firstItem="Ioh-BI-oxn" firstAttribute="bottom" secondItem="nk7-yT-NoC" secondAttribute="bottom" id="wka-JI-B4n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ioh-BI-oxn"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Liked Contents" id="2cB-wk-QBv">
+                        <barButtonItem key="leftBarButtonItem" image="move" id="irK-A8-fih">
+                            <button key="customView" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NNC-KF-LJX">
+                                <rect key="frame" x="20" y="0.0" width="50" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="move"/>
+                                <connections>
+                                    <action selector="menuButtonPressed:" destination="FqJ-5I-fWq" eventType="touchUpInside" id="QLX-js-coN"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="menuButton" destination="irK-A8-fih" id="cuq-Nj-7sX"/>
+                        <outlet property="myTableView" destination="nk7-yT-NoC" id="Rhc-e7-URa"/>
+                        <outlet property="swiftLabel" destination="g4z-O9-wef" id="8VL-tQ-GS1"/>
+                        <segue destination="cYd-51-8zN" kind="show" identifier="ToFavoriteReading" id="NRu-S0-oya"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qtP-oD-Zm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="1332"/>
+        </scene>
+        <!--Liked-->
+        <scene sceneID="guk-sn-CPX">
+            <objects>
+                <navigationController storyboardIdentifier="UINavigationController-rLJ-0N-w4p" automaticallyAdjustsScrollViewInsets="NO" id="rLJ-0N-w4p" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Liked" image="heartSketch" id="fYx-uL-G33">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="-15" vertical="0.0"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="K8L-fo-n4d">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.1569153368" green="0.15693783759999999" blue="0.156902343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FqJ-5I-fWq" kind="relationship" relationship="rootViewController" id="8Pv-rd-Lmn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E1p-Ak-cKm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-756" y="1332"/>
+        </scene>
+        <!--ReadingFavoriteArticle-->
+        <scene sceneID="3lA-gj-r26">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ReadingFavoriteArticle" storyboardName="ReadingFavoriteViewController" referencedIdentifier="ReadingFavoriteArticle" id="cYd-51-8zN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EdY-8B-wuZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="583" y="1332"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="heartSketch" width="25" height="25"/>
+        <image name="move" width="25" height="25"/>
+    </resources>
+</document>

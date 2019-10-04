@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dtz-aV-hWW">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--World Clock-->
+        <scene sceneID="wOu-Vr-Hkb">
+            <objects>
+                <viewController id="Eiz-AQ-2GT" customClass="WorldClockVC" customModule="DailyLifeV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="awd-Ge-C14">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M4B-Qj-atq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" rowHeight="70" id="l9T-Of-HTa" customClass="WorldClockCell" customModule="DailyLifeV2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l9T-Of-HTa" id="swj-Lc-W5W">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5G-zH-M0c">
+                                                    <rect key="frame" x="20" y="69.5" width="374" height="0.5"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="bI5-Lu-2rY"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="l6W-tI-IgU"/>
+                                                    </constraints>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qO4-WR-bGQ">
+                                                    <rect key="frame" x="394" y="5" width="0.0" height="60"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fno-Uo-Agq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQa-na-BTM">
+                                                            <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <viewLayoutGuide key="safeArea" id="EM2-py-YH7"/>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EC8-KZ-k2N">
+                                                    <rect key="frame" x="20" y="5" width="0.0" height="59.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btz-1r-KEp">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz9-JN-T2Z">
+                                                            <rect key="frame" x="0.0" y="30" width="0.0" height="29.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="n5G-zH-M0c" secondAttribute="bottom" id="33E-3x-KRr"/>
+                                                <constraint firstAttribute="bottom" secondItem="qO4-WR-bGQ" secondAttribute="bottom" constant="5" id="3NO-g8-aQ7"/>
+                                                <constraint firstItem="n5G-zH-M0c" firstAttribute="top" secondItem="EC8-KZ-k2N" secondAttribute="bottom" constant="5" id="M54-rt-dyb"/>
+                                                <constraint firstItem="EC8-KZ-k2N" firstAttribute="top" secondItem="swj-Lc-W5W" secondAttribute="top" constant="5" id="N2B-xB-Jya"/>
+                                                <constraint firstItem="qO4-WR-bGQ" firstAttribute="top" secondItem="swj-Lc-W5W" secondAttribute="top" constant="5" id="Wej-gK-1qq"/>
+                                                <constraint firstAttribute="trailing" secondItem="qO4-WR-bGQ" secondAttribute="trailing" constant="20" id="aSi-qG-kmS"/>
+                                                <constraint firstItem="EC8-KZ-k2N" firstAttribute="leading" secondItem="swj-Lc-W5W" secondAttribute="leading" constant="20" id="qSJ-xf-8ZD"/>
+                                                <constraint firstItem="n5G-zH-M0c" firstAttribute="leading" secondItem="swj-Lc-W5W" secondAttribute="leading" constant="20" id="vAx-6a-WJR"/>
+                                                <constraint firstAttribute="trailing" secondItem="n5G-zH-M0c" secondAttribute="trailing" constant="20" id="yJz-6h-wxm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="cityName" destination="btz-1r-KEp" id="vDe-U8-8wt"/>
+                                            <outlet property="continentName" destination="jz9-JN-T2Z" id="CTG-sm-Iyh"/>
+                                            <outlet property="gmt" destination="BQa-na-BTM" id="qS7-Q8-CAA"/>
+                                            <outlet property="timezone" destination="Fno-Uo-Agq" id="ISh-G5-oVT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="M4B-Qj-atq" firstAttribute="top" secondItem="CYR-DZ-Afe" secondAttribute="top" id="Dt5-JV-ZTw"/>
+                            <constraint firstItem="CYR-DZ-Afe" firstAttribute="trailing" secondItem="M4B-Qj-atq" secondAttribute="trailing" id="SGj-YA-oeo"/>
+                            <constraint firstItem="M4B-Qj-atq" firstAttribute="leading" secondItem="CYR-DZ-Afe" secondAttribute="leading" id="fFv-GB-urw"/>
+                            <constraint firstItem="CYR-DZ-Afe" firstAttribute="bottom" secondItem="M4B-Qj-atq" secondAttribute="bottom" id="oXx-zd-kOX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CYR-DZ-Afe"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="World Clock" id="EPb-BJ-tML">
+                        <barButtonItem key="leftBarButtonItem" id="qRE-cR-Od5">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U2Q-as-edR">
+                                <rect key="frame" x="20" y="0.0" width="50" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="move"/>
+                                <connections>
+                                    <action selector="menuButtonByPressed:" destination="Eiz-AQ-2GT" eventType="touchUpInside" id="x0E-mo-ZE4"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="BGY-LN-jQp">
+                            <connections>
+                                <segue destination="Fti-RR-mhS" kind="show" identifier="listCities" id="ZIB-Qr-RoF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="BGY-LN-jQp" id="99M-dx-kNW"/>
+                        <outlet property="menuButton" destination="qRE-cR-Od5" id="eC4-0l-Clx"/>
+                        <outlet property="myTableView" destination="M4B-Qj-atq" id="I3A-ce-efT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gaA-VZ-2A1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2984.8000000000002" y="517.6911544227886"/>
+        </scene>
+        <!--World Clock-->
+        <scene sceneID="BZV-6Z-7es">
+            <objects>
+                <navigationController storyboardIdentifier="UINavigationController-dtz-aV-hWW" automaticallyAdjustsScrollViewInsets="NO" id="dtz-aV-hWW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="World Clock" image="worldClock" id="qF8-ZQ-6DJ">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="oAs-vQ-sxz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.1569153368" green="0.15693783759999999" blue="0.156902343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.1569153368" green="0.15693783759999999" blue="0.156902343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Eiz-AQ-2GT" kind="relationship" relationship="rootViewController" id="XUS-qv-tTZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2os-Cf-SRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2045.5999999999999" y="518.59070464767615"/>
+        </scene>
+        <!--ListCityTableVC-->
+        <scene sceneID="siu-D8-3AW">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ListCityTableVC" storyboardName="ListCityViewController" referencedIdentifier="ListCityTableVC" id="Fti-RR-mhS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nAv-fT-dHg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3732" y="517.6911544227886"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="move" width="25" height="25"/>
+        <image name="worldClock" width="25" height="25"/>
+    </resources>
+</document>

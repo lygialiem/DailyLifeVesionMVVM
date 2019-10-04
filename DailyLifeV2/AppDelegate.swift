@@ -21,6 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    // MARK: - Setup RootViewController:
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    let sb = UIStoryboard(name: "HomeViewController", bundle: nil)
+    let vc = sb.instantiateInitialViewController() as? HomeVC
+    self.window?.makeKeyAndVisible()
+    window?.rootViewController = vc
+    
     // MARK: - Firebase Configure:
     FirebaseApp.configure()
     

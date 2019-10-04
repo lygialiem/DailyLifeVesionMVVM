@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NLg-wH-Y6q">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--List City TableVC-->
+        <scene sceneID="nvK-F9-RmN">
+            <objects>
+                <tableViewController storyboardIdentifier="ListCityTableVC" id="NLg-wH-Y6q" customClass="ListCityTableVC" customModule="DailyLifeV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fLQ-kh-nO5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="0.77696917809999999" blue="0.27498039130000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="alphabeltHeader" rowHeight="18" id="jtL-aU-5HQ" customClass="AlphabeltHeaderTableViewCell" customModule="DailyLifeV2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="18"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jtL-aU-5HQ" id="rb4-3N-VUx">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE4-7a-I53">
+                                            <rect key="frame" x="15" y="0.0" width="384" height="18"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="NE4-7a-I53" secondAttribute="bottom" id="3fJ-9Y-iTj"/>
+                                        <constraint firstItem="NE4-7a-I53" firstAttribute="leading" secondItem="rb4-3N-VUx" secondAttribute="leading" constant="15" id="CHR-w4-ga6"/>
+                                        <constraint firstAttribute="trailing" secondItem="NE4-7a-I53" secondAttribute="trailing" constant="15" id="Zdg-A4-dZg"/>
+                                        <constraint firstItem="NE4-7a-I53" firstAttribute="top" secondItem="rb4-3N-VUx" secondAttribute="top" id="m5L-ze-f72"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="alphabeltHeader" destination="NE4-7a-I53" id="0LA-aH-UXZ"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityListCell" id="kzS-nv-sTk" customClass="listCityNameCell" customModule="DailyLifeV2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="46" width="414" height="27.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kzS-nv-sTk" id="vzg-sy-KGv">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="27.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="America" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWj-R2-Jqp">
+                                            <rect key="frame" x="20" y="5" width="250" height="17.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="250" id="Cts-55-rG0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgP-Q9-JPg">
+                                            <rect key="frame" x="20" y="27" width="374" height="0.5"/>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="4EZ-pm-3Mh"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MgP-Q9-JPg" firstAttribute="leading" secondItem="vzg-sy-KGv" secondAttribute="leading" constant="20" id="25w-U1-CZJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="MgP-Q9-JPg" secondAttribute="bottom" id="C3H-Fa-186"/>
+                                        <constraint firstAttribute="trailing" secondItem="MgP-Q9-JPg" secondAttribute="trailing" constant="20" id="MIs-84-YTo"/>
+                                        <constraint firstAttribute="bottom" secondItem="OWj-R2-Jqp" secondAttribute="bottom" constant="5" id="efe-if-C91"/>
+                                        <constraint firstItem="OWj-R2-Jqp" firstAttribute="top" secondItem="vzg-sy-KGv" secondAttribute="top" constant="5" id="fSw-2V-ojX"/>
+                                        <constraint firstItem="OWj-R2-Jqp" firstAttribute="leading" secondItem="vzg-sy-KGv" secondAttribute="leading" constant="20" id="kHH-NF-9tf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="nameTItle" destination="OWj-R2-Jqp" id="REn-uP-tZk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="NLg-wH-Y6q" id="eNQ-Rc-DAG"/>
+                            <outlet property="delegate" destination="NLg-wH-Y6q" id="1LK-lZ-Oh2"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXl-Du-cdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3732" y="517.6911544227886"/>
+        </scene>
+    </scenes>
+</document>

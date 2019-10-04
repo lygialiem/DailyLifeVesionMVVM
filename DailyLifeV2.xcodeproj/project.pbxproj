@@ -12,6 +12,20 @@
 		BB30249623385F1B00E4D2F7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30249523385F1B00E4D2F7 /* R.generated.swift */; };
 		BB7108D9233A2D0A0038A62C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB7108D8233A2D090038A62C /* GoogleService-Info.plist */; };
 		BBCF28B4233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF28B3233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift */; };
+		BBF014F923473483006B94C6 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF014F823473483006B94C6 /* HomeViewController.storyboard */; };
+		BBF014FB234734C0006B94C6 /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF014FA234734C0006B94C6 /* SideMenuViewController.storyboard */; };
+		BBF014FD23473E8E006B94C6 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF014FC23473E8E006B94C6 /* TabBarController.storyboard */; };
+		BBF014FF23474251006B94C6 /* WorldClockViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF014FE23474251006B94C6 /* WorldClockViewController.storyboard */; };
+		BBF015012347428E006B94C6 /* ListCityViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF015002347428E006B94C6 /* ListCityViewController.storyboard */; };
+		BBF01503234742C8006B94C6 /* FavoriteViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF01502234742C8006B94C6 /* FavoriteViewController.storyboard */; };
+		BBF01505234742F5006B94C6 /* ReadingFavoriteViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF01504234742F5006B94C6 /* ReadingFavoriteViewController.storyboard */; };
+		BBF015072347431B006B94C6 /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF015062347431B006B94C6 /* MainViewController.storyboard */; };
+		BBF0150923474347006B94C6 /* PageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF0150823474347006B94C6 /* PageViewController.storyboard */; };
+		BBF0150B23474369006B94C6 /* ReadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF0150A23474369006B94C6 /* ReadingViewController.storyboard */; };
+		BBF0150D23474382006B94C6 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF0150C23474382006B94C6 /* WebViewController.storyboard */; };
+		BBF0150F234743A5006B94C6 /* ForecastViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF0150E234743A5006B94C6 /* ForecastViewController.storyboard */; };
+		BBF015112347440B006B94C6 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF015102347440B006B94C6 /* SearchViewController.storyboard */; };
+		BBF0151323474453006B94C6 /* GPSForecastViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF0151223474453006B94C6 /* GPSForecastViewController.storyboard */; };
 		E70401F02316370C00197209 /* DetailForecastCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70401EF2316370C00197209 /* DetailForecastCelll.swift */; };
 		E70492AC23014FCC0023E468 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70492AB23014FCC0023E468 /* SideMenuCell.swift */; };
 		E70821832335C9ED00E75AEB /* LibraryRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70821822335C9ED00E75AEB /* LibraryRealm.swift */; };
@@ -83,6 +97,20 @@
 		BB30249523385F1B00E4D2F7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		BB7108D8233A2D090038A62C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BBCF28B3233B8077004798B0 /* AlphabeltHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeltHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		BBF014F823473483006B94C6 /* HomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
+		BBF014FA234734C0006B94C6 /* SideMenuViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SideMenuViewController.storyboard; sourceTree = "<group>"; };
+		BBF014FC23473E8E006B94C6 /* TabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
+		BBF014FE23474251006B94C6 /* WorldClockViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WorldClockViewController.storyboard; sourceTree = "<group>"; };
+		BBF015002347428E006B94C6 /* ListCityViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListCityViewController.storyboard; sourceTree = "<group>"; };
+		BBF01502234742C8006B94C6 /* FavoriteViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoriteViewController.storyboard; sourceTree = "<group>"; };
+		BBF01504234742F5006B94C6 /* ReadingFavoriteViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReadingFavoriteViewController.storyboard; sourceTree = "<group>"; };
+		BBF015062347431B006B94C6 /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
+		BBF0150823474347006B94C6 /* PageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PageViewController.storyboard; sourceTree = "<group>"; };
+		BBF0150A23474369006B94C6 /* ReadingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReadingViewController.storyboard; sourceTree = "<group>"; };
+		BBF0150C23474382006B94C6 /* WebViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
+		BBF0150E234743A5006B94C6 /* ForecastViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ForecastViewController.storyboard; sourceTree = "<group>"; };
+		BBF015102347440B006B94C6 /* SearchViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
+		BBF0151223474453006B94C6 /* GPSForecastViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GPSForecastViewController.storyboard; sourceTree = "<group>"; };
 		E70401EF2316370C00197209 /* DetailForecastCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCelll.swift; sourceTree = "<group>"; };
 		E70492AB23014FCC0023E468 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		E70821822335C9ED00E75AEB /* LibraryRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRealm.swift; sourceTree = "<group>"; };
@@ -179,6 +207,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BBF014F623473437006B94C6 /* UI StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				BBF014F823473483006B94C6 /* HomeViewController.storyboard */,
+				BBF014FA234734C0006B94C6 /* SideMenuViewController.storyboard */,
+				BBF014FC23473E8E006B94C6 /* TabBarController.storyboard */,
+				E780E5B12301938000869885 /* Main.storyboard */,
+				BBF015102347440B006B94C6 /* SearchViewController.storyboard */,
+				BBF0151223474453006B94C6 /* GPSForecastViewController.storyboard */,
+				BBF0150E234743A5006B94C6 /* ForecastViewController.storyboard */,
+				BBF0150C23474382006B94C6 /* WebViewController.storyboard */,
+				BBF0150A23474369006B94C6 /* ReadingViewController.storyboard */,
+				BBF0150823474347006B94C6 /* PageViewController.storyboard */,
+				BBF015062347431B006B94C6 /* MainViewController.storyboard */,
+				BBF01504234742F5006B94C6 /* ReadingFavoriteViewController.storyboard */,
+				BBF01502234742C8006B94C6 /* FavoriteViewController.storyboard */,
+				BBF015002347428E006B94C6 /* ListCityViewController.storyboard */,
+				BBF014FE23474251006B94C6 /* WorldClockViewController.storyboard */,
+				E71F711522C267D80050B506 /* LaunchScreen.storyboard */,
+			);
+			path = "UI StoryBoard";
+			sourceTree = "<group>";
+		};
+		BBF014F723473444006B94C6 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				E7E3CA712311128000DD87B6 /* DetailForecastCell.xib */,
+				E7FFA5E92318C6B700ABB379 /* SmallArticleCell.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
 		E71F710022C267D60050B506 = {
 			isa = PBXGroup;
 			children = (
@@ -244,10 +304,8 @@
 		E71F711F22C26B1E0050B506 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E780E5B12301938000869885 /* Main.storyboard */,
-				E71F711522C267D80050B506 /* LaunchScreen.storyboard */,
-				E7E3CA712311128000DD87B6 /* DetailForecastCell.xib */,
-				E7FFA5E92318C6B700ABB379 /* SmallArticleCell.xib */,
+				BBF014F723473444006B94C6 /* XIBs */,
+				BBF014F623473437006B94C6 /* UI StoryBoard */,
 				E774873923128E290096C1D8 /* daily.jpg */,
 				E79D708A22DC50F3001125F6 /* PageCell.swift */,
 				E70492AB23014FCC0023E468 /* SideMenuCell.swift */,
@@ -382,10 +440,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF0150D23474382006B94C6 /* WebViewController.storyboard in Resources */,
+				BBF0150923474347006B94C6 /* PageViewController.storyboard in Resources */,
+				BBF01505234742F5006B94C6 /* ReadingFavoriteViewController.storyboard in Resources */,
+				BBF015112347440B006B94C6 /* SearchViewController.storyboard in Resources */,
+				BBF015012347428E006B94C6 /* ListCityViewController.storyboard in Resources */,
+				BBF0151323474453006B94C6 /* GPSForecastViewController.storyboard in Resources */,
 				E774873A23128E290096C1D8 /* daily.jpg in Resources */,
+				BBF0150F234743A5006B94C6 /* ForecastViewController.storyboard in Resources */,
 				E71F711722C267D80050B506 /* LaunchScreen.storyboard in Resources */,
+				BBF015072347431B006B94C6 /* MainViewController.storyboard in Resources */,
+				BBF014FD23473E8E006B94C6 /* TabBarController.storyboard in Resources */,
 				E7FFA5EB2318C6B700ABB379 /* SmallArticleCell.xib in Resources */,
+				BBF014FB234734C0006B94C6 /* SideMenuViewController.storyboard in Resources */,
 				E780E5B22301938000869885 /* Main.storyboard in Resources */,
+				BBF014FF23474251006B94C6 /* WorldClockViewController.storyboard in Resources */,
+				BBF014F923473483006B94C6 /* HomeViewController.storyboard in Resources */,
+				BBF01503234742C8006B94C6 /* FavoriteViewController.storyboard in Resources */,
+				BBF0150B23474369006B94C6 /* ReadingViewController.storyboard in Resources */,
 				E71F711422C267D80050B506 /* Assets.xcassets in Resources */,
 				E7E3CA722311128000DD87B6 /* DetailForecastCell.xib in Resources */,
 				BB7108D9233A2D0A0038A62C /* GoogleService-Info.plist in Resources */,
@@ -450,7 +522,7 @@
 				"$TEMP_DIR/rswift-lastrun",
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

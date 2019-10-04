@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jkk-hM-LBY">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reading Favorite Article-->
+        <scene sceneID="avk-II-9A0">
+            <objects>
+                <viewController storyboardIdentifier="ReadingFavoriteArticle" id="Jkk-hM-LBY" customClass="ReadingFavoriteArticle" customModule="DailyLifeV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6mw-0E-mpP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hfr-DM-0jB">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yAw-lq-Twf">
+                                    <size key="itemSize" width="375" height="554"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReadingFavortiteCell" id="mMN-Yp-veW" customClass="ReadingFavoriteReadingCollectionViewCell" customModule="DailyLifeV2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="132" width="375" height="554"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="rvJ-aZ-nGU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="rvJ-aZ-nGU" secondAttribute="height" multiplier="16:9" id="76P-JB-Nla"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgy-Z9-yz8">
+                                                    <rect key="frame" x="8" y="342.5" width="359" height="16"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd4-3Y-I1H">
+                                                    <rect key="frame" x="8" y="219" width="359" height="37.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vN5-iG-FXs">
+                                                    <rect key="frame" x="8" y="264.5" width="359" height="70"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstItem="vN5-iG-FXs" firstAttribute="top" secondItem="dd4-3Y-I1H" secondAttribute="bottom" constant="8" id="7gy-BG-1Mp"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lgy-Z9-yz8" secondAttribute="bottom" constant="8" id="9mR-Dw-R1u"/>
+                                            <constraint firstItem="rvJ-aZ-nGU" firstAttribute="leading" secondItem="mMN-Yp-veW" secondAttribute="leading" id="GzP-S8-yGE"/>
+                                            <constraint firstAttribute="trailing" secondItem="rvJ-aZ-nGU" secondAttribute="trailing" id="HaT-j0-fJO"/>
+                                            <constraint firstAttribute="trailing" secondItem="vN5-iG-FXs" secondAttribute="trailing" constant="8" id="Jlj-Wf-pk5"/>
+                                            <constraint firstItem="rvJ-aZ-nGU" firstAttribute="top" secondItem="mMN-Yp-veW" secondAttribute="top" id="UJt-Py-t4M"/>
+                                            <constraint firstItem="vN5-iG-FXs" firstAttribute="leading" secondItem="mMN-Yp-veW" secondAttribute="leading" constant="8" id="YYe-Ut-hrJ"/>
+                                            <constraint firstItem="lgy-Z9-yz8" firstAttribute="top" secondItem="vN5-iG-FXs" secondAttribute="bottom" constant="8" id="diz-ww-pjv"/>
+                                            <constraint firstItem="dd4-3Y-I1H" firstAttribute="leading" secondItem="mMN-Yp-veW" secondAttribute="leading" constant="8" id="m7j-Wa-mUv"/>
+                                            <constraint firstAttribute="trailing" secondItem="dd4-3Y-I1H" secondAttribute="trailing" constant="8" id="n70-Ff-85p"/>
+                                            <constraint firstAttribute="trailing" secondItem="lgy-Z9-yz8" secondAttribute="trailing" constant="8" id="rIo-UW-SBr"/>
+                                            <constraint firstItem="dd4-3Y-I1H" firstAttribute="top" secondItem="rvJ-aZ-nGU" secondAttribute="bottom" constant="8" id="tJo-rW-R0W"/>
+                                            <constraint firstItem="lgy-Z9-yz8" firstAttribute="leading" secondItem="mMN-Yp-veW" secondAttribute="leading" constant="8" id="vRM-jc-KXc"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="authorArticle" destination="lgy-Z9-yz8" id="ePq-kJ-ogE"/>
+                                            <outlet property="contentArticle" destination="vN5-iG-FXs" id="XXm-31-NK3"/>
+                                            <outlet property="imageArticle" destination="rvJ-aZ-nGU" id="taM-Zh-qvH"/>
+                                            <outlet property="titleArticle" destination="dd4-3Y-I1H" id="ggf-eM-tgS"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lck-gc-2gO" firstAttribute="trailing" secondItem="Hfr-DM-0jB" secondAttribute="trailing" id="3rY-su-tPD"/>
+                            <constraint firstItem="Hfr-DM-0jB" firstAttribute="leading" secondItem="lck-gc-2gO" secondAttribute="leading" id="8yH-fy-Lta"/>
+                            <constraint firstItem="Hfr-DM-0jB" firstAttribute="top" secondItem="lck-gc-2gO" secondAttribute="top" id="9FT-HL-6CE"/>
+                            <constraint firstItem="lck-gc-2gO" firstAttribute="bottom" secondItem="Hfr-DM-0jB" secondAttribute="bottom" id="fcI-wr-KLY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lck-gc-2gO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6Ef-18-kta">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="shareButton" id="edb-bB-FE2">
+                            <connections>
+                                <action selector="shareButton:" destination="Jkk-hM-LBY" id="Vg3-uy-KIi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="myCollectionView" destination="Hfr-DM-0jB" id="jEr-Uw-0pm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v4g-gt-lTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="809" y="1334"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="noImage" width="110" height="84"/>
+        <image name="shareButton" width="25" height="25"/>
+    </resources>
+</document>
