@@ -9,86 +9,82 @@
 import UIKit
 import PanModal
 
-class SearchVC: UITableViewController{
-  
+class SearchVC: UITableViewController {
+
   var shortHeightFormEnabled = true
   @IBOutlet var mySearchBar: UISearchBar!
   var articles = [Article]()
-  
+
   var searchText = ""
   var currentPage = 2
   weak  var delegate: SearchVCToReadingFavoriteVC?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     self.mySearchBar.delegate = self
     self.mySearchBar.backgroundColor = .black
     self.mySearchBar.barStyle = .black
     self.mySearchBar.placeholder = self.getUserDefault().replacingOccurrences(of: "%20", with: " ")
     self.tableView.register(R.nib.smallArticleCell)
-    
+
     let topic = self.getUserDefault()
-    
-    if topic != ""{
-      
+
+    if !(topic.isEmpty) {
+
       LibraryAPI.instance.getSearchArticle(topic: topic, page: 1, numberOfArticles: 15) { (articles) in
-        let musHaveImageArticle = articles.articles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})
+        let musHaveImageArticle = articles.articles?.filter({!($0.urlToImage == nil || ($0.urlToImage?.isEmpty) ?? Bool())})
         let uniqueArticles = (musHaveImageArticle?.uniqueValues(value: {$0.title})) ?? [Article]()
         self.articles = uniqueArticles
-        
+
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
       }
     }
   }
-  
-  func tapToResignFirstResponder(){
+
+  func tapToResignFirstResponder() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
     self.tableView.addGestureRecognizer(tap)
   }
-  
-  @objc func handleTap(){
-    
+
+  @objc func handleTap() {
+
   }
-  
-  func getUserDefault() -> String{
+
+  func getUserDefault() -> String {
     guard let value = UserDefaults.standard.value(forKey: "searchTopic") as? String else {return String()}
     return value
   }
-  
-  
+
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100
   }
-  
+
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return articles.count
   }
-  
-  
+
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     let topic = self.getUserDefault()
-    if indexPath.row == articles.count - 5{
+    if indexPath.row == articles.count - 5 {
       let numberOfPage = 9
-      if currentPage <= numberOfPage{
-        
+      if currentPage <= numberOfPage {
+
         LibraryAPI.instance.getSearchArticle(topic: topic, page: currentPage, numberOfArticles: 15) { (articles) in
-          
+
           let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
-          let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage == ""})) ?? []
+            let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || ($0.urlToImage?.isEmpty) ?? Bool() })) ?? []
             DispatchQueue.main.async {
-                for article in alwaysHaveImageArticles{
+                for article in alwaysHaveImageArticles {
                   self.articles.append(article)
                   self.tableView.insertRows(at: [IndexPath(row: self.articles.count - 1, section: indexPath.section)], with: .automatic)
                 }
             }
-          
+
           self.currentPage += 1
-        
-            
-            
+
 //          DispatchQueue.main.async {
 //            self.tableView.reloadData()
 //          }
@@ -96,54 +92,54 @@ class SearchVC: UITableViewController{
       }
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+
     let topic = self.getUserDefault()
-    
+
     NotificationCenter.default.post(name: .searchVCToReadingVC, object: nil, userInfo: ["data": articles, "indexPath": indexPath, "topic": topic])
     self.dismiss(animated: true, completion: nil)
   }
-  
+
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
-    
+
     DispatchQueue.main.async {
       cell.configureCell(article: self.articles[indexPath.row])
     }
-    
+
     return cell
   }
 }
 
-extension SearchVC: PanModalPresentable{
-  var panScrollable: UIScrollView?{
+extension SearchVC: PanModalPresentable {
+  var panScrollable: UIScrollView? {
     return tableView
   }
-  
-  var shortFormHeight: PanModalHeight{
+
+  var shortFormHeight: PanModalHeight {
     return longFormHeight
   }
 }
 
-extension SearchVC: UISearchBarDelegate{
-  
+extension SearchVC: UISearchBarDelegate {
+
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    
+
   }
-  
+
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    if searchBar.text == "" || searchBar.text == " "{
+    if searchBar.text!.isEmpty || searchBar.text == " "{
       searchBar.placeholder = "Type What You Need"
     } else {
       let topic = searchBar.text?.replacingOccurrences(of: " ", with: "%20") ?? ""
-      LibraryAPI.instance.getSearchArticle(topic: topic , page: 1, numberOfArticles: 10) { (articles) in
-        
+      LibraryAPI.instance.getSearchArticle(topic: topic, page: 1, numberOfArticles: 10) { (articles) in
+
         let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
-        let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage == ""})) ?? []
+        let alwaysHaveImageArticles = (uniqueArticles?.filter({$0.urlToImage != nil || $0.urlToImage!.isEmpty })) ?? []
         self.articles = alwaysHaveImageArticles
-        
+
         DispatchQueue.main.async {
           UserDefaults.standard.set(topic, forKey: "searchTopic")
           UserDefaults.standard.synchronize()

@@ -9,18 +9,15 @@
 import UIKit
 
 class Title_Sumary_Daily_Forecast: UITableViewCell {
-  
+
   @IBOutlet var titleCell: UILabel!
   @IBOutlet var tempSumary: UILabel!
   @IBOutlet var citySumary: UILabel!
   @IBOutlet var imageSumary: UIImageView!
   @IBOutlet var detailTitle: UILabel!
-  
+
   override func awakeFromNib() {
         super.awakeFromNib()
-    
-  
-    
+
     }
 }
-

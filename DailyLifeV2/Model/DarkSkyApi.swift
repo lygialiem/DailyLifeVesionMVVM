@@ -9,16 +9,16 @@
 import Foundation
 import ObjectMapper
 
-struct DarkSkyApi: Decodable, Mappable{
+struct DarkSkyApi: Decodable, Mappable {
     var currently: Currently?
     var latitude: Double?
     var longitude: Double?
     var daily: Daily?
-    
+
     init?(map: Map) {
-         
+
      }
-    
+
      mutating func mapping(map: Map) {
          currently <- map["currently"]
          latitude <- map["latitude"]
@@ -27,48 +27,48 @@ struct DarkSkyApi: Decodable, Mappable{
      }
 }
 
-struct Daily: Decodable, Mappable{
- 
+struct Daily: Decodable, Mappable {
+
     var summary: String?
     var icon: String?
     var data: [Data]?
-    
+
     init?(map: Map) {
-         
+
      }
-     
+
      mutating func mapping(map: Map) {
          summary <- map["summary"]
          icon <- map["icon"]
          data <- map["data"]
      }
-     
+
 }
 
-struct Data: Decodable, Mappable{
-    
+struct Data: Decodable, Mappable {
+
     var time: Int?
     var temperatureMax: Double?
     var temperatureMin: Double?
     var icon: String?
     var precipProbability: Double?
-    
+
     init?(map: Map) {
-        
+
     }
-    
+
     mutating func mapping(map: Map) {
         time <- map["time"]
         temperatureMax <- map["temperatureMax"]
         temperatureMin <- map["temperatureMin"]
         icon <- map["icon"]
         precipProbability <- map["precipProbability"]
-        
+
     }
 }
 
 struct Currently: Decodable, Mappable {
-    
+
     var precipType: String?
     var summary: String?
     var icon: String?
@@ -88,11 +88,11 @@ struct Currently: Decodable, Mappable {
     var temperature: Double?
     var apparentTemperature: Double?
     var windGust: Double?
-    
+
     init?(map: Map) {
-        
+
     }
-    
+
     mutating func mapping(map: Map) {
         precipType <- map["precipType"]
         summary <- map["summary"]
@@ -113,11 +113,7 @@ struct Currently: Decodable, Mappable {
         temperature <- map["temperature"]
         apparentTemperature <- map["apparentTemperature"]
         windGust <- map["windGust"]
-        
+
     }
-    
-    
+
 }
-
-
-

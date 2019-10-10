@@ -11,18 +11,18 @@ import XLPagerTabStrip
 import Firebase
 
 class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegate {
-  
+
   @IBOutlet var outOfDateApi: UILabel!
   @IBOutlet var newsFeedCV: UICollectionView!
-  
+
   var articles = [Article]()
   var menuBarTitle: String = ""
   var currentPage = 2
   var articlesOfConcern = [Article]()
   let refreshControl = UIRefreshControl()
-  
+
     override func viewWillAppear(_ animated: Bool) {
-        
+
         Analytics.logEvent("\(menuBarTitle.uppercased())", parameters: nil)
 //
 //        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
@@ -32,7 +32,7 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
 //        tracker.send(builder.build() as [NSObject : AnyObject])
 //
     }
-    
+
   override func viewDidLoad() {
     super.viewDidLoad()
     print(LibraryRealm.instance.realm.configuration.fileURL!)
@@ -42,50 +42,50 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
     self.tabBarController?.delegate = self
     NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: .reload, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShareAction(notification:)), name: .shareAction, object: nil)
-    
+
     DispatchQueue.global(qos: .userInitiated).async {
-      
-      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7){ (articles) in
+
+      LibraryAPI.instance.getArticles(topic: self.menuBarTitle, page: 1, numberOfArticles: 7) { (articles) in
         let uniqueArticles = articles.articles?.uniqueValues(value: {$0.title})
-        self.articles = (uniqueArticles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})) ?? [Article]()
-        
+        self.articles = (uniqueArticles?.filter({!($0.urlToImage == nil || $0.urlToImage!.isEmpty )})) ?? [Article]()
+
         DispatchQueue.main.async {
           self.newsFeedCV.reloadData()
         }
       }
     }
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
-  
+
   func scrollToTop() {
     self.newsFeedCV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
   }
-  
-  @objc func handleShareAction(notification: Notification){
+
+  @objc func handleShareAction(notification: Notification) {
     let url = notification.userInfo!["data"]
     let share = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
     self.present(share, animated: true, completion: nil)
   }
-  @objc func handleReload(){
+  @objc func handleReload() {
     self.newsFeedCV.reloadData()
   }
-  func setupRefreshControl(){
+  func setupRefreshControl() {
     refreshControl.tintColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
     refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: UIControl.Event.valueChanged)
     newsFeedCV.refreshControl = refreshControl
   }
-  func configureCollectionView(){
+  func configureCollectionView() {
     newsFeedCV.delegate = self
     newsFeedCV.dataSource = self
   }
-  
-  @objc func handleRefreshControl(){
-    
+
+  @objc func handleRefreshControl() {
+
     LibraryAPI.instance.getArticles(topic: menuBarTitle, page: 1, numberOfArticles: 7) { (data) in
-      
+
       self.articles = (data.articles?.filter({!($0.urlToImage == nil)})) ?? [Article]()
       DispatchQueue.main.async {
         self.newsFeedCV.reloadData()
@@ -93,54 +93,53 @@ class PageVC: UIViewController, IndicatorInfoProvider, UITabBarControllerDelegat
       }
     }
   }
-  
+
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
     return IndicatorInfo(title: "\(menuBarTitle)")
   }
 }
 
-extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-  
+extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
+
     return articles.count
   }
-  
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.cellOfArticles, for: indexPath)!
-    
+
     DispatchQueue.main.async {
       cell.confiureCell(articles: self.articles[indexPath.row])
     }
     cell.likeButton.setImage(R.image.greenLikeButton(), for: .normal)
     cell.isLikedStateButton = false
-    
+
     let favoriteArticles = LibraryRealm.instance.realm.objects(FavoriteArticleRealmModel.self)
       favoriteArticles.forEach { (article) in
-        if article.title == self.articles[indexPath.row].title{
+        if article.title == self.articles[indexPath.row].title {
             cell.likeButton.setImage(R.image.redLikeButton(), for: .normal)
           cell.isLikedStateButton = true
         }
       }
-    
+
     return cell
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = self.view.frame.width - 40
     return CGSize(width: width, height: width * 9 / 16 + 60)
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 20
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+
     guard let storyboard = self.storyboard else { return }
     let readingVC = storyboard.instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
-    
+
     readingVC.articles = self.articles
     readingVC.indexPathOfDidSelectedArticle = indexPath
     readingVC.concernedTitle = menuBarTitle
@@ -148,21 +147,21 @@ extension PageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     readingVC.navigationItem.backBarButtonItem?.title = ""
     readingVC.view.layoutIfNeeded()
     readingVC.readingCollectionView.reloadData()
-    
+
     self.navigationController?.pushViewController(readingVC, animated: true)
-    
+
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    
-    if indexPath.row == articles.count - 2{
+
+    if indexPath.row == articles.count - 2 {
       let numberOfPage = 9
-      if currentPage <= numberOfPage{
-        
+      if currentPage <= numberOfPage {
+
         LibraryAPI.instance.getArticles(topic: menuBarTitle, page: currentPage, numberOfArticles: 7) { (articles) in
-          let musHaveImageArticle = (articles.articles?.filter({!($0.urlToImage == nil || $0.urlToImage == "")})) ?? []
+          let musHaveImageArticle = (articles.articles?.filter({!($0.urlToImage == nil || $0.urlToImage!.isEmpty )})) ?? []
           let uniqueArticles = musHaveImageArticle.uniqueValues(value: {$0.title})
-          for article in uniqueArticles{
+          for article in uniqueArticles {
             self.articles.append(article)
             collectionView.insertItems(at: [IndexPath(row: self.articles.count - 1, section: indexPath.section)])
           }

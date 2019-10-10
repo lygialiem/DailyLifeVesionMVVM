@@ -9,17 +9,17 @@
 import Foundation
 import ObjectMapper
 
-struct IconApi: Decodable,Mappable{
-    
+struct IconApi: Decodable, Mappable {
+
   var code: Int?
   var day: String?
   var night: String?
   var icon: Int?
-    
+
     init?(map: Map) {
-        
+
     }
-    
+
     mutating func mapping(map: Map) {
         code <- map["code"]
         day <- map["day"]
@@ -27,4 +27,3 @@ struct IconApi: Decodable,Mappable{
         icon <- map["icon"]
     }
 }
-

@@ -11,32 +11,30 @@ import PanModal
 import CoreLocation
 
 class ForecastGPS: UITableViewController {
-  
+
   var dataForecast: DarkSkyApi?
   var shortHeightFormEnabled = true
   var coordinate: ((CLLocationCoordinate2D?) -> Void)?
   let managerLocation = CLLocationManager()
   var detailGPS: ReversedGeoLocation?
-  
-  
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     tableView.dataSource = self
     tableView.register(UINib.init(nibName: "DetailForecastCell", bundle: nil), forCellReuseIdentifier: "DetailForecastCell")
-    
+
     backgroundTableViewChangeBasedHour()
-    
+
   }
-  
-  func backgroundTableViewChangeBasedHour(){
+
+  func backgroundTableViewChangeBasedHour() {
     let current = Date()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "H"
     let currentHour = dateFormatter.string(from: current)
     guard let nowHour = Int(currentHour) else {return}
-    
+
     switch nowHour {
     case 0..<2:
         tableView.backgroundView = UIImageView(image: R.image.solarGradients1(compatibleWith: nil))
@@ -70,16 +68,16 @@ class ForecastGPS: UITableViewController {
       tableView.backgroundView = UIImageView(image: R.image.solarGradients15(compatibleWith: nil))
     case 22...23:
       tableView.backgroundView = UIImageView(image: R.image.solarGradients16(compatibleWith: nil))
-      
+
     default:
       break
     }
   }
-  
+
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 2
   }
-  
+
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 0:
@@ -88,18 +86,18 @@ class ForecastGPS: UITableViewController {
       return 8
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.section {
     case 0:
-      switch indexPath.row{
+      switch indexPath.row {
       case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.titleCell, for: indexPath)!
         cell.titleCell.text = "GPS Forecast Weather"
         return cell
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.sumaryCell, for: indexPath)!
-        
+
         DispatchQueue.main.async {
           cell.tempSumary.text = "\((self.dataForecast?.currently?.temperature ?? 0).roundInt())ºC"
           cell.citySumary.text = "\(self.detailGPS?.city ?? "")"
@@ -113,10 +111,10 @@ class ForecastGPS: UITableViewController {
         return cell
       default: return UITableViewCell()
       }
-      
+
     case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.detailForecastCell, for: indexPath)!
-      switch indexPath.row{
+      switch indexPath.row {
       case 0:
         cell.title1.text = "Latitude"
         cell.title2.text = "Longitude"
@@ -168,16 +166,16 @@ class ForecastGPS: UITableViewController {
       default:
         return UITableViewCell()
       }
-      
+
     default:
       return UITableViewCell()
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     switch indexPath.section {
     case 0:
-      switch indexPath.row{
+      switch indexPath.row {
       case 0:
         return 40
       case 1:
@@ -193,9 +191,9 @@ class ForecastGPS: UITableViewController {
       return 0
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    switch section{
+    switch section {
     case 0:
       return 0
     case 1:
@@ -204,24 +202,23 @@ class ForecastGPS: UITableViewController {
       return 0
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    if section == 1{
+    if section == 1 {
       let section = tableView.dequeueReusableCell(withIdentifier: "detailTitle") as! Title_Sumary_Daily_Forecast
       section.detailTitle.text = "Detail"
       return section
     }
     return UIView()
   }
-  
+
 }
 
-
-extension ForecastGPS: PanModalPresentable{
+extension ForecastGPS: PanModalPresentable {
   var panScrollable: UIScrollView? {
     return tableView
   }
-  var shortFormHeight: PanModalHeight{
+  var shortFormHeight: PanModalHeight {
     return shortHeightFormEnabled ? .contentHeight(260) : longFormHeight
   }
 }

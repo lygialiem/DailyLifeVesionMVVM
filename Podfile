@@ -21,6 +21,7 @@ target 'DailyLifeV2' do
     pod 'Firebase/Core'
     pod 'ObjectMapper'
     pod 'AlamofireObjectMapper'
+    pod 'SwiftLint'
     
     
 end

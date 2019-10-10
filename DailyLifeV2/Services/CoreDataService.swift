@@ -9,10 +9,9 @@
 import UIKit
 import CoreData
 
+class CoreDataServices {
 
-class CoreDataServices{
-  
-  func fetchCoreData(completion: @escaping ([FavoriteArtilce])-> Void){
+  func fetchCoreData(completion: @escaping ([FavoriteArtilce]) -> Void) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
     let managedContext = appDelegate.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<FavoriteArtilce>(entityName: "FavoriteArtilce")
@@ -23,15 +22,15 @@ class CoreDataServices{
       print("Could Not Fetch: \(error), \(error.userInfo)")
     }
   }
-  
-  func fetchCoreDateCountryName(completion: @escaping ([CountrySearching]) -> Void){
+
+  func fetchCoreDateCountryName(completion: @escaping ([CountrySearching]) -> Void) {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let manager = delegate.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<CountrySearching>(entityName: "CountrySearching")
-    do{
+    do {
       let countryNameCD = try manager.fetch(fetchRequest)
       completion(countryNameCD)
-    }catch let error as NSError{
+    } catch let error as NSError {
        print("Could Not Fetch: \(error), \(error.userInfo)")
     }
   }

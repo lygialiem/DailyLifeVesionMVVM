@@ -18,7 +18,7 @@ struct ReversedGeoLocation {
   let zipCode: String         // eg. 95014
   let country: String         // eg. United States
   let isoCountryCode: String  // eg. US
-  
+
   var formattedAddress: String {
     return """
     \(name),
@@ -27,7 +27,7 @@ struct ReversedGeoLocation {
     \(country)
     """
   }
-  
+
   init(with placemark: CLPlacemark) {
     self.name           = placemark.name ?? ""
     self.streetName     = placemark.thoroughfare ?? ""

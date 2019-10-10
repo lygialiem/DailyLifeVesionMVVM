@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-class LibraryCoreData{
+class LibraryCoreData {
   static let instance = LibraryCoreData()
   var coreDataServices = CoreDataServices()
-  private init(){}
+  private init() {}
 
-  func fetchCoreData(completion: @escaping ([FavoriteArtilce]) -> Void){
+  func fetchCoreData(completion: @escaping ([FavoriteArtilce]) -> Void) {
     coreDataServices.fetchCoreData(completion: completion)
   }
-  
-  func fetchCoreDataCountryName(completion: @escaping ([CountrySearching]) -> Void){
+
+  func fetchCoreDataCountryName(completion: @escaping ([CountrySearching]) -> Void) {
     coreDataServices.fetchCoreDateCountryName(completion: completion)
   }
 }

@@ -15,36 +15,34 @@ class DailyForecastCell: UITableViewCell {
   @IBOutlet var icon: UIImageView!
   @IBOutlet var minTemp: UILabel!
   @IBOutlet var maxTemp: UILabel!
-  
-  
+
   override func awakeFromNib() {
         super.awakeFromNib()
-      
+
       self.selectionStyle = .none
     }
 
-  
-  func configureCell(forecastDay: Forecastday?){
-    
+  func configureCell(forecastDay: Forecastday?) {
+
     let day = (forecastDay?.date_epoch ?? 0).formatEpochTime(dateFormatType: "EEEE")
     self.day.text = day
-    
+
     let codeIcon = forecastDay?.day?.condition?.code ?? 0
-  
+
     LibraryAPI.instance.getIcon { (dataJson) in
-      for i in 0..<dataJson.count{
-        if codeIcon == dataJson[i].code{
-          
+      for i in 0..<dataJson.count {
+        if codeIcon == dataJson[i].code {
+
           let fullDate = Date()
           let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "HH"
           let currentDate = Int(dateFormatter.string(from: fullDate))
-          
-          if currentDate! > 5 && currentDate! <= 17{
+
+          if currentDate! > 5 && currentDate! <= 17 {
             DispatchQueue.main.async {
                 self.icon.image = UIImage(named: "day/\(dataJson[i].icon ?? 0)")
             }
-          } else{
+          } else {
             DispatchQueue.main.async {
                 self.icon.image = UIImage(named: "night/\(dataJson[i].icon ?? 0)")
             }

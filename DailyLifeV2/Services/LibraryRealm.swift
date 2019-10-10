@@ -9,9 +9,9 @@
 import Foundation
 import RealmSwift
 
-class LibraryRealm{
+class LibraryRealm {
   static var instance = LibraryRealm()
   let realm = try! Realm()
-  private init(){
+  private init() {
   }
 }

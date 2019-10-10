@@ -9,30 +9,30 @@
 import UIKit
 import SDWebImage
 
-protocol ReadingCollectionViewCellDelegate: class{
+protocol ReadingCollectionViewCellDelegate: class {
   func movoWebViewController(url: String?)
 }
 
 class ReadingCollectionViewCell: UICollectionViewCell {
-  
+
   let contentCell = ContentCell()
-  
+
   @IBOutlet var myTableView: UITableView!
-  
+
   weak var delegate: ReadingCollectionViewCellDelegate?
-  
+
   var article: Article?
   var articlesOfConcern = [Article]()
   var fontSize: CGFloat?
   var concernedTitle: String?
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+
     setupMyTableView()
   }
-  
-  func setupMyTableView(){
+
+  func setupMyTableView() {
     myTableView.estimatedRowHeight = 1000
     myTableView.delegate = self
     myTableView.dataSource = self
@@ -40,27 +40,27 @@ class ReadingCollectionViewCell: UICollectionViewCell {
   }
 }
 
-extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
-  
+extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
+
   override  func prepareForReuse() {
     super.prepareForReuse()
     myTableView.reloadData()
   }
-  
+
   func numberOfSections(in tableView: UITableView) -> Int {
     return 2
   }
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-    if section == 0{
+
+    if section == 0 {
       return 1
-    } else if section == 1{
+    } else if section == 1 {
       return articlesOfConcern.count
     }
     return Int()
   }
-  
+
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     switch section {
     case 0:
@@ -70,7 +70,7 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
       return 0
     }
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.firstCell, for: indexPath)!
@@ -78,9 +78,9 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
         cell.configureContent(article: self.article ?? Article())
       }
       cell.delegate = self
-        
+
       return cell
-    } else if indexPath.section == 1{
+    } else if indexPath.section == 1 {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.smallArticleCell, for: indexPath)!
       DispatchQueue.main.async {
         cell.configureCell(article: self.articlesOfConcern[indexPath.row])
@@ -89,16 +89,16 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
     }
     return UITableViewCell()
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 0{
+    if indexPath.section == 0 {
       return UITableView.automaticDimension
-    } else if indexPath.section == 1{
+    } else if indexPath.section == 1 {
       return 100
     }
     return 0
   }
-  
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     switch section {
     case 0:
@@ -111,15 +111,15 @@ extension ReadingCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
       return UIView()
     }
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if indexPath.section == 1{
+    if indexPath.section == 1 {
       delegate?.movoWebViewController(url: articlesOfConcern[indexPath.row].url)
     }
   }
 }
 
-extension ReadingCollectionViewCell: ReadingCellDelegate{
+extension ReadingCollectionViewCell: ReadingCellDelegate {
   func didPressSeeMore(url: String) {
     let webViewViewController = UIStoryboard.init(name: "WebViewController", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
     webViewViewController.urlOfContent = url

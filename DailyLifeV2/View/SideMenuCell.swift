@@ -9,12 +9,12 @@
 import UIKit
 
 class SideMenuCell: UICollectionViewCell {
-  
+
   @IBOutlet var topic: UILabel!
   @IBOutlet var imageSideMenu: UIImageView!
-  
-  var imageName: String!{
-    didSet{
+
+  var imageName: String! {
+    didSet {
       imageSideMenu.clipsToBounds = true
       imageSideMenu.layer.cornerRadius = 15
       imageSideMenu.layer.borderWidth = 1
@@ -22,11 +22,11 @@ class SideMenuCell: UICollectionViewCell {
       imageSideMenu.image = UIImage(named: imageName)
     }
   }
-  
-  var topicName: String!{
-    didSet{
+
+  var topicName: String! {
+    didSet {
     topic.text = topicName
-      
+
     }
   }
 }

@@ -13,10 +13,7 @@ class listCityNameCell: UITableViewCell {
   @IBOutlet var nameTItle: UILabel!
   override func awakeFromNib() {
         super.awakeFromNib()
-     
-      
-    }
 
- 
+    }
 
 }

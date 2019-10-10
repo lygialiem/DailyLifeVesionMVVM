@@ -87,6 +87,7 @@ PODS:
   - SDWebImage (5.1.0):
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
+  - SwiftLint (0.35.0)
   - SwiftyJSON (5.0.0)
   - XLPagerTabStrip (8.1.1)
 
@@ -103,11 +104,12 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SDWebImage (~> 5.0)
+  - SwiftLint
   - SwiftyJSON
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireObjectMapper
     - Firebase
@@ -134,6 +136,8 @@ SPEC REPOS:
     - SDWebImage
     - SwiftyJSON
     - XLPagerTabStrip
+  trunk:
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -160,9 +164,10 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
+  SwiftLint: 5553187048b900c91aa03552807681bb6b027846
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 4d5d49b9f7558736d9407571a6c4fa10cc80ca38
+PODFILE CHECKSUM: 42e1e8f8bc48a71acbd7796c692e3c6c8930fe37
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.8.3

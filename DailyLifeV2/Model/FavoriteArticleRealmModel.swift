@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class FavoriteArticleRealmModel: Object{
+class FavoriteArticleRealmModel: Object {
   @objc dynamic var author = ""
   @objc dynamic var content = ""
   @objc dynamic var descriptions = ""
@@ -17,5 +17,4 @@ class FavoriteArticleRealmModel: Object{
   @objc dynamic var title = ""
   @objc dynamic var url = ""
   @objc dynamic var urlToImage = ""
- 
 }

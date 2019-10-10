@@ -11,9 +11,7 @@ import UIKit
 class SummaryForecastCell: UITableViewCell {
 
   @IBOutlet var summary: UILabel!
-  
-  
-  
+
   override func awakeFromNib() {
         super.awakeFromNib()
        self.selectionStyle = .none

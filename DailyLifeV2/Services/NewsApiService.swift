@@ -15,22 +15,22 @@ import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 
-class NewsApiService{
-  
+class NewsApiService {
+
   static var instance = NewsApiService()
-  
-  var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business","World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
-  
-  func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
+
+  var TOPIC_NEWSAPI = ["General", "Entertainment", "Health", "Science", "Sports", "Technology", "Business", "World", "Style", "Arts", "Travel", "Food", "Politics", "Opinion"]
+
+  func getArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void) {
     let totalUrl =  "\(URL_API.NewsAPI.keyAndPath.path)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(URL_API.NewsAPI.keyAndPath.key)&sortBy=publishedAt&page=\(page)&sources=ars-technica,ary-news,time,bbc-news,espn,financial-post,bloomberg,business-insider,cbc-news,cbs-news,daily-mail,entertainment-weekly,fox-news,mtv-news,national-geographic,new-york-magazine,the-new-york-times,the-verge"
-    
+
     Alamofire.request(totalUrl).validate().responseJSON { (response) in
-      if response.result.error == nil{
+      if response.result.error == nil {
         guard let data = response.data else {return}
         do {
           let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
           completion(dataDecode)
-        }catch let jsonDecodeError{
+        } catch let jsonDecodeError {
           debugPrint(jsonDecodeError.localizedDescription)
         }
       } else {
@@ -38,20 +38,20 @@ class NewsApiService{
       }
     }
   }
- 
-  func getSearchArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void){
-    
+
+  func getSearchArticles(topic: String, page: Int, numberOfArticles: Int, completion: @escaping (NewsApi) -> Void) {
+
     let totalUrl =  "\(URL_API.SearchNewsAPI.keyAndPath.path)\(topic)&language=en&pageSize=\(numberOfArticles)&apiKey=\(URL_API.SearchNewsAPI.keyAndPath.key)&sortBy=publishedAt&page=\(page)"
-    
+
     guard let url = URL(string: totalUrl) else {return}
 
-    URLSession.shared.dataTask(with: url) {(dataApi, response, error) in
+    URLSession.shared.dataTask(with: url) {(dataApi, _, _) in
       guard let data = dataApi else {return}
-      do{
+      do {
         let dataDecode = try JSONDecoder().decode(NewsApi.self, from: data)
         completion(dataDecode)
-      } catch let jsonError{
-        debugPrint("API Key for NewsApi is Out Of Date: ",jsonError)
+      } catch let jsonError {
+        debugPrint("API Key for NewsApi is Out Of Date: ", jsonError)
       }
       }.resume()
   }

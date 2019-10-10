@@ -6,36 +6,34 @@
 //  Copyright © 2019 LGL. All rights reserved.
 //
 
-
 import UIKit
 import SDWebImage
 
 class ReadingFavoriteArticle: UIViewController {
-  
+
   @IBOutlet var myCollectionView: UICollectionView!
-    
+
     let readingFavoriteCollectionViewCell = ReadingCollectionViewCell()
-  
+
   var articles = [Article]()
   var indexPathOfDidSelectedArticle: IndexPath?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setupReadingCollectionView()
-    
+
     view.layoutIfNeeded()
     myCollectionView.reloadData()
-    
+
     setupReadingCollectionView()
   }
-  
-  func setupReadingCollectionView(){
+
+  func setupReadingCollectionView() {
     myCollectionView.delegate = self
     myCollectionView.dataSource = self
     myCollectionView.isPagingEnabled = true
-    myCollectionView.scrollToItem(at: indexPathOfDidSelectedArticle!
-      , at: .centeredHorizontally, animated: false)
+    myCollectionView.scrollToItem(at: indexPathOfDidSelectedArticle!, at: .centeredHorizontally, animated: false)
   }
   @IBAction func shareButton(_ sender: Any) {
     let shareAction = UIActivityViewController(activityItems: [self.articles[indexPathOfDidSelectedArticle?.row ?? 0].url ?? ""], applicationActivities: nil)
@@ -43,31 +41,31 @@ class ReadingFavoriteArticle: UIViewController {
   }
 }
 
-extension ReadingFavoriteArticle: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource{
+extension ReadingFavoriteArticle: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return articles.count
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let readingCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.readingFavortiteCell, for: indexPath)!
-    
+
     readingCell.delegate = self
     readingCell.configureContent(article: articles[indexPath.row])
-    
+
     return readingCell
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+
     return CGSize(width: view.frame.width, height: self.myCollectionView.frame.height)
   }
 }
 
-extension ReadingFavoriteArticle: ReadingFavoriteCollectionViewCellDelegate{
+extension ReadingFavoriteArticle: ReadingFavoriteCollectionViewCellDelegate {
   func moveToWebViewController(url: String) {
 
     let webViewViewController = UIStoryboard(name: "WebViewController", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as! WebViewController
@@ -75,6 +73,3 @@ extension ReadingFavoriteArticle: ReadingFavoriteCollectionViewCellDelegate{
     self.navigationController?.pushViewController(webViewViewController, animated: true)
   }
 }
-
-
-

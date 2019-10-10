@@ -14,7 +14,7 @@ class DetailForecastCelll: UITableViewCell {
   @IBOutlet var title2: UILabel!
   @IBOutlet var para1: UILabel!
   @IBOutlet var para2: UILabel!
-  
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

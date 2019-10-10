@@ -6,12 +6,10 @@
 //  Copyright © 2019 LGL. All rights reserved.
 //
 
-
 import UIKit
 import SDWebImage
 
-
-protocol ReadingFavoriteCollectionViewCellDelegate: class{
+protocol ReadingFavoriteCollectionViewCellDelegate: class {
   func moveToWebViewController(url: String)
 }
 
@@ -20,52 +18,51 @@ class ReadingFavoriteReadingCollectionViewCell: UICollectionViewCell {
   @IBOutlet var titleArticle: UILabel!
   @IBOutlet var contentArticle: UITextView!
   @IBOutlet var authorArticle: UILabel!
-    
+
     var moveToWebView: ((String) -> Void)?
-  
+
   var article: FavoriteArtilce?
   var indexPathOfDidSelectedArticle: IndexPath?
   let seeMore = "See more"
   weak var delegate: ReadingFavoriteCollectionViewCellDelegate?
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
-    
-    
+
   }
-  
-  func configureContent(article: Article?){
-    
+
+  func configureContent(article: Article?) {
+
     guard let urlToImage = article?.urlToImage else {return}
     imageArticle.sd_setImage(with: URL(string: urlToImage), completed: nil)
     titleArticle.text = article?.title?.capitalized
     authorArticle.text = article?.author
-    
+
     contentArticle.layer.cornerRadius = 7
     contentArticle.delegate = self
-    
+
     let attributedOfString = [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 15)]
-    
+
     let stringContent = "\(article?.content ?? "") - \(seeMore)"
     let completedConent = stringContent.replacingOccurrences(of: "[", with: "(", options: String.CompareOptions.literal, range: nil)
     let completedConent1 = completedConent.replacingOccurrences(of: "+", with: "", options: String.CompareOptions.literal, range: nil)
     let finalContent = completedConent1.replacingOccurrences(of: "]", with: ")", options: String.CompareOptions.literal, range: nil)
-    let attributedString = NSMutableAttributedString(string: finalContent, attributes: attributedOfString as [NSAttributedString.Key : Any])
-    
+    let attributedString = NSMutableAttributedString(string: finalContent, attributes: attributedOfString as [NSAttributedString.Key: Any])
+
     guard let url = article?.url else {return}
     attributedString.setAsLink(textToFind: seeMore, urlString: url)
-    
+
     contentArticle.attributedText = attributedString
   }
 }
 
-extension ReadingFavoriteReadingCollectionViewCell:  UITextViewDelegate{
+extension ReadingFavoriteReadingCollectionViewCell: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-    
+
     self.moveToWebView?(URL.absoluteString)
-    
+
     delegate?.moveToWebViewController(url: URL.absoluteString)
-    
+
     return false
   }
 }

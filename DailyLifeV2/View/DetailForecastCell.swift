@@ -1,4 +1,3 @@
-
 //
 //  DetailForecastCell.swift
 //  DailyLifeV2
@@ -10,7 +9,7 @@
 import UIKit
 
 class DetailForecastCell: UITableViewCell {
-  
+
   @IBOutlet var sunRise: UILabel!
   @IBOutlet var sunSet: UILabel!
   @IBOutlet var moonRise: UILabel!
@@ -23,15 +22,14 @@ class DetailForecastCell: UITableViewCell {
   @IBOutlet var lowestTemp: UILabel!
   @IBOutlet var visibility: UILabel!
   @IBOutlet var UVIndex: UILabel!
-  
+
   @IBOutlet var dateForecast: UILabel!
   @IBOutlet var summary: UILabel!
-  
 
     override func awakeFromNib() {
         super.awakeFromNib()
   selectionStyle = .none
-      
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

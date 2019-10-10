@@ -8,23 +8,22 @@
 
 import Foundation
 
-
-struct ForecastApi: Decodable{
+struct ForecastApi: Decodable {
   var location: Location?
   var current: Current?
   var forecast: Forecast?
   var error: Error?
-  
+
 }
 
-struct Error: Decodable{
+struct Error: Decodable {
   var code: Int?
   var message: String?
 }
 
-struct Location: Decodable{
+struct Location: Decodable {
   var name: String?
-  var region : String?
+  var region: String?
   var country: String?
   var lat: Double?
   var lon: Double?
@@ -32,7 +31,7 @@ struct Location: Decodable{
   var localtime: String?
 }
 
-struct Current: Decodable{
+struct Current: Decodable {
   var last_updated_epoch: Int?
   var last_updated: String?
   var temp_c: Double?
@@ -53,31 +52,31 @@ struct Current: Decodable{
   var gust_kph: Double?
 }
 
-struct Condition: Decodable{
+struct Condition: Decodable {
   var text: String?
   var icon: String?
   var code: Int?
 }
 
-struct Forecast: Decodable{
+struct Forecast: Decodable {
   var forecastday: [Forecastday]?
 }
 
-struct Forecastday: Decodable{
+struct Forecastday: Decodable {
   var date: String?
   var date_epoch: Int?
   var day: Day?
   var astro: Astro?
 }
 
-struct Astro: Decodable{
+struct Astro: Decodable {
   var sunrise: String?
   var sunset: String?
   var moonrise: String?
   var moonset: String?
 }
 
-struct Day: Decodable{
+struct Day: Decodable {
   var maxtemp_c: Double?
   var mintemp_c: Double?
   var avgtemp_c: Double?
@@ -87,13 +86,11 @@ struct Day: Decodable{
   var condition: ConditionDay?
   var uv: Double?
   var avghumidity: Double?
-  
+
 }
 
-struct ConditionDay: Decodable{
+struct ConditionDay: Decodable {
   var text: String?
   var icon: String?
   var code: Int?
 }
-
-

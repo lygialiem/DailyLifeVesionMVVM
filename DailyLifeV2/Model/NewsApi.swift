@@ -9,8 +9,8 @@
 import Foundation
 import ObjectMapper
 
-struct NewsApi: Decodable, Hashable{
-    
+struct NewsApi: Decodable, Hashable {
+
     var status: String?
     var totalResults: Int?
     var articles: [Article]?
@@ -19,8 +19,8 @@ struct NewsApi: Decodable, Hashable{
 
 }
 
-struct Article: Decodable, Hashable{
-   
+struct Article: Decodable, Hashable {
+
     var source: Source?
     var author: String?
     var title: String?
@@ -29,11 +29,11 @@ struct Article: Decodable, Hashable{
     var urlToImage: String?
     var publishedAt: String?
     var content: String?
-    
+
 }
 
-struct Source: Decodable, Hashable{
-    
+struct Source: Decodable, Hashable {
+
     var id: String?
     var name: String?
 }

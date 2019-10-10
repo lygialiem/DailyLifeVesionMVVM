@@ -11,19 +11,18 @@ import XLPagerTabStrip
 import CoreLocation
 import PanModal
 
-
 class MainVC: ButtonBarPagerTabStripViewController {
-    
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    
-    //MARK: - IBOutlets:
+
+   weak var appDelegate = UIApplication.shared.delegate as? AppDelegate
+
+    // MARK: - IBOutlets:
     @IBOutlet var temperatureButton: UIButton!
     @IBOutlet var visualEffectView: UIVisualEffectView!
     @IBOutlet var snipper: UIActivityIndicatorView!
     @IBOutlet var btnBarView: UIView!
     @IBOutlet var apiOutOfDate: UILabel!
-    
-    //MARK: - Properties:
+
+    // MARK: - Properties:
     var isWeatherOpen = false
     var pageVCArray = [PageVC]()
     var effect: UIVisualEffect!
@@ -31,35 +30,35 @@ class MainVC: ButtonBarPagerTabStripViewController {
     var detailGPS: ReversedGeoLocation?
     var newestLocaton: ((CLLocation?) -> Void)?
     var statusUpdated: ((CLAuthorizationStatus?) -> Void)?
-    var status: CLAuthorizationStatus{
+    var status: CLAuthorizationStatus {
         return CLLocationManager.authorizationStatus()
     }
     let manager = CLLocationManager()
-    
+
     // MARK: - LifeCycle:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(moveToTopic(notification:)), name: .MoveToTopic, object: nil)
-        
+
         setUpCoreLocation()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         temperatureButton.isEnabled = false
         configureButtonBar()
         super.viewDidLoad()
-        
+
         snipper.isHidden = true
-        
+
         effect = visualEffectView.effect
         visualEffectView.isHidden = true
         visualEffectView.effect = nil
         setupNotificationAddObsrver()
-        
+
         btnBarView.clipsToBounds = true
         btnBarView.layer.cornerRadius = 12
         btnBarView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -67,86 +66,84 @@ class MainVC: ButtonBarPagerTabStripViewController {
         btnBarView.frame(forAlignmentRect: CGRect(x: 250, y: 30, width: 300, height: 30))
         temperatureButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
         temperatureButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        
-        
+
     }
-    
-    //MARK: - @objc Functions:
-    @objc func handleTabbarIndex0(notify:  Notification){
+
+    // MARK: - @objc Functions:
+    @objc func handleTabbarIndex0(notify: Notification) {
         tabBarController?.selectedIndex = 0
     }
-    
-    @objc func handleSearchVCToReadingVC(notify: Notification){
-        
-        guard let article = notify.userInfo?["data"] as? [Article],let indexPathDidSelect = notify.userInfo?["indexPath"] as? IndexPath,  let concernedTitle = notify.userInfo?["topic"] as? String else {return}
-        
-        
-        if let viewcontrollers = navigationController?.viewControllers{
+
+    @objc func handleSearchVCToReadingVC(notify: Notification) {
+
+        guard let article = notify.userInfo?["data"] as? [Article], let indexPathDidSelect = notify.userInfo?["indexPath"] as? IndexPath, let concernedTitle = notify.userInfo?["topic"] as? String else {return}
+
+        if let viewcontrollers = navigationController?.viewControllers {
             let filteredViewcontroller = viewcontrollers.filter({!($0 is ReadingVC) && !($0 is WebViewController)})
             self.navigationController?.viewControllers = filteredViewcontroller
         }
-        
+
         let readingVc = UIStoryboard(name: "ReadingViewController", bundle: nil).instantiateViewController(withIdentifier: "ReadingVC") as! ReadingVC
-        
+
         readingVc.articles = article
         readingVc.indexPathOfDidSelectedArticle = indexPathDidSelect
         readingVc.concernedTitle = concernedTitle
         readingVc.view.layoutIfNeeded()
         readingVc.readingCollectionView.reloadData()
-        
+
         NotificationCenter.default.post(name: .MoveToTabbarIndex0, object: nil)
         self.navigationController?.pushViewController(readingVc, animated: true)
-        
+
     }
-    
-    @objc func OpenSearchVC(){
-       
+
+    @objc func OpenSearchVC() {
+
         let searchVC = UIStoryboard(name: "SearchViewController", bundle: nil).instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
         self.presentPanModal(searchVC)
     }
-    
-    @objc func moveToTopic(notification: Notification){
+
+    @objc func moveToTopic(notification: Notification) {
         let indexPath = notification.userInfo?["data"] as! IndexPath
         self.moveToViewController(at: indexPath.row, animated: false)
-        
+
     }
-    
-    //MARK: - Functions:
-    
-    func setupNotificationAddObsrver(){
-           
+
+    // MARK: - Functions:
+
+    func setupNotificationAddObsrver() {
+
            NotificationCenter.default.addObserver(self, selector: #selector(OpenSearchVC), name: .OpenSearchVC, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(handleSearchVCToReadingVC(notify:)), name: .searchVCToReadingVC, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(handleTabbarIndex0(notify:)), name: .MoveToTabbarIndex0, object: nil)
        }
-    
-    func setUpCoreLocation(){
-        if CLLocationManager.locationServicesEnabled(){
+
+    func setUpCoreLocation() {
+        if CLLocationManager.locationServicesEnabled() {
             manager.delegate = self
             manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
             manager.startUpdatingLocation()
-            
+
             self.newestLocaton = { [weak self] (location) in
                 guard let self = self, let location = location else { return }
-                
+
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
-                
+
                 let geoCoder = CLGeocoder()
-                
+
                 geoCoder.reverseGeocodeLocation(location, completionHandler: { (placeMarks, error) in
-                    if error == nil{
+                    if error == nil {
                         guard let placeMark = placeMarks?.first else {return}
-                        
+
                         let reveresGeoCoder = ReversedGeoLocation(with: placeMark)
                         self.detailGPS = reveresGeoCoder
                     }
                 })
-                
+
                 LibraryAPI.instance.getForecast(latitude: latitude, longitude: longitude, completion: { (dataResponse) in
-                    
+
                     self.forecastData = dataResponse
-                    
+
                     guard let temper = dataResponse.currently?.temperature else {
                         return
                     }
@@ -159,7 +156,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
             }
         }
     }
-    
+
     func configureButtonBar() {
         settings.style.selectedBarHeight = 4
         settings.style.selectedBarBackgroundColor = #colorLiteral(red: 1, green: 0.765712738, blue: 0.0435429886, alpha: 1)
@@ -174,7 +171,7 @@ class MainVC: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarRightContentInset = 0
         settings.style.buttonBarHeight = 30
         settings.style.selectedBarVerticalAlignment = .bottom
-        
+
         // Changing item text color on swipe
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
@@ -182,61 +179,57 @@ class MainVC: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = .white
         }
     }
-    
 
      override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-         for i in 0..<LibraryAPI.instance.TOPIC_NEWSAPI.count{
+         for i in 0..<LibraryAPI.instance.TOPIC_NEWSAPI.count {
              let pageVC = storyboard?.instantiateViewController(withIdentifier: "PageControllerID") as! PageVC
-             
+
              pageVC.menuBarTitle = LibraryAPI.instance.TOPIC_NEWSAPI[i]
              pageVCArray.append(pageVC)
          }
          return pageVCArray
      }
-     
-     
-    
-     
-     func animateVisualEffectOUT(){
+
+     func animateVisualEffectOUT() {
          self.visualEffectView.effect = nil
          self.visualEffectView.isHidden = true
      }
-     
-     func animateVisualEffectIN(){
+
+     func animateVisualEffectIN() {
          self.visualEffectView.effect = self.effect
          self.visualEffectView.isHidden = false
      }
-    
-    //MARK: - @IBAction:
-    
+
+    // MARK: - @IBAction:
+
     @IBAction func searchButtonAction(_ sender: Any) {
         let searchVc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
         searchVc.delegate = self
-        
+
         presentPanModal(searchVc)
-        
+
     }
-    
+
     @IBAction func openMenuPressed(_ sender: Any) {
            NotificationCenter.default.post(name: .OpenOrCloseSideMenu, object: nil)
        }
-       
+
        @IBAction func weatherButtonByPressed(_ sender: Any) {
-           
-           let forecastLocationVC = storyboard?.instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastGPS
+
+           let forecastLocationVC = UIStoryboard(name: "GPSForecastViewController", bundle: nil).instantiateViewController(withIdentifier: "ForecastLocationTableVC") as! ForecastGPS
            forecastLocationVC.dataForecast = self.forecastData
            forecastLocationVC.detailGPS = self.detailGPS
            DispatchQueue.main.async {
                forecastLocationVC.tableView.reloadData()
            }
            self.presentPanModal(forecastLocationVC)
-        
+
        }
 }
 
-//MARK: - Extensions:
+// MARK: - Extensions:
 
-extension MainVC: CLLocationManagerDelegate{
+extension MainVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.sorted(by: {$0.timestamp > $1.timestamp}).first else {
             self.newestLocaton?(nil)
@@ -244,27 +237,27 @@ extension MainVC: CLLocationManagerDelegate{
         }
         self.newestLocaton?(location)
     }
-    
+
     private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("Fail to get Location")
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Location Status:",status)
+        print("Location Status:", status)
         self.statusUpdated?(status)
     }
 }
 
-extension MainVC: SearchVCToReadingFavoriteVC{
+extension MainVC: SearchVCToReadingFavoriteVC {
     func searchVCToReadingFavoriteVC(articles: [Article], indexPathDidSelect: IndexPath) {
         let readingFavoriteVC = storyboard?.instantiateViewController(withIdentifier: "ReadingFavoriteArticle") as! ReadingFavoriteArticle
         readingFavoriteVC.articles = articles
         readingFavoriteVC.indexPathOfDidSelectedArticle = indexPathDidSelect
-        
+
         DispatchQueue.main.async {
             readingFavoriteVC.myCollectionView.reloadData()
         }
-        
+
         self.navigationController?.pushViewController(readingFavoriteVC, animated: true)
     }
 }
