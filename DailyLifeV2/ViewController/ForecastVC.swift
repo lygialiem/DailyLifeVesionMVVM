@@ -287,6 +287,8 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
+    
+    //Feature 2
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
