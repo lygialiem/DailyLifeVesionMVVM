@@ -287,11 +287,9 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
-    
-    //Feature1.......
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+//change master
     if tableView.tag == 0 {
       switch indexPath.section {
       case 0:
@@ -503,7 +501,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       case 0:
         return 0
       case 5:
-        return 40
+        return 50
       default:
         return 20
       }
