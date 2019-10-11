@@ -503,7 +503,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       case 0:
         return 0
       case 5:
-        return 40
+        return 50
       default:
         return 20
       }
