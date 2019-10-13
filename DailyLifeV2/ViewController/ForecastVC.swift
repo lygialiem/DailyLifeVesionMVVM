@@ -289,10 +289,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
   }
     
     
-    //Feature1 is adding
-    
-    //Feature2 í adding
-    
+ //Feature 1
     
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
