@@ -287,16 +287,11 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
-    
-    
-    //Feature1 is adding
-    
-    //Feature2 í adding
-    
-    
+//Feature 2
 
+    
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//change master
+
     if tableView.tag == 0 {
       switch indexPath.section {
       case 0:
