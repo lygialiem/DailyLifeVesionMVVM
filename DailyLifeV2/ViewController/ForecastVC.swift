@@ -287,6 +287,11 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
+    
+    
+    //Feature1 is adding
+    
+    
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //change master
